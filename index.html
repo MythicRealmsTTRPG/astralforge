@@ -1,125 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Astral Forge</title>
 
+<!-- Brand Font -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+
 <style>
-  :root{
-    --bg:#0c0c0e;
-    --text: rgba(255,255,255,.92);
-    --border: rgba(255,255,255,.08);
-  }
 
-  *{ box-sizing:border-box; }
+:root{
+  --bg:#0c0c0e;
+  --text:rgba(255,255,255,.92);
+  --border:rgba(255,255,255,.08);
+}
 
-  body{
-    margin:0;
-    font-family: Segoe UI, system-ui, -apple-system, Roboto, Arial, sans-serif;
-    color: var(--text);
-    background: var(--bg);
-  }
+*{ box-sizing:border-box; }
 
-  /* ===== Page backdrop ===== */
-  .home-bg{
-    min-height:100vh;
-    position:relative;
-    background:
-      url("assets/backgrounds/Astral-Forge.png")
-      center / cover no-repeat fixed;
-    background-color: var(--bg);
-  }
-  .home-bg::before{
-    content:"";
-    position:fixed;
-    inset:0;
-    background: linear-gradient(rgba(8,8,10,.78), rgba(10,10,12,.92));
-    pointer-events:none;
-    z-index:0;
-  }
+body{
+  margin:0;
+  font-family:Segoe UI, system-ui, -apple-system, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:var(--bg);
+}
 
-  /* ===== Nav ===== */
-  nav{
-    position:fixed;
-    top:0; left:0; right:0;
-    z-index:1000;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background: rgba(0,0,0,.55);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 6px 30px rgba(0,0,0,.45);
-  }
-  .nav-inner{
-    width:100%;
-    padding: 14px 56px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 18px;
-  }
-  .brand{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    text-decoration:none;
-    color: var(--text);
-    white-space:nowrap;
-  }
-  .brand img{
-    height:42px;
-    width:auto;
-  }
-  .brand-text{
-    font-weight:800;
-    letter-spacing:.4px;
-    font-size:15px;
-  }
+/* ================= BACKGROUND ================= */
 
-  .nav-links{
-    display:flex;
-    align-items:center;
-    gap:18px;
-  }
-  .nav-links a{
-    text-decoration:none;
-    color: rgba(255,255,255,.82);
-    font-size:14px;
-    padding:8px 12px;
-    border-radius:10px;
-    transition:.2s;
-    white-space:nowrap;
-  }
-  .nav-links a:hover{
-    background: rgba(255,255,255,.06);
-  }
-  .nav-links a.join{
-    border: 1px solid rgba(255,255,255,.28);
-    background: rgba(255,255,255,.06);
-    color: rgba(255,255,255,.95);
-  }
+.home-bg{
+  min-height:100vh;
+  position:relative;
+  background:
+    url("assets/backgrounds/Astral-Forge.png")
+    center / cover no-repeat fixed;
+}
 
-  /* ===== Hero (image only) ===== */
+.home-bg::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:linear-gradient(
+    rgba(8,8,10,.78),
+    rgba(10,10,12,.92)
+  );
+  pointer-events:none;
+}
+
+/* ================= NAV ================= */
+
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:1000;
+
+  backdrop-filter:blur(12px);
+  background:rgba(0,0,0,.55);
+  border-bottom:1px solid var(--border);
+  box-shadow:0 6px 30px rgba(0,0,0,.45);
+}
+
+.nav-inner{
+  width:100%;
+  padding:14px 56px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:white;
+}
+
+.brand img{
+  height:42px;
+}
+
+/* ONLY BRAND NAME USES CINZEL */
+.brand-text{
+  font-family:'Cinzel', serif;
+  font-weight:600;
+  letter-spacing:1.2px;
+  font-size:16px;
+}
+
+/* NAV LINKS */
+
+.nav-links{
+  display:flex;
+  gap:18px;
+}
+
+.nav-links a{
+  text-decoration:none;
+  color:rgba(255,255,255,.85);
+  font-size:14px;
+  padding:8px 12px;
+  border-radius:10px;
+  transition:.2s;
+}
+
+.nav-links a:hover{
+  background:rgba(255,255,255,.06);
+}
+
+/* ================= HERO ================= */
+
+.hero-banner{
+  margin-top:72px;
+  height:78vh;
+
+  background:
+    url("assets/hero/Astral-Forge-hero.png")
+    center / cover no-repeat;
+
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  padding-right:8%;
+}
+
+/* HERO TEXT */
+
+.hero-content{
+  text-align:right;
+  max-width:520px;
+  color:white;
+
+  text-shadow:
+    0 2px 12px rgba(0,0,0,.65);
+}
+
+.hero-content h1{
+  font-family:'Cinzel', serif;
+  font-size:clamp(42px,4vw,64px);
+  margin:0;
+  letter-spacing:1px;
+}
+
+.hero-content h2{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:14px;
+  margin:12px 0 0 0;
+  font-weight:500;
+  font-size:clamp(22px,2vw,30px);
+}
+
+.divider{
+  width:80px;
+  height:2px;
+  background:linear-gradient(
+    to right,
+    transparent,
+    rgba(255,255,255,.85)
+  );
+}
+
+.hero-tagline{
+  margin-top:14px;
+  font-size:16px;
+  line-height:1.6;
+  color:rgba(255,255,255,.85);
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:900px){
+  .nav-inner{ padding:14px 18px; }
+  .brand-text{ display:none; }
+
   .hero-banner{
-    position:relative;
-    z-index:1;
-    margin-top:72px;     /* clears fixed nav */
-    height:78vh;
-    width:100%;
-    background:
-      url("assets/hero/Astral-Forge-hero.png")
-      center / cover no-repeat;
+    justify-content:center;
+    padding:0 20px;
   }
 
-  /* ===== Responsive ===== */
-  @media (max-width: 900px){
-    .nav-inner{ padding: 14px 18px; }
-    .brand-text{ display:none; }
+  .hero-content{
+    text-align:center;
   }
-  @media (max-width: 700px){
-    .nav-links{ gap:10px; }
-    .nav-links a{ padding:8px 10px; font-size:13px; }
+
+  .hero-content h2{
+    justify-content:center;
   }
+}
+
 </style>
 </head>
 
@@ -127,24 +199,43 @@
 
 <nav>
   <div class="nav-inner">
+
     <a class="brand" href="index.html">
-      <img src="assets/nav/Astral-Forge-nav.png" alt="Astral Forge" />
+      <img src="assets/nav/Astral-Forge-nav.png" alt="Astral Forge">
       <span class="brand-text">Astral Forge</span>
     </a>
 
-    <!-- Use # until pages exist (prevents 404) -->
     <div class="nav-links">
       <a href="#">Games</a>
       <a href="#">Blog</a>
       <a href="#">Store</a>
       <a href="#">Software</a>
       <a href="#">About</a>
-      <a class="join" href="#">Join</a>
+      <a href="#">Join</a>
     </div>
+
   </div>
 </nav>
 
-<section class="hero-banner"></section>
+<section class="hero-banner">
+
+  <div class="hero-content">
+
+    <h1>Crafted Worlds</h1>
+
+    <h2>
+      <span class="divider"></span>
+      Epic Journeys
+    </h2>
+
+    <p class="hero-tagline">
+      Professional tabletop campaigns, immersive storytelling,
+      and worlds forged beyond imagination.
+    </p>
+
+  </div>
+
+</section>
 
 </body>
 </html>
