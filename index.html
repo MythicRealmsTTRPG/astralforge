@@ -11,7 +11,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
   --bg:#0c0c0e;
   --text:rgba(255,255,255,.92);
@@ -41,10 +40,7 @@ body{
   content:"";
   position:fixed;
   inset:0;
-  background:linear-gradient(
-    rgba(8,8,10,.78),
-    rgba(10,10,12,.92)
-  );
+  background:linear-gradient(rgba(8,8,10,.78), rgba(10,10,12,.92));
   pointer-events:none;
 }
 
@@ -52,12 +48,10 @@ body{
 
 nav{
   position:fixed;
-  top:0;
-  left:0;
-  right:0;
+  top:0; left:0; right:0;
   z-index:1000;
-
   backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
   background:rgba(0,0,0,.55);
   border-bottom:1px solid var(--border);
   box-shadow:0 6px 30px rgba(0,0,0,.45);
@@ -79,9 +73,7 @@ nav{
   color:white;
 }
 
-.brand img{
-  height:42px;
-}
+.brand img{ height:42px; }
 
 /* ONLY BRAND NAME USES CINZEL */
 .brand-text{
@@ -90,8 +82,6 @@ nav{
   letter-spacing:1.2px;
   font-size:16px;
 }
-
-/* NAV LINKS */
 
 .nav-links{
   display:flex;
@@ -131,11 +121,9 @@ nav{
 
 .hero-content{
   text-align:right;
-  max-width:520px;
+  max-width:720px; /* wider so H1 stays on one line */
   color:white;
-
-  text-shadow:
-    0 2px 12px rgba(0,0,0,.65);
+  text-shadow:0 2px 12px rgba(0,0,0,.65);
 }
 
 .hero-content h1{
@@ -143,6 +131,7 @@ nav{
   font-size:clamp(42px,4vw,64px);
   margin:0;
   letter-spacing:1px;
+  white-space:nowrap; /* ⭐ keep "Crafted Worlds" on one line */
 }
 
 .hero-content h2{
@@ -158,11 +147,7 @@ nav{
 .divider{
   width:80px;
   height:2px;
-  background:linear-gradient(
-    to right,
-    transparent,
-    rgba(255,255,255,.85)
-  );
+  background:linear-gradient(to right, transparent, rgba(255,255,255,.85));
 }
 
 .hero-tagline{
@@ -185,13 +170,18 @@ nav{
 
   .hero-content{
     text-align:center;
+    max-width:640px;
   }
 
   .hero-content h2{
     justify-content:center;
   }
-}
 
+  /* keep on one line, but avoid overflow on very small screens */
+  .hero-content h1{
+    white-space:normal;
+  }
+}
 </style>
 </head>
 
@@ -199,7 +189,6 @@ nav{
 
 <nav>
   <div class="nav-inner">
-
     <a class="brand" href="index.html">
       <img src="assets/nav/Astral-Forge-nav.png" alt="Astral Forge">
       <span class="brand-text">Astral Forge</span>
@@ -213,14 +202,11 @@ nav{
       <a href="#">About</a>
       <a href="#">Join</a>
     </div>
-
   </div>
 </nav>
 
 <section class="hero-banner">
-
   <div class="hero-content">
-
     <h1>Crafted Worlds</h1>
 
     <h2>
@@ -232,9 +218,7 @@ nav{
       Professional tabletop campaigns, immersive storytelling,
       and worlds forged beyond imagination.
     </p>
-
   </div>
-
 </section>
 
 </body>
