@@ -1,229 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Astral Forge</title>
 
 <style>
-  :root{
-    --bg:#0c0c0e;
-    --text: rgba(255,255,255,.92);
-    --muted: rgba(255,255,255,.70);
-    --border: rgba(255,255,255,.08);
-    --accent: #4cc9f0;
-    --accent2:#7209b7;
-  }
 
-  *{ box-sizing:border-box; }
+/* ================= BASE ================= */
 
-  body{
-    margin:0;
-    font-family: Segoe UI, system-ui, -apple-system, Roboto, Arial, sans-serif;
-    color: var(--text);
-    background: var(--bg);
-  }
+body{
+  margin:0;
+  font-family:Segoe UI, system-ui, sans-serif;
+  color:white;
+}
 
-  /* ================= BACKGROUND ================= */
+/* ================= BACKGROUND ================= */
 
-  .home-bg{
-    min-height:100vh;
-    position:relative;
-    background:
-      url("/assets/backgrounds/Astral-Forge.png")
-      center / cover no-repeat fixed;
-    background-color: var(--bg);
-  }
+.home-bg{
+  min-height:100vh;
+  position:relative;
 
-  /* dark cinematic overlay (won't block clicks) */
-  .home-bg::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background: linear-gradient(
-      rgba(8,8,10,.82),
-      rgba(10,10,12,.95)
-    );
-    pointer-events:none;
-    z-index:0;
-  }
+  background:
+    url("/assets/backgrounds/astral-forge-leather.png")
+    center / cover no-repeat fixed;
 
-  /* ================= NAVBAR ================= */
+  background-color:#0c0c0e;
+}
 
-  nav{
-    position:fixed;
-    top:0; left:0; right:0;
-    z-index:1000;
+.home-bg::before{
+  content:"";
+  position:absolute;
+  inset:0;
 
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    background: rgba(0,0,0,.55);
-    border-bottom: 1px solid var(--border);
-    box-shadow: 0 6px 30px rgba(0,0,0,.45);
-  }
+  background:linear-gradient(
+    rgba(8,8,10,.82),
+    rgba(10,10,12,.95)
+  );
 
-  /* ✅ corners: full width + padding */
-  .nav-inner{
-    width:100%;
-    padding: 14px 24px; /* nudge toward corners */
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap: 18px;
-  }
+  pointer-events:none;
+}
 
-  .brand{
-    display:flex;
-    align-items:center;
-    gap: 12px;
-    text-decoration:none;
-    color: var(--text);
-  }
+/* ================= HERO ================= */
 
-  .brand img{
-    height: 42px;
-    width:auto;
-  }
+.hero-banner{
+  height:78vh;
+  width:100%;
 
-  .brand-text{
-    font-weight: 800;
-    letter-spacing: .4px;
-    font-size: 15px;
-    white-space: nowrap;
-  }
+  /* ✅ CORRECT HERO PATH */
+  background:
+    url("/assets/hero/Astral-Forge-hero.jpg")
+    center / cover no-repeat;
 
-  .nav-links{
-    display:flex;
-    align-items:center;
-    gap: 18px;
-  }
+  position:relative;
 
-  .nav-links a{
-    text-decoration:none;
-    color: rgba(255,255,255,.82);
-    font-size: 14px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    transition: .2s;
-    white-space: nowrap;
-  }
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
 
-  .nav-links a:hover{
-    color: var(--accent);
-    background: rgba(255,255,255,.06);
-  }
+.hero-banner::before{
+  content:"";
+  position:absolute;
+  inset:0;
 
-  /* ✅ Join CTA on far right */
-  .nav-links a.join{
-    border: 1px solid rgba(76,201,240,.45);
-    background: linear-gradient(
-      135deg,
-      rgba(76,201,240,.18),
-      rgba(114,9,183,.18)
-    );
-    color: rgba(255,255,255,.95);
-    box-shadow: 0 10px 30px rgba(76,201,240,.12);
-  }
+  background:linear-gradient(
+    rgba(10,8,6,.65),
+    rgba(12,10,8,.92)
+  );
+}
 
-  .nav-links a.join:hover{
-    border-color: rgba(76,201,240,.75);
-    transform: translateY(-1px);
-  }
+.hero-overlay{
+  position:relative;
+  z-index:2;
+  max-width:900px;
+  padding:20px;
+}
 
-  /* ================= HERO ================= */
+.hero-overlay h1{
+  font-size:64px;
+  margin:0;
+  font-family:Georgia,serif;
+}
 
-  .hero{
-    position:relative;
-    z-index: 1;              /* above overlay */
-    min-height:100vh;
+.hero-overlay p{
+  margin-top:14px;
+  color:#d6cfc6;
+  font-size:18px;
+}
 
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
+.hero-buttons{
+  margin-top:28px;
+  display:flex;
+  gap:16px;
+  justify-content:center;
+}
 
-    padding: 110px 16px 60px; /* clears fixed nav */
-  }
+.btn-primary,
+.btn-secondary{
+  padding:14px 26px;
+  border-radius:10px;
+  text-decoration:none;
+}
 
-  .hero h1{
-    font-size: 64px;
-    margin: 0;
-    letter-spacing: 1px;
-  }
+.btn-primary{
+  background:#8a5a2b;
+  border:1px solid #b07a45;
+  color:white;
+}
 
-  .hero p{
-    max-width: 680px;
-    margin: 14px 0 0;
-    color: var(--muted);
-    line-height: 1.6;
-  }
+.btn-secondary{
+  border:1px solid rgba(255,255,255,.35);
+  color:white;
+}
 
-  .button{
-    margin-top: 28px;
-    padding: 14px 28px;
-    border-radius: 12px;
-    border: 1px solid rgba(76,201,240,.60);
-    text-decoration:none;
-    color: rgba(255,255,255,.95);
-
-    background: linear-gradient(
-      135deg,
-      rgba(76,201,240,.22),
-      rgba(114,9,183,.22)
-    );
-
-    transition: .25s;
-  }
-
-  .button:hover{
-    transform: translateY(-2px);
-    border-color: rgba(76,201,240,.85);
-  }
-
-  /* ================= RESPONSIVE ================= */
-  @media (max-width: 900px){
-    .nav-inner{ padding: 14px 18px; } /* less edge padding on small screens */
-    .brand-text{ display:none; }      /* keeps nav from wrapping */
-    .hero h1{ font-size: 44px; }
-  }
-
-  @media (max-width: 600px){
-    .nav-links{ gap: 10px; }
-    .nav-links a{ padding: 8px 10px; font-size: 13px; }
-  }
 </style>
 </head>
 
 <body class="home-bg">
 
-<nav>
-  <div class="nav-inner">
-    <a class="brand" href="/">
-      <img src="/assets/Astral-Forge-nav.png" alt="Astral Forge" />
-      <span class="brand-text">Astral Forge</span>
-    </a>
+<!-- NAV LOAD -->
+<div id="nav-placeholder"></div>
 
-    <div class="nav-links">
-      <a href="/games">Games</a>
-      <a href="/blog">Blog</a>
-      <a href="/store">Store</a>
-      <a href="/software">Software</a>
-      <a href="/about">About</a>
-      <a class="join" href="/membership">Join</a>
+<!-- HERO -->
+<section class="hero-banner">
+
+  <div class="hero-overlay">
+
+    <h1>Astral Forge</h1>
+
+    <p>
+      A Fantasy Alexandria where worlds are written,
+      campaigns forged, and legends prepared.
+    </p>
+
+    <div class="hero-buttons">
+      <a class="btn-primary" href="/games">Explore Campaigns</a>
+      <a class="btn-secondary" href="/membership">Join the Forge</a>
     </div>
+
   </div>
-</nav>
 
-<section class="hero">
-  <h1>Astral Forge</h1>
-  <p>
-    The personal stronghold of ScaleScribe — professional GM campaigns,
-    worldbuilding, software, and stories forged beyond platforms.
-  </p>
-
-  <a class="button" href="/games">Book a Game</a>
 </section>
+
+<!-- LOAD NAV COMPONENT -->
+<script>
+fetch("/components/nav/nav.html")
+  .then(res => res.text())
+  .then(data => {
+    document.getElementById("nav-placeholder").innerHTML = data;
+  });
+</script>
 
 </body>
 </html>
