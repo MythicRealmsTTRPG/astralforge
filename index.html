@@ -7,14 +7,17 @@
 
 <title>Astral Forge</title>
 
-<!-- Brand Font -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --bg:#0c0c0e;
   --text:rgba(255,255,255,.92);
   --border:rgba(255,255,255,.08);
+
+  --warm:#f3eee6;
+  --warm2:#d6c7b1;
+  --gold:#b08a55;
 }
 
 *{ box-sizing:border-box; }
@@ -26,7 +29,7 @@ body{
   background:var(--bg);
 }
 
-/* ================= BACKGROUND ================= */
+/* ================= PAGE BACKDROP ================= */
 
 .home-bg{
   min-height:100vh;
@@ -36,11 +39,15 @@ body{
     center / cover no-repeat fixed;
 }
 
+/* OPTION A: LIGHTER PAGE OVERLAY */
 .home-bg::before{
   content:"";
-  position:fixed;
+  position:absolute;
   inset:0;
-  background:linear-gradient(rgba(8,8,10,.78), rgba(10,10,12,.92));
+  background:linear-gradient(
+    rgba(8,8,10,.45),
+    rgba(10,10,12,.65)
+  );
   pointer-events:none;
 }
 
@@ -50,9 +57,11 @@ nav{
   position:fixed;
   top:0; left:0; right:0;
   z-index:1000;
+
   backdrop-filter:blur(12px);
   -webkit-backdrop-filter:blur(12px);
   background:rgba(0,0,0,.55);
+
   border-bottom:1px solid var(--border);
   box-shadow:0 6px 30px rgba(0,0,0,.45);
 }
@@ -75,7 +84,7 @@ nav{
 
 .brand img{ height:42px; }
 
-/* ONLY BRAND NAME USES CINZEL */
+/* ONLY ASTRAL FORGE uses Cinzel */
 .brand-text{
   font-family:'Cinzel', serif;
   font-weight:600;
@@ -111,61 +120,75 @@ nav{
     url("assets/hero/Astral-Forge-hero.png")
     center / cover no-repeat;
 
+  position:relative;
+
   display:flex;
-  align-items:center;
-  justify-content:flex-end;
+  align-items:flex-end;     /* push down */
+  justify-content:flex-end; /* push right */
+
   padding-right:8%;
+  padding-bottom:6%;
 }
 
-/* HERO TEXT */
-
+/* Hero title block (bottom-right) */
 .hero-content{
+  max-width:560px;
   text-align:right;
-  max-width:720px; /* wider so H1 stays on one line */
-  color:white;
-  text-shadow:0 2px 12px rgba(0,0,0,.65);
+  color:var(--warm);
+
+  text-shadow:
+    0 0 12px rgba(255,210,150,.14),
+    0 10px 34px rgba(0,0,0,.85);
 }
 
 .hero-content h1{
   font-family:'Cinzel', serif;
-  font-size:clamp(42px,4vw,64px);
+  font-weight:600;
+  font-size:clamp(42px,4vw,66px);
   margin:0;
   letter-spacing:1px;
-  white-space:nowrap; /* ⭐ keep "Crafted Worlds" on one line */
+  white-space:nowrap; /* keep Crafted Worlds on one line (desktop) */
 }
 
 .hero-content h2{
+  margin:10px 0 12px;
+  font-size:clamp(20px,2vw,30px);
+  font-weight:500;
+  color:var(--warm2);
+
   display:flex;
   justify-content:flex-end;
   align-items:center;
-  gap:14px;
-  margin:12px 0 0 0;
-  font-weight:500;
-  font-size:clamp(22px,2vw,30px);
+  gap:12px;
 }
 
-.divider{
-  width:80px;
+.hero-content h2::before{
+  content:"";
+  display:inline-block;
+  width:74px;
   height:2px;
-  background:linear-gradient(to right, transparent, rgba(255,255,255,.85));
+  background:linear-gradient(to right, transparent, var(--gold));
 }
 
 .hero-tagline{
-  margin-top:14px;
+  margin:0;
   font-size:16px;
   line-height:1.6;
-  color:rgba(255,255,255,.85);
+  color:rgba(240,230,215,.82);
+  max-width:52ch;
+  margin-left:auto; /* keeps paragraph snug to right */
 }
 
 /* ================= MOBILE ================= */
 
-@media(max-width:900px){
+@media (max-width: 900px){
   .nav-inner{ padding:14px 18px; }
   .brand-text{ display:none; }
 
   .hero-banner{
     justify-content:center;
-    padding:0 20px;
+    align-items:flex-end;
+    padding:0 18px 34px 18px;
   }
 
   .hero-content{
@@ -177,9 +200,13 @@ nav{
     justify-content:center;
   }
 
-  /* keep on one line, but avoid overflow on very small screens */
   .hero-content h1{
-    white-space:normal;
+    white-space:normal; /* avoid overflow on small screens */
+  }
+
+  .hero-tagline{
+    margin-left:0;
+    max-width:60ch;
   }
 }
 </style>
@@ -208,12 +235,7 @@ nav{
 <section class="hero-banner">
   <div class="hero-content">
     <h1>Crafted Worlds</h1>
-
-    <h2>
-      <span class="divider"></span>
-      Epic Journeys
-    </h2>
-
+    <h2>Epic Journeys</h2>
     <p class="hero-tagline">
       Professional tabletop campaigns, immersive storytelling,
       and worlds forged beyond imagination.
