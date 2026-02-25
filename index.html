@@ -1,196 +1,209 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Astral Forge</title>
 
 <style>
+  :root{
+    --bg:#0c0c0e;
+    --text: rgba(255,255,255,.92);
+    --muted: rgba(255,255,255,.70);
+    --border: rgba(255,255,255,.08);
+    --accent: #4cc9f0;
+    --accent2:#7209b7;
+  }
 
-/* ================= BASE ================= */
+  *{ box-sizing:border-box; }
 
-body{
-  margin:0;
-  font-family:Segoe UI, system-ui, sans-serif;
-  color:white;
-  background:#0c0c0e;
-}
+  body{
+    margin:0;
+    font-family: Segoe UI, system-ui, -apple-system, Roboto, Arial, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+  }
 
-/* ================= BACKGROUND ================= */
+  /* ================= BACKGROUND ================= */
 
-.home-bg{
-  min-height:100vh;
-  position:relative;
+  .home-bg{
+    min-height:100vh;
+    position:relative;
+    background:
+      url("/assets/backgrounds/Astral-Forge.png")
+      center / cover no-repeat fixed;
+    background-color: var(--bg);
+  }
 
-  background:
-    url("/assets/backgrounds/Astral-Forge.png")
-    center / cover no-repeat fixed;
-}
+  /* dark cinematic overlay (won't block clicks) */
+  .home-bg::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(
+      rgba(8,8,10,.82),
+      rgba(10,10,12,.95)
+    );
+    pointer-events:none;
+    z-index:0;
+  }
 
-.home-bg::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(
-    rgba(8,8,10,.82),
-    rgba(10,10,12,.95)
-  );
-  pointer-events:none;
-}
+  /* ================= NAVBAR ================= */
 
-/* ================= NAVBAR ================= */
+  nav{
+    position:fixed;
+    top:0; left:0; right:0;
+    z-index:1000;
 
-nav{
-  position:fixed;
-  top:0;
-  left:0;
-  right:0;
-  z-index:1000;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    background: rgba(0,0,0,.55);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 6px 30px rgba(0,0,0,.45);
+  }
 
-  backdrop-filter:blur(12px);
-  background:rgba(0,0,0,.55);
-  border-bottom:1px solid rgba(255,255,255,.08);
-}
+  /* ✅ corners: full width + padding */
+  .nav-inner{
+    width:100%;
+    padding: 14px 56px; /* nudge toward corners */
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap: 18px;
+  }
 
-.nav-inner{
-  max-width:1300px;
-  margin:0 auto;
-  padding:14px 24px;
+  .brand{
+    display:flex;
+    align-items:center;
+    gap: 12px;
+    text-decoration:none;
+    color: var(--text);
+  }
 
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-}
+  .brand img{
+    height: 42px;
+    width:auto;
+  }
 
-/* Brand Left */
+  .brand-text{
+    font-weight: 800;
+    letter-spacing: .4px;
+    font-size: 15px;
+    white-space: nowrap;
+  }
 
-.brand{
-  display:flex;
-  align-items:center;
-  gap:12px;
-  text-decoration:none;
-  color:white;
-}
+  .nav-links{
+    display:flex;
+    align-items:center;
+    gap: 18px;
+  }
 
-.brand img{
-  height:42px;
-}
+  .nav-links a{
+    text-decoration:none;
+    color: rgba(255,255,255,.82);
+    font-size: 14px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: .2s;
+    white-space: nowrap;
+  }
 
-.brand-text{
-  font-weight:800;
-  letter-spacing:.4px;
-  font-size:15px;
-}
+  .nav-links a:hover{
+    color: var(--accent);
+    background: rgba(255,255,255,.06);
+  }
 
-/* Links Right */
+  /* ✅ Join CTA on far right */
+  .nav-links a.join{
+    border: 1px solid rgba(76,201,240,.45);
+    background: linear-gradient(
+      135deg,
+      rgba(76,201,240,.18),
+      rgba(114,9,183,.18)
+    );
+    color: rgba(255,255,255,.95);
+    box-shadow: 0 10px 30px rgba(76,201,240,.12);
+  }
 
-.nav-links{
-  display:flex;
-  align-items:center;
-  gap:20px;
-}
+  .nav-links a.join:hover{
+    border-color: rgba(76,201,240,.75);
+    transform: translateY(-1px);
+  }
 
-.nav-links a{
-  text-decoration:none;
-  color:#ddd;
-  font-size:14px;
-  padding:8px 12px;
-  border-radius:10px;
-  transition:.2s;
-  white-space:nowrap;
-}
+  /* ================= HERO ================= */
 
-.nav-links a:hover{
-  color:#4cc9f0;
-  background:rgba(255,255,255,.06);
-}
+  .hero{
+    position:relative;
+    z-index: 1;              /* above overlay */
+    min-height:100vh;
 
-/* Join Button */
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
 
-.nav-links a.join{
-  border:1px solid rgba(76,201,240,.45);
-  background:linear-gradient(
-    135deg,
-    rgba(76,201,240,.18),
-    rgba(114,9,183,.18)
-  );
-  color:white;
-  box-shadow:0 10px 30px rgba(76,201,240,.12);
-}
+    padding: 110px 16px 60px; /* clears fixed nav */
+  }
 
-.nav-links a.join:hover{
-  transform:translateY(-1px);
-  border-color:rgba(76,201,240,.75);
-}
+  .hero h1{
+    font-size: 64px;
+    margin: 0;
+    letter-spacing: 1px;
+  }
 
-/* ================= HERO ================= */
+  .hero p{
+    max-width: 680px;
+    margin: 14px 0 0;
+    color: var(--muted);
+    line-height: 1.6;
+  }
 
-.hero{
-  position:relative;
-  z-index:2;
+  .button{
+    margin-top: 28px;
+    padding: 14px 28px;
+    border-radius: 12px;
+    border: 1px solid rgba(76,201,240,.60);
+    text-decoration:none;
+    color: rgba(255,255,255,.95);
 
-  height:100vh;
+    background: linear-gradient(
+      135deg,
+      rgba(76,201,240,.22),
+      rgba(114,9,183,.22)
+    );
 
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
+    transition: .25s;
+  }
 
-  padding-top:90px;
-}
+  .button:hover{
+    transform: translateY(-2px);
+    border-color: rgba(76,201,240,.85);
+  }
 
-.hero h1{
-  font-size:64px;
-  margin:0;
-  letter-spacing:1px;
-}
+  /* ================= RESPONSIVE ================= */
+  @media (max-width: 900px){
+    .nav-inner{ padding: 14px 18px; } /* less edge padding on small screens */
+    .brand-text{ display:none; }      /* keeps nav from wrapping */
+    .hero h1{ font-size: 44px; }
+  }
 
-.hero p{
-  max-width:620px;
-  margin-top:14px;
-  color:#bbb;
-}
-
-.button{
-  margin-top:30px;
-  padding:14px 28px;
-  border-radius:10px;
-  border:1px solid #4cc9f0;
-  text-decoration:none;
-  color:white;
-
-  background:linear-gradient(
-    135deg,
-    rgba(76,201,240,.22),
-    rgba(114,9,183,.22)
-  );
-
-  transition:.25s;
-}
-
-.button:hover{
-  transform:translateY(-2px);
-}
-
+  @media (max-width: 600px){
+    .nav-links{ gap: 10px; }
+    .nav-links a{ padding: 8px 10px; font-size: 13px; }
+  }
 </style>
 </head>
 
 <body class="home-bg">
 
-<!-- ================= NAVBAR ================= -->
-
 <nav>
   <div class="nav-inner">
-
-    <!-- LEFT -->
     <a class="brand" href="/">
-      <img src="/assets/Astral-Forge-nav.png" alt="Astral Forge">
+      <img src="/assets/Astral-Forge-nav.png" alt="Astral Forge" />
       <span class="brand-text">Astral Forge</span>
     </a>
 
-    <!-- RIGHT -->
     <div class="nav-links">
       <a href="/games">Games</a>
       <a href="/blog">Blog</a>
@@ -199,25 +212,17 @@ nav{
       <a href="/about">About</a>
       <a class="join" href="/membership">Join</a>
     </div>
-
   </div>
 </nav>
 
-<!-- ================= HERO ================= -->
-
 <section class="hero">
-
   <h1>Astral Forge</h1>
-
   <p>
     The personal stronghold of ScaleScribe — professional GM campaigns,
     worldbuilding, software, and stories forged beyond platforms.
   </p>
 
-  <a class="button" href="/games">
-    Book a Game
-  </a>
-
+  <a class="button" href="/games">Book a Game</a>
 </section>
 
 </body>
