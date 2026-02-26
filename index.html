@@ -1,116 +1,253 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astral Forge</title>
 
-<title>Astral Forge</title>
+  <!-- Cinzel for Astral Forge (top-left only) -->
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="style.css">
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --border:rgba(255,255,255,.10);
+    }
 
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+    *{ box-sizing:border-box; }
+    html,body{ margin:0; padding:0; background:var(--bg); color:var(--text); font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif; }
 
+    /* NAV */
+    .navbar{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:1000;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 40px;
+      background:rgba(0,0,0,.70);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+    .nav-left{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 220px;
+    }
+    .nav-left img{
+      height:40px;
+      width:auto;
+      display:block;
+    }
+    .brand{
+      font-family:'Cinzel', serif;
+      font-weight:600;
+      letter-spacing:.8px;
+      font-size:18px;
+      white-space:nowrap;
+    }
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      white-space:nowrap;
+    }
+    .nav-links a{
+      color:rgba(255,255,255,.82);
+      text-decoration:none;
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:10px;
+      transition:.15s ease;
+    }
+    .nav-links a:hover{
+      background:rgba(255,255,255,.06);
+      color:#fff;
+    }
+
+    /* HERO */
+    .hero{
+      position:relative;
+      margin-top:72px; /* space for fixed nav */
+      width:100%;
+      overflow:hidden;
+      background:#000;
+    }
+    .hero-image{
+      width:100%;
+      height:calc(100vh - 72px);
+      max-height:760px;
+      object-fit:cover;
+      display:block;
+      filter: saturate(1.02) contrast(1.02);
+    }
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,.20), rgba(0,0,0,.55));
+      pointer-events:none;
+    }
+
+    /* Right-aligned hero text (bottom-right area) */
+    .hero-text{
+      position:absolute;
+      right:6%;
+      bottom:10%;
+      text-align:right;
+      max-width:min(560px, 88%);
+      text-shadow: 0 6px 24px rgba(0,0,0,.75);
+    }
+    .hero-text h1{
+      margin:0;
+      font-family: Georgia, serif;
+      font-size: clamp(34px, 4.6vw, 56px);
+      letter-spacing:.5px;
+      white-space:nowrap; /* keeps Crafted Worlds on one line */
+    }
+    .hero-text h2{
+      margin:10px 0 0;
+      font-family: Georgia, serif;
+      font-size: clamp(20px, 2.6vw, 30px);
+      font-weight:600;
+      opacity:.92;
+    }
+    .hero-text p{
+      margin:12px 0 0;
+      font-size:14px;
+      line-height:1.6;
+      color:rgba(255,255,255,.78);
+    }
+
+    /* SECTIONS */
+    main{
+      background:
+        url("assets/backgrounds/Astral-Forge.png") center / cover no-repeat fixed;
+    }
+    .section{
+      padding:80px 10%;
+      position:relative;
+    }
+    .section::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.82));
+      pointer-events:none;
+    }
+    .section > *{ position:relative; z-index:1; }
+
+    .section h2{
+      margin:0 0 26px;
+      font-family:'Cinzel', serif;
+      font-weight:600;
+      letter-spacing:.6px;
+      text-align:left;
+    }
+
+    .placeholder{
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.25);
+      padding:46px 24px;
+      border-radius:14px;
+      color:rgba(255,255,255,.65);
+    }
+
+    /* FOOTER */
+    .footer{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:24px 40px;
+      background:rgba(0,0,0,.85);
+      border-top:1px solid var(--border);
+    }
+    .footer a{
+      color:rgba(255,255,255,.78);
+      text-decoration:none;
+      margin-left:18px;
+    }
+    .footer a:hover{ color:#fff; }
+
+    @media (max-width: 800px){
+      .navbar{ padding:14px 18px; }
+      .brand{ font-size:16px; }
+      .hero-text{ right:4%; bottom:8%; }
+      .nav-links{ gap:10px; }
+      .nav-links a{ font-size:13px; padding:8px 8px; }
+      .section{ padding:64px 7%; }
+      .footer{ padding:20px 18px; flex-direction:column; gap:10px; align-items:flex-start; }
+      .footer a{ margin-left:0; margin-right:14px; }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- ================= NAV ================= -->
-<nav class="navbar">
-
+  <!-- NAV -->
+  <nav class="navbar">
     <div class="nav-left">
-        <img src="assets/logo.png" class="logo">
-        <span class="brand">Astral Forge</span>
+      <!-- This file exists in your repo -->
+      <img src="assets/nav/Astral-Forge-nav.png" alt="Astral Forge">
+      <span class="brand">Astral Forge</span>
     </div>
 
     <div class="nav-links">
-        <a href="pages/games.html">Games</a>
-        <a href="pages/lore.html">Lore</a>
-        <a href="pages/store.html">Store</a>
-        <a href="pages/software.html">Software</a>
-        <a href="pages/about.html">About</a>
-        <a href="pages/membership.html">Join</a>
+      <a href="pages/games.html">Games</a>
+      <a href="pages/lore.html">Lore</a>
+      <a href="pages/store.html">Store</a>
+      <a href="pages/software.html">Software</a>
+      <a href="pages/about.html">About</a>
+      <a href="pages/membership.html">Join</a>
     </div>
+  </nav>
 
-</nav>
-
-
-<!-- ================= HERO ================= -->
-<section class="hero">
-
+  <!-- HERO -->
+  <section class="hero">
+    <img class="hero-image" src="assets/hero/Astral-Forge-hero.png" alt="Astral Forge Hero">
     <div class="hero-overlay"></div>
 
-    <img src="assets/hero/Astral-Forge-Hero.png" class="hero-image">
-
+    <!-- Bottom-right placement like you pointed out -->
     <div class="hero-text">
-        <h1>Crafted Worlds</h1>
-        <h2>Epic Journeys</h2>
-        <p>
-            Professional tabletop campaigns, immersive storytelling,
-            and worlds forged beyond imagination.
-        </p>
+      <h1>Crafted Worlds</h1>
+      <h2>Epic Journeys</h2>
+      <p>Professional tabletop campaigns, immersive storytelling, and worlds forged beyond imagination.</p>
     </div>
+  </section>
 
-</section>
+  <!-- CONTENT BELOW HERO -->
+  <main>
 
+    <section class="section">
+      <h2>Featured Campaign</h2>
+      <div class="placeholder">Campaign Coming Soon</div>
+    </section>
 
-<!-- ================= FEATURED CAMPAIGN ================= -->
-<section class="featured">
+    <section class="section">
+      <h2>Playable Campaigns</h2>
+      <div class="placeholder">Sessions Opening Soon</div>
+    </section>
 
-    <h2>Featured Campaign</h2>
+    <section class="section">
+      <h2>Player Reviews</h2>
+      <div class="placeholder">Reviews Coming Soon</div>
+    </section>
 
-    <!-- Empty until launch -->
-    <div class="placeholder">
-        Campaign Coming Soon
-    </div>
-
-</section>
-
-
-<!-- ================= PLAYABLE CAMPAIGNS ================= -->
-<section class="playable">
-
-    <h2>Playable Campaigns</h2>
-
-    <!-- Empty grid -->
-    <div class="placeholder">
-        Sessions Opening Soon
-    </div>
-
-</section>
-
-
-<!-- ================= REVIEWS ================= -->
-<section class="reviews">
-
-    <h2>Player Reviews</h2>
-
-    <!-- Ready for your testimonials -->
-    <div class="reviews-grid">
-
-        <!-- Leave empty for now -->
-        <!-- You will paste review cards here later -->
-
-    </div>
-
-</section>
-
-
-<!-- ================= FOOTER ================= -->
-<footer class="footer">
-
-    <div class="footer-left">
-        © 2026 Astral Forge
-    </div>
-
-    <div class="footer-right">
+    <footer class="footer">
+      <div>© 2026 Astral Forge</div>
+      <div>
         <a href="pages/contact.html">Contact</a>
         <a href="pages/privacy.html">Privacy</a>
         <a href="pages/terms.html">Terms</a>
-        <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q" target="_blank">Root</a>
-    </div>
+        <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q" target="_blank" rel="noopener">Root</a>
+      </div>
+    </footer>
 
-</footer>
+  </main>
 
 </body>
 </html>
