@@ -22,7 +22,6 @@
       /* ink + parchment */
       --ink:#1b1209;
       --ink2:rgba(27,18,9,.82);
-      --parchmentTint: rgba(255,245,220,.10);
 
       --gold:#b99054;
       --gold2:#7e5a2f;
@@ -36,7 +35,7 @@
       color: var(--text);
     }
 
-    /* ===== NAV (same pattern as your other pages) ===== */
+    /* ===== NAV ===== */
     nav{
       position:fixed;
       top:0; left:0; right:0;
@@ -100,7 +99,7 @@
       transform: translateY(-1px);
     }
 
-    /* ===== PAGE BACKDROP (parchment) ===== */
+    /* ===== PAGE BACKDROP ===== */
     main{
       min-height:100vh;
       padding-top: 86px; /* nav space */
@@ -115,6 +114,7 @@
       padding: 34px 20px 60px;
     }
 
+    /* ===== PARCHMENT PANEL ===== */
     .parchment{
       position:relative;
       border-radius: 18px;
@@ -122,7 +122,7 @@
       box-shadow: 0 30px 80px var(--shadow);
       border: 1px solid rgba(255,255,255,.08);
 
-      /* ✅ Put your parchment file here */
+      /* Put your parchment file here */
       background: url("../assets/backgrounds/parchment.png") center / cover no-repeat;
       background-color: #c9b48f;
     }
@@ -199,7 +199,7 @@
       border-top: 1px solid rgba(40,28,18,.14);
     }
 
-    /* BIO + BLOCKS */
+    /* BIO */
     .bio p{
       margin: 0 0 14px;
       font-size: 16px;
@@ -222,6 +222,7 @@
       background: rgba(255,255,255,.22);
     }
 
+    /* REUSABLE CARDS */
     .cards{
       display:grid;
       grid-template-columns: 1fr 1fr;
@@ -258,7 +259,37 @@
       line-height: 1.8;
     }
 
-    /* ===== FOOTER (dark, like homepage) ===== */
+    /* GET IN TOUCH (boxed) */
+    .contact-card{
+      margin-top: 22px;
+      text-align:center;
+    }
+    .contact-card p{
+      margin: 0 0 10px;
+      color: rgba(28,20,14,.90);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+    .contact-card .email{
+      margin: 10px 0 8px;
+      font-weight: 600;
+      font-size: 16px;
+    }
+    .contact-card .email a{
+      color: rgba(20,10,0,.95);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .contact-card .email a:hover{
+      opacity: .85;
+    }
+    .contact-card .response-time{
+      margin: 0;
+      opacity: .78;
+      font-size: 14px;
+    }
+
+    /* ===== FOOTER ===== */
     footer{
       margin-top: 34px;
       background: rgba(0,0,0,.70);
@@ -329,11 +360,11 @@
           <div class="profile">
             <!-- PHOTO -->
             <div class="photo-card">
-              <!-- ✅ Replace this with your photo: assets/portraits/scribe.jpg (example) -->
+              <!-- Replace this when ready: /assets/portraits/scribe.jpg -->
               <img class="photo" src="../assets/portraits/scribe.jpg" alt="Scribe portrait (replace this file)" />
               <div class="photo-cap">
                 Warm table. Clear expectations. Real consequences.<br/>
-                <span style="opacity:.78;">Tip: use a soft-lit storyteller portrait (books/dice background is perfect).</span>
+                <span style="opacity:.78;">Tip: a soft-lit storyteller portrait (books/dice background is perfect).</span>
               </div>
             </div>
 
@@ -384,33 +415,26 @@
                 The best moments are rarely planned — they happen when players surprise the world, and the world answers back.
                 If that’s the kind of table you’ve been looking for, I’d be honored to run a game for you.
               </div>
+
+              <!-- ✅ Get in Touch in its own BOX (uses .card so it will always look correct) -->
+              <div class="cards" style="grid-template-columns: 1fr;">
+                <div class="card contact-card">
+                  <h3>Get in Touch</h3>
+                  <p>
+                    Whether you’re curious about a campaign, interested in collaboration,
+                    or simply want to talk story — I’d love to hear from you.
+                  </p>
+                  <p class="email">
+                    <a href="mailto:scribe@astralforge.studio">scribe@astralforge.studio</a>
+                  </p>
+                  <p class="response-time">
+                    I personally read and respond to every message. Most replies go out within 24–48 hours.
+                  </p>
+                </div>
+              </div>
+
             </div>
           </div>
-
-          <div class="contact-wrapper">
-
-  <div class="contact-card">
-    <h2>Get in Touch</h2>
-
-    <p>
-      Whether you’re curious about a campaign, interested in collaboration,
-      or simply want to talk story — I’d love to hear from you.
-    </p>
-
-    <p class="email">
-      <a href="mailto:scribe@astralforge.studio">
-        scribe@astralforge.studio
-      </a>
-    </p>
-
-    <p class="response-time">
-      I personally read and respond to every message.
-      Most replies go out within 24–48 hours.
-    </p>
-
-  </div>
-
-</div>
 
         </div>
       </div>
