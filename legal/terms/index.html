@@ -1,1 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>Terms of Service • Astral Forge</title>
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0b0b0d;
+  --text:rgba(255,255,255,.92);
+  --muted:rgba(255,255,255,.72);
+  --border:rgba(255,255,255,.10);
+  --gold:#b99054;
+  --shadow:rgba(0,0,0,.65);
+}
+
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+
+/* ================= NAV ================= */
+
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  background:rgba(0,0,0,.55);
+  border-bottom:1px solid var(--border);
+  z-index:1000;
+  box-shadow:0 6px 30px rgba(0,0,0,.45);
+}
+
+.nav-inner{
+  padding:14px 56px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:var(--text);
+  white-space:nowrap;
+}
+
+.brand img{
+  height:38px;
+  width:auto;
+  display:block;
+}
+
+.brand-text{
+  font-family:"Cinzel",serif;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-size:14px;
+  font-weight:700;
+}
+
+.nav-links{
+  display:flex;
+  gap:18px;
+  align-items:center;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.nav-links a{
+  color:rgba(255,255,255,.8);
+  text-decoration:none;
+  padding:8px 12px;
+  border-radius:10px;
+  font-size:14px;
+  transition:.2s;
+}
+
+.nav-links a:hover{
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.95);
+}
+
+.nav-links a.join{
+  border:1px solid rgba(185,144,84,.55);
+  background:linear-gradient(135deg, rgba(185,144,84,.18), rgba(0,0,0,.12));
+  color:rgba(255,255,255,.95);
+  box-shadow:0 10px 30px rgba(185,144,84,.12);
+}
+
+.nav-links a.join:hover{
+  border-color:rgba(185,144,84,.85);
+  transform:translateY(-1px);
+}
+
+/* ================= PAGE ================= */
+
+main{
+  padding-top:90px;
+  min-height:100vh;
+  background:
+    radial-gradient(1200px 600px at 20% 10%, rgba(185,144,84,.08), transparent 55%),
+    radial-gradient(900px 500px at 85% 0%, rgba(255,255,255,.05), transparent 60%),
+    var(--bg);
+}
+
+.container{
+  max-width:900px;
+  margin:auto;
+  padding:40px 20px 80px;
+}
+
+.paper{
+  position:relative;
+  background:url("/assets/backgrounds/parchment.png") center/cover no-repeat;
+  background-color:#c9b48f;
+  border-radius:18px;
+  padding:50px;
+  color:#20160d;
+  line-height:1.8;
+  box-shadow:0 30px 80px var(--shadow);
+  border:1px solid rgba(255,255,255,.08);
+  overflow:hidden;
+}
+
+.paper::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(1200px 600px at 50% 10%, rgba(255,255,255,.18), transparent 55%),
+    radial-gradient(900px 600px at 50% 100%, rgba(0,0,0,.26), transparent 60%),
+    linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.18));
+  pointer-events:none;
+}
+
+.paper > *{
+  position:relative;
+  z-index:1;
+}
+
+h1{
+  font-family:Georgia,serif;
+  font-size:42px;
+  margin:0 0 12px;
+  letter-spacing:.02em;
+}
+
+h2{
+  margin-top:34px;
+  font-family:Georgia,serif;
+}
+
+p{ margin:14px 0; }
+ul{ padding-left:20px; }
+
+/* ================= FOOTER ================= */
+
+footer{
+  background:rgba(0,0,0,.70);
+  border-top:1px solid var(--border);
+}
+
+.footer-inner{
+  max-width:1200px;
+  margin:auto;
+  padding:18px 20px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:18px;
+  color:rgba(255,255,255,.7);
+  font-size:14px;
+}
+
+.footer-links{
+  display:flex;
+  gap:18px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+
+.footer-links a{
+  color:rgba(255,255,255,.8);
+  text-decoration:none;
+}
+
+.footer-links a:hover{ color:white; }
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width:980px){
+  .nav-inner{ padding:14px 18px; }
+  .paper{ padding:28px 20px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a class="brand" href="/">
+      <img src="/assets/nav/Astral-Forge-nav.png" alt="Astral Forge">
+      <span class="brand-text">Astral Forge</span>
+    </a>
+
+    <div class="nav-links">
+      <a href="/games/">Games</a>
+      <a href="https://codex.astralforge.studio" target="_blank" rel="noopener noreferrer">Codex</a>
+      <a href="https://shop.astralforge.studio" target="_blank" rel="noopener noreferrer">Shop</a>
+      <a href="/about/">About</a>
+      <a class="join" href="/membership/">Join</a>
+    </div>
+  </div>
+</nav>
+
+<!-- CONTENT -->
+<main>
+  <div class="container">
+    <div class="paper">
+
+      <h1>Terms of Service</h1>
+      <p><strong>Last Updated:</strong> 2026</p>
+
+      <p>
+        By accessing Astral Forge, booking a campaign, purchasing products,
+        or participating in community spaces, you agree to the following terms.
+      </p>
+
+      <h2>1. Services Provided</h2>
+      <p>
+        Astral Forge offers professional tabletop roleplaying campaigns,
+        digital products, software tools, and community experiences.
+        All services are provided by an independent creator operating under
+        the Astral Forge brand.
+      </p>
+
+      <h2>2. Campaign Participation</h2>
+      <ul>
+        <li>Players agree to respectful and cooperative behavior.</li>
+        <li>Harassment, discrimination, or disruptive conduct may result in removal.</li>
+        <li>The Dungeon Master reserves the right to maintain table safety and atmosphere.</li>
+      </ul>
+
+      <h2>3. Payments & Subscriptions</h2>
+      <ul>
+        <li>Campaigns may require weekly recurring payments.</li>
+        <li>Payments are processed securely through Stripe.</li>
+        <li>Failure to maintain payment may result in removal from a campaign.</li>
+      </ul>
+
+      <h2>4. Cancellation & Refund Policy</h2>
+      <ul>
+        <li>Missed sessions are generally non-refundable.</li>
+        <li>If Astral Forge cancels a session, credit or rescheduling will be provided.</li>
+        <li>Subscription cancellations prevent future billing but do not retroactively refund past sessions.</li>
+      </ul>
+
+      <h2>5. Digital Products & Software</h2>
+      <ul>
+        <li>Software licenses grant usage rights, not ownership transfer.</li>
+        <li>Digital downloads are non-refundable once delivered.</li>
+        <li>Redistribution or resale without permission is prohibited.</li>
+      </ul>
+
+      <h2>6. Community Conduct</h2>
+      <p>
+        Astral Forge strives to maintain a welcoming and inclusive environment.
+        Users who repeatedly violate community expectations may lose access
+        without refund.
+      </p>
+
+      <h2>7. Intellectual Property</h2>
+      <p>
+        All original content, campaign material, writing, branding, and software
+        remain the intellectual property of Astral Forge unless otherwise stated.
+        Player characters remain owned by their respective players.
+      </p>
+
+      <h2>8. Recording & Streaming</h2>
+      <p>
+        Sessions may not be recorded, streamed, or redistributed without explicit permission.
+      </p>
+
+      <h2>9. Limitation of Liability</h2>
+      <p>
+        Astral Forge provides entertainment services. Participation is voluntary.
+        Astral Forge is not liable for indirect damages arising from use of the site,
+        services, or community platforms.
+      </p>
+
+      <h2>10. Changes to Terms</h2>
+      <p>
+        These terms may be updated as services evolve. Continued use of Astral Forge
+        constitutes acceptance of revised terms.
+      </p>
+
+      <h2>11. Contact</h2>
+      <p>
+        Questions regarding these terms may be directed to:<br>
+        <strong>scribe@astralforge.studio</strong>
+      </p>
+
+    </div>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>© 2026 Astral Forge</div>
+    <div class="footer-links">
+      <a href="/contact/">Contact</a>
+      <a href="/legal/privacy/">Privacy</a>
+      <a href="/legal/terms/">Terms</a>
+      <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q" target="_blank" rel="noopener noreferrer">Root</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
