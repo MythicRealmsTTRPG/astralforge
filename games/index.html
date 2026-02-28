@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AstralForge | Campaigns</title>
+
+<style>
+:root {
+  --bg: #0e0f14;
+  --panel: #141722;
+  --border: rgba(255,255,255,.12);
+  --text: #f5f5f7;
+  --muted: rgba(255,255,255,.65);
+  --accent: #7c5cff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+nav {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border);
+}
+
+nav a {
+  color: var(--text);
+  text-decoration: none;
+  margin-left: 20px;
+  opacity: .85;
+}
+
+nav a:hover { opacity: 1; }
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+h1 {
+  font-size: 42px;
+  margin-bottom: 12px;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-bottom: 50px;
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+.games-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.game-card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  transition: .2s ease;
+}
+
+.game-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.game-image {
+  width: 220px;
+  max-width: 100%;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  object-fit: cover;
+}
+
+.game-info {
+  flex: 1;
+  min-width: 260px;
+}
+
+.system {
+  font-size: 12px;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  opacity: .6;
+}
+
+.title {
+  font-size: 22px;
+  margin: 8px 0 10px;
+  font-weight: 600;
+}
+
+.tagline {
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.meta {
+  font-size: 14px;
+  opacity: .85;
+}
+
+.meta span {
+  margin-right: 12px;
+}
+
+.view-link {
+  margin-top: 14px;
+  display: inline-block;
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.view-link:hover {
+  text-decoration: underline;
+}
+
+footer {
+  padding: 40px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  opacity: .5;
+  font-size: 14px;
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+  <div><strong>AstralForge</strong></div>
+  <div>
+    <a href="/">Home</a>
+    <a href="/games/">Games</a>
+    <a href="/codex/">Codex</a>
+    <a href="/shop/">Shop</a>
+    <a href="/contact/">Contact</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h1>Playable Campaigns</h1>
+  <div class="subtitle">
+    Ongoing and upcoming narrative-driven campaigns led by a professional Dungeon Master. 
+    Each world is handcrafted, character-driven, and built to evolve around player choice.
+  </div>
+
+  <div id="games-list" class="games-grid"></div>
+</div>
+
+<footer>
+  © 2026 AstralForge. All worlds forged in story.
+</footer>
+
+<script>
+(async function () {
+  try {
+    const res = await fetch('/data/games.json', { cache: 'no-store' });
+    const data = await res.json();
+    const games = data.games || [];
+
+    const container = document.getElementById('games-list');
+
+    if (!games.length) {
+      container.innerHTML = "<div style='opacity:.6'>No active campaigns yet.</div>";
+      return;
+    }
+
+    container.innerHTML = games.map(g => `
+      <div class="game-card">
+        ${g.image ? `<img src="${g.image}" alt="${g.title}" class="game-image">` : ""}
+        <div class="game-info">
+          <div class="system">${g.system || ""}</div>
+          <div class="title">${g.title || ""}</div>
+          <div class="tagline">${g.tagline || ""}</div>
+          <div class="meta">
+            ${g.status ? `<span>${g.status}</span>` : ""}
+            ${g.seats ? `<span>${g.seats}</span>` : ""}
+            ${g.schedule ? `<span>${g.schedule}</span>` : ""}
+            ${g.price ? `<span>${g.price}</span>` : ""}
+          </div>
+          ${g.url ? `<a class="view-link" href="${g.url}">View Campaign →</a>` : ""}
+        </div>
+      </div>
+    `).join('');
+
+  } catch (err) {
+    document.getElementById('games-list').innerHTML =
+      "<div style='opacity:.6'>Unable to load campaigns.</div>";
+  }
+})();
+</script>
+
+</body>
+</html>
