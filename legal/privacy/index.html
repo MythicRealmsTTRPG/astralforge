@@ -88,10 +88,16 @@ nav{
   border-radius:10px;
   font-size:14px;
   transition:.2s;
+  white-space:nowrap;
 }
 
 .nav-links a:hover{
   background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.95);
+}
+
+.nav-links a[aria-current="page"]{
+  background:rgba(255,255,255,.08);
   color:rgba(255,255,255,.95);
 }
 
@@ -226,9 +232,11 @@ footer{
 
     <div class="nav-links">
       <a href="/games/">Games</a>
+      <a href="https://play.astralforge.studio" target="_blank" rel="noopener noreferrer">Play</a>
       <a href="https://codex.astralforge.studio" target="_blank" rel="noopener noreferrer">Codex</a>
       <a href="https://shop.astralforge.studio" target="_blank" rel="noopener noreferrer">Shop</a>
       <a href="/about/">About</a>
+      <a href="/contact/">Contact</a>
       <a class="join" href="/membership/">Join</a>
     </div>
   </div>
@@ -318,7 +326,7 @@ footer{
     <div>© 2026 Astral Forge</div>
     <div class="footer-links">
       <a href="/contact/">Contact</a>
-      <a href="/legal/privacy/">Privacy</a>
+      <a href="/legal/privacy/" aria-current="page">Privacy</a>
       <a href="/legal/terms/">Terms</a>
       <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q" target="_blank" rel="noopener noreferrer">Root</a>
     </div>
