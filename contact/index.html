@@ -75,6 +75,8 @@
       align-items:center;
       gap:18px;
       white-space:nowrap;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
     .nav-links a{
       text-decoration:none;
@@ -83,10 +85,15 @@
       padding:8px 12px;
       border-radius:10px;
       transition:.2s;
+      white-space:nowrap;
     }
     .nav-links a:hover{
       color: rgba(255,255,255,.96);
       background: rgba(255,255,255,.06);
+    }
+    .nav-links a[aria-current="page"]{
+      color: rgba(255,255,255,.95);
+      background: rgba(255,255,255,.08);
     }
     .nav-links a.join{
       border: 1px solid rgba(185,144,84,.55);
@@ -122,7 +129,6 @@
       box-shadow: 0 30px 80px var(--shadow);
       border: 1px solid rgba(255,255,255,.08);
 
-      /* ✅ absolute path so it works from /contact/ */
       background: url("/assets/backgrounds/parchment.png") center / cover no-repeat;
       background-color: #c9b48f;
     }
@@ -251,7 +257,7 @@
 
     .note{
       margin-top: 18px;
-      padding: 14px 14px 14px;
+      padding: 14px;
       border-radius: 14px;
       background: rgba(0,0,0,.06);
       border: 1px solid rgba(40,28,18,.16);
@@ -334,9 +340,11 @@
 
       <div class="nav-links">
         <a href="/games/">Games</a>
+        <a href="https://play.astralforge.studio" target="_blank" rel="noopener noreferrer">Play</a>
         <a href="https://codex.astralforge.studio" target="_blank" rel="noopener noreferrer">Codex</a>
         <a href="https://shop.astralforge.studio" target="_blank" rel="noopener noreferrer">Shop</a>
         <a href="/about/">About</a>
+        <a href="/contact/" aria-current="page">Contact</a>
         <a class="join" href="/membership/">Join</a>
       </div>
     </div>
@@ -356,7 +364,6 @@
           <div class="profile">
             <!-- PHOTO -->
             <div class="photo-card">
-              <!-- ✅ absolute path so it works from /contact/ -->
               <img class="photo" src="/assets/portraits/scribe.jpg" alt="Scribe portrait" />
               <div class="photo-cap">
                 Warm table. Clear expectations. Real consequences.<br/>
@@ -412,7 +419,6 @@
                 If that’s the kind of table you’ve been looking for, I’d be honored to run a game for you.
               </div>
 
-              <!-- ✅ Get in Touch in its own BOX -->
               <div class="cards" style="grid-template-columns: 1fr;">
                 <div class="card contact-card">
                   <h3>Get in Touch</h3>
