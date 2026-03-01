@@ -17,9 +17,7 @@
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
       --border: rgba(255,255,255,.10);
-      --card: rgba(0,0,0,.45);
       --gold:#b99054;
-      --gold2:#7e5a2f;
       --shadow: rgba(0,0,0,.55);
     }
 
@@ -32,7 +30,7 @@
       background: var(--bg);
     }
 
-    /* ===== NAV (matches homepage style) ===== */
+    /* ===== NAV ===== */
     nav{
       position:fixed;
       top:0; left:0; right:0;
@@ -67,6 +65,7 @@
       font-size:14px;
       text-transform: uppercase;
     }
+
     .nav-links{
       display:flex;
       align-items:center;
@@ -106,12 +105,12 @@
     .page{
       min-height:100vh;
       padding-top: 86px; /* room for fixed nav */
-      background: radial-gradient(1200px 600px at 20% 10%, rgba(185,144,84,.08), transparent 55%),
-                  radial-gradient(900px 500px at 85% 0%, rgba(255,255,255,.05), transparent 60%),
-                  var(--bg);
+      background:
+        radial-gradient(1200px 600px at 20% 10%, rgba(185,144,84,.08), transparent 55%),
+        radial-gradient(900px 500px at 85% 0%, rgba(255,255,255,.05), transparent 60%),
+        var(--bg);
     }
 
-    /* parchment strip/panel area */
     .parchment-stage{
       max-width: 1200px;
       margin: 0 auto;
@@ -125,7 +124,6 @@
       box-shadow: 0 30px 80px var(--shadow);
       border: 1px solid rgba(255,255,255,.08);
 
-      /* root path so it works from /about/ */
       background: url("/assets/backgrounds/parchment.png") center / cover no-repeat;
       background-color: #c9b48f;
     }
@@ -275,13 +273,14 @@
         <span class="brand-text">Astral Forge</span>
       </a>
 
-      <!-- ✅ fixed to match your real routes -->
+      <!-- Correct routes + Join uses /membership/ -->
       <div class="nav-links">
-      <a href="https://play.astralforge.studio" target="_blank" rel="noopener">Play</a>
-      <a href="https://codex.astralforge.studio" target="_blank" rel="noopener">Codex</a>
-      <a href="https://shop.astralforge.studio" target="_blank" rel="noopener">Shop</a>
-      <a href="/about/">About</a>
-      <a href="/membership/">Join</a>
+        <a href="/games/">Games</a>
+        <a href="https://play.astralforge.studio">Play</a>
+        <a href="https://codex.astralforge.studio">Codex</a>
+        <a href="https://shop.astralforge.studio">Shop</a>
+        <a href="/about/" aria-current="page">About</a>
+        <a class="join" href="/membership/">Join</a>
       </div>
     </div>
   </nav>
