@@ -31,6 +31,7 @@
     color:var(--text);
   }
 
+  /* NAV */
   nav{
     position:fixed; top:0; left:0; right:0;
     z-index:1000;
@@ -41,12 +42,11 @@
     box-shadow: 0 6px 30px rgba(0,0,0,.45);
   }
   .nav-inner{
-    padding:14px 18px;
+    padding:14px 56px;
     display:flex;
     align-items:center;
     justify-content:space-between;
     gap:18px;
-    flex-wrap:wrap;
   }
   .brand{
     display:flex; align-items:center; gap:12px;
@@ -60,26 +60,6 @@
     text-transform:uppercase;
   }
   .nav-actions{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:center; }
-  .btn{
-    appearance:none;
-    border:1px solid rgba(255,255,255,.16);
-    background: rgba(0,0,0,.20);
-    color: rgba(255,255,255,.92);
-    padding:10px 12px;
-    border-radius:12px;
-    font-size:13px;
-    cursor:pointer;
-    transition:.18s;
-    text-decoration:none;
-    text-align:center;
-    user-select:none;
-  }
-  .btn:hover{ background: rgba(255,255,255,.06); }
-  .btn.gold{
-    border-color: rgba(185,144,84,.55);
-    background: linear-gradient(135deg, rgba(185,144,84,.18), rgba(0,0,0,.12));
-  }
-  .btn.gold:hover{ border-color: rgba(185,144,84,.85); transform: translateY(-1px); }
 
   .pill{
     border: 1px solid rgba(255,255,255,.14);
@@ -93,8 +73,29 @@
   .pill.bad{ border-color: rgba(255,107,107,.55); color: rgba(255,107,107,.92); }
   .pill.gold{ border-color: rgba(185,144,84,.55); color: rgba(185,144,84,.92); }
 
+  .btn{
+    appearance:none;
+    border:1px solid rgba(255,255,255,.16);
+    background: rgba(0,0,0,.20);
+    color: rgba(255,255,255,.92);
+    padding:10px 12px;
+    border-radius:12px;
+    font-size:13px;
+    cursor:pointer;
+    transition:.18s;
+    text-decoration:none;
+    text-align:center;
+  }
+  .btn:hover{ background: rgba(255,255,255,.06); }
+  .btn.gold{
+    border-color: rgba(185,144,84,.55);
+    background: linear-gradient(135deg, rgba(185,144,84,.18), rgba(0,0,0,.12));
+  }
+  .btn.gold:hover{ border-color: rgba(185,144,84,.85); transform: translateY(-1px); }
+
+  /* LAYOUT */
   .wrap{
-    padding-top: 92px;
+    padding-top: 86px;
     max-width: 1400px;
     margin: 0 auto;
     padding-left: 20px;
@@ -106,9 +107,10 @@
     align-items:start;
   }
 
+  /* SIDEBAR */
   .sidebar{
     position:sticky;
-    top: 102px;
+    top: 96px;
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: 16px;
@@ -152,6 +154,7 @@
     color: rgba(46,204,113,.95);
   }
 
+  /* MAIN FORM */
   .main{
     background: var(--panel);
     border: 1px solid var(--border);
@@ -227,6 +230,7 @@
   input::placeholder, textarea::placeholder{ color: rgba(255,255,255,.45); }
 
   .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+
   .row{
     display:flex;
     align-items:center;
@@ -270,9 +274,10 @@
   }
   .footerbar .muted{ color: rgba(255,255,255,.62); font-size: 12px; }
 
+  /* PREVIEW */
   .preview{
     position:sticky;
-    top: 102px;
+    top: 96px;
     background: var(--panel);
     border: 1px solid var(--border);
     border-radius: 16px;
@@ -285,8 +290,6 @@
     display:flex;
     justify-content:space-between;
     align-items:center;
-    gap:10px;
-    flex-wrap:wrap;
   }
   .preview-head .t{
     font-weight:600;
@@ -363,20 +366,17 @@
 
 <nav>
   <div class="nav-inner">
-    <a class="brand" href="/">
-      <span class="brand-text">Astral Forge • Campaign Builder (Admin)</span>
+    <a class="brand" href="/admin/">
+      <span class="brand-text">Astral Forge • Admin Builder</span>
     </a>
 
     <div class="nav-actions">
       <span class="pill" id="pillAuth">Auth: unset</span>
-      <span class="pill gold" id="pillApi">API: workers.dev</span>
-      <span class="pill" id="pillLink">Unlinked</span>
-
-      <button class="btn" id="btnSetApi">API Base</button>
-      <button class="btn" id="btnSetToken">Set Token</button>
-      <button class="btn" id="btnSaveServer">Save Draft</button>
+      <span class="pill" id="pillDraft">Draft: local</span>
+      <button class="btn" id="btnSaveLocal">Save Local</button>
+      <button class="btn" id="btnSaveServer">Save Draft (Server)</button>
       <button class="btn gold" id="btnPublish">Publish</button>
-      <button class="btn" id="btnOpenPublic">Open Public</button>
+      <button class="btn" id="btnExport">Export JSON</button>
     </div>
   </div>
 </nav>
@@ -417,7 +417,7 @@
       <div class="section active" id="sec-basic">
         <div class="block">
           <h2>Basic information</h2>
-          <p class="help">Core identity. Title, system, hook, and description are what players see first.</p>
+          <p class="help">Core identity. Title + hook + description are what players feel first.</p>
 
           <label for="title">Title</label>
           <input id="title" type="text" maxlength="64" placeholder="Mythic Realms: The Shattered Oath" />
@@ -455,10 +455,10 @@
           </div>
 
           <label for="hook">Game hook (1–2 sentences)</label>
-          <textarea id="hook" maxlength="150" placeholder="A one- or two-sentence teaser that sets the stakes and vibe."></textarea>
+          <textarea id="hook" maxlength="150" placeholder="A one- or two-sentence teaser."></textarea>
 
           <label for="description">Game description</label>
-          <textarea id="description" maxlength="3000" placeholder="Back-cover copy. Setting, theme, what makes this campaign special, and what players will do."></textarea>
+          <textarea id="description" maxlength="3000" placeholder="Back-cover copy. Setting, theme, what makes it special."></textarea>
 
           <div class="grid2">
             <div>
@@ -472,11 +472,11 @@
             <div>
               <label>Themes (1–8)</label>
               <div class="row">
-                <input id="themeInput" type="text" placeholder="Type a theme and press Add (e.g. Horror)" />
+                <input id="themeInput" type="text" placeholder="Type a theme (e.g. Horror)" />
                 <button class="btn" type="button" id="btnAddTheme">Add</button>
               </div>
               <div class="row" id="themes"></div>
-              <p class="help" style="margin-top:10px;">Examples: Epic, Political Intrigue, Dark Fantasy, Mystery, Beginner Friendly.</p>
+              <p class="help" style="margin-top:10px;">Examples: Epic, Political Intrigue, Dark Fantasy, Mystery.</p>
             </div>
           </div>
         </div>
@@ -486,10 +486,10 @@
       <div class="section" id="sec-image">
         <div class="block">
           <h2>Image</h2>
-          <p class="help">Use a 16:9 banner. Host in the play repo under <code>/assets/campaigns/</code> and paste the path.</p>
+          <p class="help">Since it’s admin-only: copy the file into <code>play.astralforge.studio/assets/campaigns/</code> and paste the URL path here.</p>
 
           <div class="warn">
-            Only use art you have rights to. If commissioned, add credit info below.
+            Recommended: <code>/assets/campaigns/your-campaign.jpg</code> (16:9 banner)
           </div>
 
           <label for="imagePath">Campaign image path</label>
@@ -507,7 +507,7 @@
       <div class="section" id="sec-seo">
         <div class="block">
           <h2>Search &amp; social</h2>
-          <p class="help">Preview text when shared/discovered.</p>
+          <p class="help">Preview text when shared. Keep it punchy.</p>
 
           <label for="seoTitle">Title (external)</label>
           <input id="seoTitle" type="text" maxlength="64" placeholder="Mythic Realms — A Living Campaign of Consequences" />
@@ -524,15 +524,15 @@
       <div class="section" id="sec-booking">
         <div class="block">
           <h2>Booking</h2>
-          <p class="help">What players are committing to.</p>
+          <p class="help">Make commitments clear.</p>
 
           <div class="grid2">
             <div>
-              <label for="minSessions">Estimated campaign length (min sessions)</label>
+              <label for="minSessions">Estimated length (min sessions)</label>
               <input id="minSessions" type="number" min="1" placeholder="5" />
             </div>
             <div>
-              <label for="maxSessions">Estimated campaign length (max sessions)</label>
+              <label for="maxSessions">Estimated length (max sessions)</label>
               <input id="maxSessions" type="number" min="1" placeholder="30" />
             </div>
           </div>
@@ -577,11 +577,11 @@
           <div class="grid2">
             <div>
               <label for="seatsTotal">Seats (total)</label>
-              <input id="seatsTotal" type="number" min="1" placeholder="6" />
+              <input id="seatsTotal" type="number" min="1" placeholder="5" />
             </div>
             <div>
               <label for="seatsOpen">Seats (open)</label>
-              <input id="seatsOpen" type="number" min="0" placeholder="3" />
+              <input id="seatsOpen" type="number" min="0" placeholder="2" />
             </div>
           </div>
         </div>
@@ -591,7 +591,7 @@
       <div class="section" id="sec-pricing">
         <div class="block">
           <h2>Pricing</h2>
-          <p class="help">Display-only for now; Stripe later.</p>
+          <p class="help">Display-only for now.</p>
 
           <label for="price">Session cost (per player)</label>
           <input id="price" type="text" placeholder="$20 / session" />
@@ -605,9 +605,9 @@
       <div class="section" id="sec-chars">
         <div class="block">
           <h2>Character creation</h2>
-          <p class="help">How players build characters, approvals, sources, etc.</p>
+          <p class="help">How players create characters.</p>
 
-          <label for="charCreation">How should players create characters?</label>
+          <label for="charCreation">Character creation details</label>
           <textarea id="charCreation" maxlength="3000" placeholder="Starting level, allowed sources, stat method, approvals, etc."></textarea>
         </div>
       </div>
@@ -616,16 +616,16 @@
       <div class="section" id="sec-prep">
         <div class="block">
           <h2>Preparation</h2>
-          <p class="help">What players must do before session 1.</p>
+          <p class="help">What players should do before Session 1, what you provide, any table rules.</p>
 
           <label for="prepSteps">How should players prepare?</label>
-          <textarea id="prepSteps" maxlength="3000" placeholder="Accounts to create, Discord, VTT, what to read, etc."></textarea>
+          <textarea id="prepSteps" maxlength="3000" placeholder="Discord, VTT, what to read, etc."></textarea>
 
           <label for="gmProvides">What will you provide?</label>
-          <textarea id="gmProvides" maxlength="3000" placeholder="What you bring: pacing, ambiance, recaps, maps, etc."></textarea>
+          <textarea id="gmProvides" maxlength="3000" placeholder="Recaps, maps, ambiance, tools, etc."></textarea>
 
           <label for="homebrew">Homebrew rules (optional)</label>
-          <textarea id="homebrew" maxlength="3000" placeholder="Potion rules, crit rules, downtime, etc."></textarea>
+          <textarea id="homebrew" maxlength="3000" placeholder="Potion rules, crit rules, death saves, downtime, etc."></textarea>
 
           <label>Equipment needed</label>
           <div class="row">
@@ -647,10 +647,10 @@
       <div class="section" id="sec-safety">
         <div class="block">
           <h2>Safety</h2>
-          <p class="help">Safety tools, content warnings, and comfort expectations.</p>
+          <p class="help">How you keep players safe and comfortable.</p>
 
-          <label for="safetyPlan">How will you keep your players safe and comfortable?</label>
-          <textarea id="safetyPlan" maxlength="3000" placeholder="Session 0, lines & veils, X-card, open door, aftercare, etc."></textarea>
+          <label for="safetyPlan">Safety plan</label>
+          <textarea id="safetyPlan" maxlength="3000" placeholder="Session 0, lines & veils, X-card, open door, etc."></textarea>
 
           <label>Content warnings</label>
           <div class="row">
@@ -677,19 +677,17 @@
               <input type="checkbox" class="sTool" value="Breaks"> Breaks
             </label>
           </div>
-
-          <div style="margin-top:12px;" class="warn">
-            Admin-only page. Keep your token private.
-          </div>
         </div>
       </div>
 
     </div>
 
     <div class="footerbar">
-      <div class="muted" id="saveStatus">Ready.</div>
+      <div class="muted" id="saveStatus">Draft not saved yet.</div>
       <div class="row">
-        <button class="btn" id="btnClearLocal">Clear Local Draft</button>
+        <button class="btn" id="btnClear">Clear</button>
+        <button class="btn" id="btnSaveServer2">Save Draft (Server)</button>
+        <button class="btn gold" id="btnPublish2">Publish</button>
       </div>
     </div>
   </section>
@@ -723,7 +721,8 @@
       <div style="height:12px;"></div>
 
       <div class="warn">
-        <strong>Publish flow:</strong> Save Draft → stores in D1. Publish → sets status to published and opens the public campaign page.
+        Publish flow writes your full builder JSON into D1 via the Worker API.
+        Next we’ll build the Play pages to render it.
       </div>
     </div>
   </aside>
@@ -731,81 +730,16 @@
 </div>
 
 <script>
-  // ---------------------------
-  // ADMIN CONFIG (IMPORTANT)
-  // ---------------------------
-  const API_BASE_DEFAULT = "https://astralforge-api.scalescribe-mythicrealms.workers.dev";
-  const KEY_LOCAL_DRAFT = "af_builder_local_draft_v1";
+  // ===== Shared keys used by the Switchboard =====
   const KEY_ADMIN_TOKEN = "af_admin_token";
-  const KEY_API_BASE = "af_api_base";
-  const KEY_CAMPAIGN_ID = "af_current_campaign_id";
-  const KEY_CAMPAIGN_SLUG = "af_current_campaign_slug";
+  const KEY_API_BASE    = "af_api_base";
 
-  const el = (id) => document.getElementById(id);
+  // ===== Builder storage keys =====
+  const STORE_KEY = "astralforge_campaign_builder_v2";
+  const SERVER_KEY = "astralforge_campaign_server_ref_v1"; // {id, slug}
 
-  function getApiBase(){
-    return (localStorage.getItem(KEY_API_BASE) || API_BASE_DEFAULT).replace(/\/+$/, "");
-  }
-  function setApiBase(v){
-    localStorage.setItem(KEY_API_BASE, v.replace(/\/+$/, ""));
-    syncPills();
-  }
+  const API_BASE_DEFAULT = "https://astralforge-api.scalescribe-mythicrealms.workers.dev";
 
-  function getToken(){ return localStorage.getItem(KEY_ADMIN_TOKEN) || ""; }
-  function setToken(v){ localStorage.setItem(KEY_ADMIN_TOKEN, v); syncPills(); }
-  function clearToken(){ localStorage.removeItem(KEY_ADMIN_TOKEN); syncPills(); }
-
-  function getLinkedId(){ return localStorage.getItem(KEY_CAMPAIGN_ID) || ""; }
-  function setLinked(id, slug){
-    localStorage.setItem(KEY_CAMPAIGN_ID, id);
-    localStorage.setItem(KEY_CAMPAIGN_SLUG, slug);
-    syncPills();
-  }
-  function clearLinked(){
-    localStorage.removeItem(KEY_CAMPAIGN_ID);
-    localStorage.removeItem(KEY_CAMPAIGN_SLUG);
-    syncPills();
-  }
-
-  function syncPills(){
-    const t = getToken();
-    el("pillAuth").textContent = t ? "Auth: set" : "Auth: unset";
-    el("pillAuth").className = "pill " + (t ? "ok" : "bad");
-
-    const base = getApiBase();
-    el("pillApi").textContent = base.includes("api.astralforge.studio") ? "API: api.astralforge.studio" : "API: workers.dev";
-
-    const id = getLinkedId();
-    const slug = localStorage.getItem(KEY_CAMPAIGN_SLUG) || "";
-    el("pillLink").textContent = id ? ("Linked: " + (slug || id.slice(0,8))) : "Unlinked";
-    el("pillLink").className = "pill " + (id ? "ok" : "");
-  }
-
-  async function apiFetch(path, method="GET", body=null){
-    const url = getApiBase() + path;
-    const headers = { "Content-Type": "application/json" };
-    const token = getToken();
-    if(token) headers["Authorization"] = "Bearer " + token;
-
-    const res = await fetch(url, { method, headers, body: body ? JSON.stringify(body) : null });
-    const text = await res.text();
-    let data = null;
-    try { data = text ? JSON.parse(text) : null; } catch { data = { ok:false, error:"Bad JSON from server", raw:text }; }
-
-    if(!res.ok || !data?.ok) {
-      const msg = data?.error || `HTTP ${res.status}`;
-      throw new Error(msg);
-    }
-    return data;
-  }
-
-  function toast(msg){
-    el("saveStatus").textContent = msg;
-  }
-
-  // ---------------------------
-  // BUILDER STATE
-  // ---------------------------
   const steps = [
     {key:"basic", title:"Basic information"},
     {key:"image", title:"Image"},
@@ -817,6 +751,72 @@
     {key:"safety", title:"Safety"},
   ];
 
+  const el = (id) => document.getElementById(id);
+
+  function getApiBase(){
+    return (localStorage.getItem(KEY_API_BASE) || API_BASE_DEFAULT).replace(/\/+$/, "");
+  }
+  function getToken(){
+    return (localStorage.getItem(KEY_ADMIN_TOKEN) || "").trim();
+  }
+  function syncAuthPill(){
+    const t = getToken();
+    el("pillAuth").textContent = t ? "Auth: set" : "Auth: unset";
+    el("pillAuth").className = "pill " + (t ? "ok" : "bad");
+  }
+
+  function setDraftPill(text, kind="gold"){
+    el("pillDraft").textContent = text;
+    el("pillDraft").className = "pill " + kind;
+  }
+
+  async function api(path, opts={}){
+    const token = getToken();
+    if(!token) throw new Error("Admin token not set. Go to /admin and click Set Token.");
+
+    const res = await fetch(getApiBase() + path, {
+      ...opts,
+      headers: {
+        "content-type": "application/json",
+        "authorization": "Bearer " + token,
+        ...(opts.headers || {})
+      }
+    });
+
+    const data = await res.json().catch(()=>null);
+    if(!res.ok || !data || data.ok === false){
+      const msg = (data && data.error) ? data.error : ("HTTP " + res.status);
+      throw new Error(msg);
+    }
+    return data;
+  }
+
+  function slugify(str){
+    return (str || "")
+      .toLowerCase()
+      .trim()
+      .replace(/['"]/g,"")
+      .replace(/[^a-z0-9]+/g,"-")
+      .replace(/^-+|-+$/g,"")
+      .slice(0, 64);
+  }
+
+  function escapeHtml(s){
+    return (s ?? "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  }
+
+  function downloadJson(filename, obj){
+    const blob = new Blob([JSON.stringify(obj, null, 2)], {type:"application/json"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(a.href);
+  }
+
+  // Inputs
   const inputs = {
     title: el("title"),
     type: el("type"),
@@ -857,33 +857,23 @@
     safetyPlan: el("safetyPlan"),
   };
 
+  // Chip lists
   let themes = [];
   let equipment = [];
   let platforms = [];
   let contentWarnings = [];
 
-  function slugify(str){
-    return (str || "")
-      .toLowerCase()
-      .trim()
-      .replace(/['"]/g,"")
-      .replace(/[^a-z0-9]+/g,"-")
-      .replace(/^-+|-+$/g,"")
-      .slice(0, 64);
-  }
-
   function getSafetyTools(){
     return Array.from(document.querySelectorAll(".sTool:checked")).map(x => x.value);
   }
-
   function setSafetyTools(values){
     const set = new Set(values || []);
     document.querySelectorAll(".sTool").forEach(cb => cb.checked = set.has(cb.value));
   }
 
   function collect(){
-    return {
-      version: 1,
+    const data = {
+      version: 2,
       updatedAt: new Date().toISOString(),
       slug: slugify(inputs.title.value),
       basic: {
@@ -922,9 +912,7 @@
         price: inputs.price.value.trim(),
         notes: inputs.pricingNotes.value.trim(),
       },
-      characterCreation: {
-        details: inputs.charCreation.value.trim(),
-      },
+      characterCreation: { details: inputs.charCreation.value.trim() },
       preparation: {
         steps: inputs.prepSteps.value.trim(),
         gmProvides: inputs.gmProvides.value.trim(),
@@ -938,6 +926,7 @@
         tools: getSafetyTools(),
       }
     };
+    return data;
   }
 
   function apply(data){
@@ -998,19 +987,119 @@
     updateDots();
   }
 
-  function saveLocalDraft(){
+  function saveLocal(){
     const data = collect();
-    localStorage.setItem(KEY_LOCAL_DRAFT, JSON.stringify(data));
-    toast("Local draft saved • " + new Date().toLocaleString());
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+    el("saveStatus").textContent = "Saved locally • " + new Date().toLocaleString();
+    setDraftPill("Draft: local", "gold");
     updateDots();
   }
 
-  function loadLocalDraft(){
-    const raw = localStorage.getItem(KEY_LOCAL_DRAFT);
+  function loadLocal(){
+    const raw = localStorage.getItem(STORE_KEY);
     if(!raw) return null;
     try{ return JSON.parse(raw); }catch{ return null; }
   }
 
+  function getServerRef(){
+    const raw = localStorage.getItem(SERVER_KEY);
+    if(!raw) return null;
+    try { return JSON.parse(raw); } catch { return null; }
+  }
+  function setServerRef(ref){
+    localStorage.setItem(SERVER_KEY, JSON.stringify(ref));
+  }
+  function clearServerRef(){
+    localStorage.removeItem(SERVER_KEY);
+  }
+
+  // ===== Server save / publish =====
+  async function saveDraftToServer(){
+    const data = collect();
+    if(!data.basic.title || data.basic.title.trim().length < 3){
+      alert("Title is required (min 3 chars).");
+      return;
+    }
+
+    // Keep DB fields in sync with the main story fields
+    const payload = {
+      title: data.basic.title,
+      description: data.basic.hook || data.basic.description || "",
+      status: "draft",
+      timezone: "UTC",
+      data_json: data
+    };
+
+    const ref = getServerRef();
+
+    setDraftPill("Draft: saving…", "gold");
+    el("saveStatus").textContent = "Saving to server…";
+
+    try{
+      let out;
+      if(!ref || !ref.id){
+        out = await api("/api/v1/admin/campaigns", {
+          method: "POST",
+          body: JSON.stringify(payload)
+        });
+        setServerRef({ id: out.id, slug: out.slug });
+      }else{
+        out = await api("/api/v1/admin/campaigns/" + encodeURIComponent(ref.id), {
+          method: "PATCH",
+          body: JSON.stringify(payload)
+        });
+      }
+
+      const newRef = getServerRef();
+      el("saveStatus").textContent = "Server draft saved • " + new Date().toLocaleString() + (newRef?.slug ? (" • slug: " + newRef.slug) : "");
+      setDraftPill("Draft: server", "ok");
+
+      return newRef;
+    }catch(err){
+      setDraftPill("Draft: error", "bad");
+      el("saveStatus").textContent = "Server save failed.";
+      alert("Server save failed: " + err.message);
+      throw err;
+    }
+  }
+
+  async function publishToServer(){
+    // Ensure there's a server record
+    const ref = await saveDraftToServer();
+    if(!ref || !ref.id) return;
+
+    const data = collect();
+
+    // Publish = status published + persist final JSON
+    setDraftPill("Publishing…", "gold");
+    el("saveStatus").textContent = "Publishing…";
+
+    try{
+      await api("/api/v1/admin/campaigns/" + encodeURIComponent(ref.id), {
+        method: "PATCH",
+        body: JSON.stringify({
+          status: "published",
+          title: data.basic.title,
+          description: data.basic.hook || data.basic.description || "",
+          data_json: data
+        })
+      });
+
+      setDraftPill("Published", "ok");
+      el("saveStatus").textContent = "Published • " + new Date().toLocaleString() + " • redirecting to Play…";
+
+      // Redirect to Play campaign page (we’ll build renderer next)
+      const slug = ref.slug || data.slug || slugify(data.basic.title);
+      window.open("https://play.astralforge.studio/campaigns/" + slug + "/", "_blank", "noopener");
+    }catch(err){
+      setDraftPill("Publish: error", "bad");
+      el("saveStatus").textContent = "Publish failed.";
+      alert("Publish failed: " + err.message);
+      throw err;
+    }
+  }
+
+  // ===== Chips + preview =====
   function renderChipList(containerId, items, onRemove){
     const wrap = el(containerId);
     wrap.innerHTML = "";
@@ -1032,10 +1121,6 @@
     renderChipList("equipment", equipment, (i)=>{ equipment.splice(i,1); renderChips(); updatePreview(); updateDots(); });
     renderChipList("platforms", platforms, (i)=>{ platforms.splice(i,1); renderChips(); updatePreview(); updateDots(); });
     renderChipList("contentWarnings", contentWarnings, (i)=>{ contentWarnings.splice(i,1); renderChips(); updatePreview(); updateDots(); });
-  }
-
-  function escapeHtml(s){
-    return (s ?? "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
   }
 
   function updatePreview(){
@@ -1067,27 +1152,16 @@
 
   function updateDots(){
     const data = collect();
-
-    const basicOk =
-      isFilled(data.basic.title) &&
-      isFilled(data.basic.system) &&
-      isFilled(data.basic.hook) &&
-      isFilled(data.basic.description);
-
+    const basicOk = isFilled(data.basic.title) && isFilled(data.basic.system) && isFilled(data.basic.hook) && isFilled(data.basic.description);
     const imgOk = isFilled(data.image.path);
     const seoOk = isFilled(data.seo.title) && isFilled(data.seo.description);
-
-    const bookingOk = isFilled(data.booking.schedule) &&
-      (typeof data.booking.seatsTotal === "number") &&
-      (typeof data.booking.seatsOpen === "number");
-
+    const bookingOk = isFilled(data.booking.schedule) && (typeof data.booking.seatsTotal === "number") && (typeof data.booking.seatsOpen === "number");
     const pricingOk = isFilled(data.pricing.price);
     const charsOk = isFilled(data.characterCreation.details);
     const prepOk = isFilled(data.preparation.steps) && isFilled(data.preparation.gmProvides);
     const safetyOk = isFilled(data.safety.plan) && (data.safety.tools || []).length > 0;
 
     const map = { basic: basicOk, image: imgOk, seo: seoOk, booking: bookingOk, pricing: pricingOk, chars: charsOk, prep: prepOk, safety: safetyOk };
-
     Object.entries(map).forEach(([k, ok]) => {
       const dot = el("dot-" + k);
       dot.classList.toggle("ok", !!ok);
@@ -1095,7 +1169,7 @@
     });
   }
 
-  // Step navigation
+  // ===== Step navigation =====
   let idx = 0;
   function setStep(nextIdx){
     idx = Math.max(0, Math.min(steps.length - 1, nextIdx));
@@ -1156,9 +1230,37 @@
   document.querySelectorAll(".sTool").forEach(cb => cb.addEventListener("change", () => { updatePreview(); updateDots(); }));
 
   // Live preview updates
-  Object.values(inputs).forEach(inp => inp.addEventListener("input", () => { updatePreview(); updateDots(); saveLocalDraft(); }));
+  Object.values(inputs).forEach(inp => inp.addEventListener("input", () => { updatePreview(); updateDots(); }));
 
-  // Slug copy
+  // Buttons
+  el("btnSaveLocal").addEventListener("click", saveLocal);
+
+  el("btnSaveServer").addEventListener("click", () => saveDraftToServer());
+  el("btnSaveServer2").addEventListener("click", () => saveDraftToServer());
+
+  el("btnPublish").addEventListener("click", () => publishToServer());
+  el("btnPublish2").addEventListener("click", () => publishToServer());
+
+  el("btnExport").addEventListener("click", () => {
+    const data = collect();
+    const fname = (data.slug || "campaign") + ".json";
+    downloadJson(fname, data);
+  });
+
+  el("btnClear").addEventListener("click", () => {
+    if(!confirm("Clear all fields? This also forgets the linked server record.")) return;
+    localStorage.removeItem(STORE_KEY);
+    clearServerRef();
+    themes = []; equipment = []; platforms = []; contentWarnings = [];
+    setSafetyTools([]);
+    Object.values(inputs).forEach(i => i.value = "");
+    inputs.type.value = "campaign";
+    inputs.language.value = "en";
+    renderChips(); updatePreview(); updateDots();
+    el("saveStatus").textContent = "Cleared.";
+    setDraftPill("Draft: local", "gold");
+  });
+
   el("btnCopySlug").addEventListener("click", async () => {
     const slug = slugify(inputs.title.value);
     try{
@@ -1170,128 +1272,19 @@
     }
   });
 
-  // ---------------------------
-  // SERVER SAVE / PUBLISH
-  // ---------------------------
-  function requireToken(){
-    const t = getToken();
-    if(!t){
-      alert("Set Token first.");
-      return false;
-    }
-    return true;
-  }
-
-  function toServerBody(status){
-    const data = collect();
-
-    if(!data.basic.title || data.basic.title.length < 3){
-      throw new Error("Title is required (min 3 chars).");
-    }
-
-    return {
-      title: data.basic.title,
-      description: data.basic.description || data.basic.hook || "",
-      slug: data.slug || undefined,
-      status,
-      timezone: "UTC",
-      seat_capacity: Number.isFinite(data.booking.seatsTotal) ? data.booking.seatsTotal : 6,
-      price_cents: null,
-      start_at: null,
-      end_at: null,
-      data_json: data
-    };
-  }
-
-  async function saveToServer(status){
-    if(!requireToken()) return;
-
-    const linkedId = getLinkedId();
-
-    const body = toServerBody(status);
-
-    if(!linkedId){
-      const created = await apiFetch("/api/v1/admin/campaigns", "POST", body);
-      setLinked(created.id, created.slug);
-      toast(`Server saved • ${created.slug} • ${status}`);
-      return created.slug;
-    } else {
-      await apiFetch(`/api/v1/admin/campaigns/${linkedId}`, "PATCH", body);
-      // slug may have changed because title changed — keep local copy aligned:
-      localStorage.setItem(KEY_CAMPAIGN_SLUG, body.slug || localStorage.getItem(KEY_CAMPAIGN_SLUG) || "");
-      toast(`Server updated • ${localStorage.getItem(KEY_CAMPAIGN_SLUG) || linkedId.slice(0,8)} • ${status}`);
-      return localStorage.getItem(KEY_CAMPAIGN_SLUG) || "";
-    }
-  }
-
-  function openPublic(slug){
-    if(!slug){
-      alert("No slug available yet. Save to server first.");
-      return;
-    }
-    window.open(`/campaigns/${encodeURIComponent(slug)}/`, "_blank");
-  }
-
-  // ---------------------------
-  // TOP BAR BUTTONS
-  // ---------------------------
-  el("btnSetToken").addEventListener("click", () => {
-    const next = prompt("Enter ADMIN_TOKEN (stored in your browser):", getToken() || "");
-    if(next === null) return;
-    if(!next.trim()) { clearToken(); toast("Token cleared."); return; }
-    setToken(next.trim());
-    toast("Token saved.");
-  });
-
-  el("btnSetApi").addEventListener("click", () => {
-    const next = prompt("API Base URL:", getApiBase());
-    if(next === null) return;
-    if(!next.trim()) return alert("API Base cannot be empty.");
-    setApiBase(next.trim());
-    toast("API base saved.");
-  });
-
-  el("btnSaveServer").addEventListener("click", async () => {
-    try{
-      await saveToServer("draft");
-    }catch(e){
-      alert(e?.message || String(e));
-    }
-  });
-
-  el("btnPublish").addEventListener("click", async () => {
-    try{
-      const slug = await saveToServer("published");
-      openPublic(slug || collect().slug);
-    }catch(e){
-      alert(e?.message || String(e));
-    }
-  });
-
-  el("btnOpenPublic").addEventListener("click", () => {
-    const slug = localStorage.getItem(KEY_CAMPAIGN_SLUG) || collect().slug;
-    openPublic(slug);
-  });
-
-  el("btnClearLocal").addEventListener("click", () => {
-    if(!confirm("Clear local draft + unlink server ID for this browser?")) return;
-    localStorage.removeItem(KEY_LOCAL_DRAFT);
-    clearLinked();
-    themes = []; equipment = []; platforms = []; contentWarnings = [];
-    setSafetyTools([]);
-    Object.values(inputs).forEach(i => i.value = "");
-    inputs.type.value = "campaign";
-    inputs.language.value = "en";
-    renderChips(); updatePreview(); updateDots();
-    toast("Cleared local draft and server link.");
-  });
-
   // Init
-  const existing = loadLocalDraft();
-  if(existing) apply(existing);
-  else { renderChips(); updatePreview(); updateDots(); }
+  syncAuthPill();
 
-  syncPills();
+  const existing = loadLocal();
+  if(existing) {
+    apply(existing);
+    el("saveStatus").textContent = "Draft loaded from this browser.";
+  } else {
+    renderChips(); updatePreview(); updateDots();
+  }
+
+  const ref = getServerRef();
+  if(ref && ref.id) setDraftPill("Draft: server-linked", "ok");
 </script>
 
 </body>
