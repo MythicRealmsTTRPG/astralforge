@@ -1,0 +1,37 @@
+<!-- /membership/thanks/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>You're Subscribed • Astral Forge</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root{--bg:#0b0b0d;--text:rgba(255,255,255,.92);--muted:rgba(255,255,255,.72);--border:rgba(255,255,255,.10);--gold:#b99054;}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(1000px 540px at 20% 10%, rgba(185,144,84,.10), transparent 55%), var(--bg);color:var(--text);}
+    .wrap{max-width:900px;margin:0 auto;padding:70px 18px;}
+    .card{border:1px solid var(--border);border-radius:18px;background:rgba(0,0,0,.35);box-shadow:0 18px 60px rgba(0,0,0,.35);padding:26px;}
+    h1{margin:0 0 10px;font-family:Georgia,serif;font-size:34px}
+    p{margin:0 0 14px;color:var(--muted);line-height:1.8}
+    .btn{display:inline-block;margin-top:10px;padding:10px 14px;border-radius:12px;border:1px solid rgba(185,144,84,.55);background:linear-gradient(135deg, rgba(185,144,84,.18), rgba(0,0,0,.12));color:var(--text);text-decoration:none;font-weight:700}
+    .btn:hover{border-color:rgba(185,144,84,.9)}
+    .small{font-size:13px;color:rgba(255,255,255,.65)}
+    code{background:rgba(255,255,255,.08);padding:2px 6px;border-radius:8px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <h1>You're subscribed.</h1>
+      <p>Welcome to the Forge’s email notifications. You’ll get updates based on what you selected.</p>
+      <p class="small">Tip: if you ever need help managing preferences, we’ll include a link in future emails.</p>
+
+      <a class="btn" href="/membership/">Back to Join</a>
+      <p class="small" style="margin-top:14px;">If you hit this page by accident, go back to <code>/membership/</code>.</p>
+    </div>
+  </div>
+</body>
+</html>
