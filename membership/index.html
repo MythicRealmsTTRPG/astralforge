@@ -200,11 +200,6 @@
       padding: 16px;
       box-shadow: 0 12px 34px rgba(0,0,0,.10);
     }
-    .row{
-      display:grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
     label{
       display:block;
       font-weight: 700;
@@ -384,7 +379,6 @@
     @media (max-width: 980px){
       .nav-inner{ padding: 14px 18px; }
       .grid{ grid-template-columns: 1fr; }
-      .row{ grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -413,10 +407,10 @@
       <div class="parchment">
         <div class="inner">
 
-          <div class="kicker">Free Notifications</div>
+          <div class="kicker">Free Email Notifications</div>
           <h1>Stay in the Loop</h1>
           <p class="sub">
-            This is a free “membership” for players and friends of the Forge: opt into email and/or SMS notifications when
+            This is a free “membership” for players and friends of the Forge: opt into <strong>email notifications</strong> when
             a <strong>new campaign launches</strong>, a <strong>new store item drops</strong>, or the <strong>Codex gets a new article</strong>.
             You can update preferences or opt out at any time.
           </p>
@@ -425,18 +419,10 @@
             <!-- LEFT: Form -->
             <div>
               <form method="post" action="/api/notify/subscribe" id="notifyForm" novalidate>
-                <div class="row">
-                  <div>
-                    <label for="email">Email (recommended)</label>
-                    <input id="email" name="email" type="email" placeholder="you@domain.com" autocomplete="email" required />
-                    <div class="hint">Used for announcements + preference management link.</div>
-                  </div>
-
-                  <div>
-                    <label for="phone">Mobile Number (optional)</label>
-                    <input id="phone" name="phone" type="tel" placeholder="+1 (555) 555-5555" autocomplete="tel" />
-                    <div class="hint">Only used if you enable SMS alerts below.</div>
-                  </div>
+                <div>
+                  <label for="email">Email</label>
+                  <input id="email" name="email" type="email" placeholder="you@domain.com" autocomplete="email" required />
+                  <div class="hint">Used for announcements + preference management link.</div>
                 </div>
 
                 <div class="section">
@@ -470,25 +456,7 @@
                 </div>
 
                 <div class="section">
-                  <h2>How should we notify you?</h2>
-
-                  <div class="toggles" aria-label="Notification channels">
-                    <label class="toggle">
-                      <input type="checkbox" name="channels[]" value="email" checked />
-                      <div>
-                        <strong>Email</strong>
-                        <span>Best for full details and links.</span>
-                      </div>
-                    </label>
-
-                    <label class="toggle">
-                      <input type="checkbox" name="channels[]" value="sms" />
-                      <div>
-                        <strong>SMS</strong>
-                        <span>Short alerts with links. Requires consent below.</span>
-                      </div>
-                    </label>
-                  </div>
+                  <h2>How often?</h2>
 
                   <label for="frequency">Frequency</label>
                   <select id="frequency" name="frequency">
@@ -498,32 +466,18 @@
                   </select>
                   <div class="hint">Digest options are great if you only want summaries.</div>
 
-                  <div class="section">
-                    <h2>SMS Consent (only if you enable SMS)</h2>
-
-                    <label class="toggle" style="margin-top:10px;">
-                      <input type="checkbox" name="sms_consent" value="yes" />
-                      <div>
-                        <strong>I agree to receive SMS messages from Astral Forge.</strong>
-                        <span>
-                          Message & data rates may apply. Message frequency varies. Reply <strong>STOP</strong> to opt out, <strong>HELP</strong> for help.
-                        </span>
-                      </div>
-                    </label>
-
-                    <div class="fineprint">
-                      By subscribing, you agree to our <a href="/legal/terms/">Terms</a> and <a href="/legal/privacy/">Privacy Policy</a>.
-                      We only use your contact info for the alerts you opt into.
-                    </div>
+                  <div class="fineprint" style="margin-top:12px;">
+                    By subscribing, you agree to our <a href="/legal/terms/">Terms</a> and <a href="/legal/privacy/">Privacy Policy</a>.
+                    We only use your email for the alerts you opt into.
                   </div>
 
                   <div class="actions">
-                    <button class="btn primary" type="submit">Enable Notifications →</button>
+                    <button class="btn primary" type="submit">Enable Email Notifications →</button>
                     <a class="btn" href="#manage">Manage / Opt out</a>
                   </div>
 
                   <div class="hint" style="margin-top:10px;">
-                    After you submit, we may send a confirmation email (and SMS confirmation if enabled).
+                    After you submit, we may send a confirmation email.
                   </div>
                 </div>
               </form>
@@ -531,8 +485,7 @@
               <div class="section" id="manage">
                 <h2>Manage Preferences / Opt Out</h2>
                 <p>
-                  Use your preference link from any email to update topics, channels, or unsubscribe completely.
-                  If you enabled SMS, you can also reply <strong>STOP</strong> to end text messages.
+                  Use your preference link from any email to update topics or unsubscribe completely.
                 </p>
 
                 <details>
@@ -556,7 +509,7 @@
               <div class="panel">
                 <h3>What This Is</h3>
                 <p>
-                  A free notification list for active players and Forge friends — no paywall, no clutter.
+                  A free email notification list for active players and Forge friends — no paywall, no clutter.
                 </p>
                 <ul>
                   <li>Campaign launches & openings</li>
@@ -573,8 +526,7 @@
                   We only send what you opt into. You can change your mind anytime.
                 </p>
                 <ul>
-                  <li>Email: unsubscribe link in every message</li>
-                  <li>SMS: reply <strong>STOP</strong> to opt out</li>
+                  <li>Unsubscribe link in every message</li>
                   <li>No selling your info</li>
                 </ul>
               </div>
@@ -622,32 +574,6 @@
 
       form.addEventListener('submit', function (e) {
         const email = form.querySelector('#email');
-        const phone = form.querySelector('#phone');
-        const sms = form.querySelector('input[name="channels[]"][value="sms"]');
-        const consent = form.querySelector('input[name="sms_consent"]');
-
-        // Require at least one channel
-        const channels = Array.from(form.querySelectorAll('input[name="channels[]"]'))
-          .filter(c => c.checked).map(c => c.value);
-        if (channels.length === 0) {
-          e.preventDefault();
-          alert('Please select at least one notification channel (Email and/or SMS).');
-          return;
-        }
-
-        // If SMS selected, phone + consent required
-        if (sms && sms.checked) {
-          if (!phone.value.trim()) {
-            e.preventDefault();
-            alert('Please enter a mobile number to enable SMS notifications.');
-            return;
-          }
-          if (!consent.checked) {
-            e.preventDefault();
-            alert('Please check the SMS consent box to enable SMS notifications.');
-            return;
-          }
-        }
 
         // Require at least one topic
         const topics = Array.from(form.querySelectorAll('input[name="topics[]"]'))
