@@ -735,8 +735,8 @@
   const KEY_API_BASE    = "af_api_base";
 
   // ===== Builder storage keys =====
-  const STORE_KEY = "astralforge_campaign_builder_v2";
-  const SERVER_KEY = "astralforge_campaign_server_ref_v1"; // {id, slug}
+  const STORE_KEY  = "astralforge_campaign_builder_v2";
+  const SERVER_KEY = "astralforge_campaign_server_ref_v1"; // {id}
 
   const API_BASE_DEFAULT = "https://astralforge-api.scalescribe-mythicrealms.workers.dev";
 
@@ -1013,6 +1013,23 @@
     localStorage.removeItem(SERVER_KEY);
   }
 
+  // Auto-migrate old localStorage ref formats (ones that stored slug)
+  function sanitizeServerRef(){
+    const ref = getServerRef();
+    if(!ref) return;
+
+    // Old versions stored {id, slug}. If slug is generic/stale, wipe it.
+    if(ref.slug && ref.slug === "campaign"){
+      clearServerRef();
+      return;
+    }
+
+    // If ref has slug but not harmful, strip it anyway to prevent future staleness.
+    if(ref.slug && ref.id){
+      setServerRef({ id: ref.id });
+    }
+  }
+
   // ===== Server save / publish =====
   async function saveDraftToServer(){
     const data = collect();
@@ -1036,22 +1053,23 @@
     el("saveStatus").textContent = "Saving to server…";
 
     try{
-      let out;
       if(!ref || !ref.id){
-        out = await api("/api/v1/admin/campaigns", {
+        const out = await api("/api/v1/admin/campaigns", {
           method: "POST",
           body: JSON.stringify(payload)
         });
-        setServerRef({ id: out.id, slug: out.slug });
+
+        // IMPORTANT: only store id. Slug becomes stale and causes /campaigns/campaign/
+        setServerRef({ id: out.id });
       }else{
-        out = await api("/api/v1/admin/campaigns/" + encodeURIComponent(ref.id), {
+        await api("/api/v1/admin/campaigns/" + encodeURIComponent(ref.id), {
           method: "PATCH",
           body: JSON.stringify(payload)
         });
       }
 
       const newRef = getServerRef();
-      el("saveStatus").textContent = "Server draft saved • " + new Date().toLocaleString() + (newRef?.slug ? (" • slug: " + newRef.slug) : "");
+      el("saveStatus").textContent = "Server draft saved • " + new Date().toLocaleString() + (newRef?.id ? (" • id: " + newRef.id) : "");
       setDraftPill("Draft: server", "ok");
 
       return newRef;
@@ -1086,11 +1104,11 @@
       });
 
       setDraftPill("Published", "ok");
-      el("saveStatus").textContent = "Published • " + new Date().toLocaleString() + " • redirecting to Play…";
+      el("saveStatus").textContent = "Published • " + new Date().toLocaleString() + " • opening Play…";
 
-      // Redirect to Play campaign page (we’ll build renderer next)
-      const slug = ref.slug || data.slug || slugify(data.basic.title);
-      window.open("https://play.astralforge.studio/campaigns/" + slug + "/", "_blank", "noopener");
+      // IMPORTANT: NEVER trust a stored/stale slug. Always compute from title.
+      const slug = slugify(data.basic.title);
+      window.open("https://play.astralforge.studio/campaigns/" + encodeURIComponent(slug) + "/", "_blank", "noopener");
     }catch(err){
       setDraftPill("Publish: error", "bad");
       el("saveStatus").textContent = "Publish failed.";
@@ -1274,6 +1292,7 @@
 
   // Init
   syncAuthPill();
+  sanitizeServerRef();
 
   const existing = loadLocal();
   if(existing) {
