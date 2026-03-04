@@ -5,15 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Astral Forge</title>
 
-  <!-- Cinzel -->
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --bg:#0b0b0b;
-      --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.72);
-      --border:rgba(255,255,255,.10);
+      --panel: rgba(0,0,0,.35);
+      --panel-2: rgba(0,0,0,.22);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --border: rgba(255,255,255,.12);
+      --border-2: rgba(255,255,255,.18);
+      --ring: rgba(255,255,255,.28);
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --max: 1120px;
     }
 
     *{ box-sizing:border-box; }
@@ -22,7 +30,14 @@
       padding:0;
       background:var(--bg);
       color:var(--text);
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+
+    a{ color:inherit; }
+    img{ max-width:100%; height:auto; }
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); border:0;
     }
 
     /* NAV */
@@ -33,8 +48,8 @@
       display:flex;
       justify-content:space-between;
       align-items:center;
-      padding:14px 40px;
-      background:rgba(0,0,0,.70);
+      padding:12px 28px;
+      background:rgba(0,0,0,.72);
       backdrop-filter: blur(12px);
       border-bottom:1px solid var(--border);
     }
@@ -44,11 +59,10 @@
       align-items:center;
       gap:12px;
       text-decoration:none;
-      color:inherit;
     }
 
     .nav-left img{
-      height:40px;
+      height:38px;
       width:auto;
       display:block;
     }
@@ -64,28 +78,34 @@
     .nav-links{
       display:flex;
       align-items:center;
-      gap:18px;
+      gap:10px;
       white-space:nowrap;
     }
 
     .nav-links a{
-      color:rgba(255,255,255,.82);
+      color:rgba(255,255,255,.84);
       text-decoration:none;
       font-size:14px;
       padding:8px 10px;
-      border-radius:10px;
-      transition:.15s ease;
+      border-radius:999px;
+      transition: .15s ease;
     }
 
     .nav-links a:hover{
-      background:rgba(255,255,255,.06);
+      background:rgba(255,255,255,.07);
       color:#fff;
+    }
+
+    .nav-links a.cta{
+      border:1px solid var(--border-2);
+      background:rgba(255,255,255,.06);
+      padding:8px 12px;
     }
 
     /* HERO */
     .hero{
       position:relative;
-      margin-top:72px;
+      margin-top:64px;
       width:100%;
       overflow:hidden;
       background:#000;
@@ -93,129 +113,310 @@
 
     .hero-image{
       width:100%;
-      height:calc(100vh - 72px);
-      max-height:760px;
+      height: min(760px, calc(100vh - 64px));
       object-fit:cover;
       display:block;
+      filter:saturate(1.02) contrast(1.03);
     }
 
     .hero-overlay{
       position:absolute;
       inset:0;
-      background: radial-gradient(ellipse at center, rgba(0,0,0,.20), rgba(0,0,0,.55));
+      background:
+        radial-gradient(ellipse at 70% 70%, rgba(0,0,0,.12), rgba(0,0,0,.66)),
+        linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.55));
       pointer-events:none;
     }
 
-    .hero-text{
+    .hero-inner{
       position:absolute;
-      right:6%;
-      bottom:10%;
+      inset:0;
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-end;
+      padding: clamp(18px, 3.5vw, 52px);
+    }
+
+    .hero-text{
       text-align:right;
-      max-width:min(560px, 88%);
-      text-shadow: 0 6px 24px rgba(0,0,0,.75);
+      max-width: min(640px, 92%);
+      text-shadow: 0 8px 28px rgba(0,0,0,.75);
     }
 
     .hero-text h1{
       margin:0;
       font-family: Georgia, serif;
-      font-size: clamp(34px, 4.6vw, 56px);
-      letter-spacing:.5px;
-      white-space:nowrap;
+      font-size: clamp(34px, 4.4vw, 58px);
+      letter-spacing:.4px;
+      line-height:1.05;
     }
 
     .hero-text h2{
       margin:10px 0 0;
       font-family: Georgia, serif;
-      font-size: clamp(20px, 2.6vw, 30px);
+      font-size: clamp(18px, 2.2vw, 30px);
       font-weight:600;
-      opacity:.92;
+      opacity:.95;
     }
 
     .hero-text p{
       margin:12px 0 0;
       font-size:14px;
       line-height:1.6;
-      color:rgba(255,255,255,.78);
+      color:rgba(255,255,255,.80);
+      max-width: 56ch;
+      margin-left:auto;
     }
 
-    /* SECTIONS */
+    .hero-cta{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+
+    /* BUTTONS */
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border-2);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      text-decoration:none;
+      font-size:13.5px;
+      transition:.15s ease;
+    }
+    .btn:hover{ background:rgba(255,255,255,.11); }
+    .btn.primary{
+      background:rgba(255,255,255,.14);
+      border-color:rgba(255,255,255,.28);
+    }
+    .btn:focus{
+      outline:none;
+      box-shadow: 0 0 0 3px var(--ring);
+    }
+
+    /* MAIN BACKDROP */
     main{
-      background:
-        url("/assets/backgrounds/Astral-Forge.png") center / cover no-repeat fixed;
+      background: url("/assets/backgrounds/Astral-Forge.png") center / cover no-repeat fixed;
     }
 
+    /* Section wrapper that keeps content readable and centered */
     .section{
-      padding:80px 10%;
       position:relative;
+      padding: clamp(46px, 6vw, 90px) 20px;
     }
 
     .section::before{
       content:"";
       position:absolute;
       inset:0;
-      background: linear-gradient(rgba(0,0,0,.72), rgba(0,0,0,.82));
+      background: linear-gradient(rgba(0,0,0,.70), rgba(0,0,0,.84));
       pointer-events:none;
     }
 
-    .section > *{
+    .container{
       position:relative;
       z-index:1;
+      max-width: var(--max);
+      margin:0 auto;
     }
 
     .section h2{
-      margin:0 0 26px;
+      margin:0 0 18px;
       font-family:'Cinzel', serif;
       font-weight:600;
       letter-spacing:.6px;
+      font-size: 18px;
+      color:rgba(255,255,255,.92);
     }
 
+    .subhead{
+      margin:0 0 18px;
+      color: rgba(255,255,255,.68);
+      font-size: 13.5px;
+      line-height:1.6;
+      max-width: 72ch;
+    }
+
+    /* FEATURED CAMPAIGN (single clickable card) */
+    .feature-link{
+      display:block;
+      text-decoration:none;
+      border-radius: var(--radius);
+      border:1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      transition: .16s ease;
+    }
+    .feature-link:hover{
+      transform: translateY(-2px);
+      border-color: rgba(255,255,255,.22);
+      background: rgba(0,0,0,.42);
+    }
+    .feature-link:focus{
+      outline:none;
+      box-shadow: 0 0 0 3px var(--ring), var(--shadow);
+    }
+
+    .feature{
+      display:grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap:0;
+      align-items:stretch;
+    }
+
+    .feature-media{
+      position:relative;
+      min-height: 260px;
+      background:#000;
+    }
+    .feature-media img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.06) contrast(1.04);
+    }
+    .feature-media::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(90deg, rgba(0,0,0,.10), rgba(0,0,0,.62));
+      pointer-events:none;
+    }
+
+    .feature-body{
+      padding: 18px 18px 18px 18px;
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .kicker{
+      font-family:'Cinzel', serif;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+      font-size:12px;
+      color: rgba(255,255,255,.70);
+    }
+
+    .title{
+      margin:0;
+      font-family: Georgia, serif;
+      font-size: clamp(22px, 2.2vw, 30px);
+      letter-spacing:.35px;
+      line-height:1.15;
+    }
+
+    .hook{
+      margin:0;
+      color: rgba(255,255,255,.78);
+      font-size: 13.5px;
+      line-height: 1.65;
+      max-width: 62ch;
+    }
+
+    .meta{
+      margin-top:auto;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      padding-top:12px;
+      border-top:1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.72);
+      font-size: 12.5px;
+    }
+
+    .pill{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+
+    .arrow{
+      margin-left:auto;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color: rgba(255,255,255,.86);
+      font-weight:600;
+    }
+
+    /* Placeholders */
     .placeholder{
       border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.25);
-      padding:46px 24px;
-      border-radius:14px;
-      color:rgba(255,255,255,.65);
+      background:var(--panel-2);
+      padding:22px 18px;
+      border-radius: var(--radius);
+      color: rgba(255,255,255,.68);
     }
 
     /* FOOTER */
     .footer{
+      position:relative;
+      z-index:1;
       display:flex;
       justify-content:space-between;
       align-items:center;
-      padding:24px 40px;
-      background:rgba(0,0,0,.85);
+      gap:14px;
+      padding:22px 20px;
+      background:rgba(0,0,0,.86);
       border-top:1px solid var(--border);
+    }
+
+    .footer-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
     }
 
     .footer a{
       color:rgba(255,255,255,.78);
       text-decoration:none;
-      margin-left:18px;
+      margin-left:16px;
+      font-size: 13px;
     }
-
     .footer a:hover{ color:#fff; }
 
-    @media (max-width:800px){
-      .navbar{ padding:14px 18px; }
-      .section{ padding:64px 7%; }
-      .footer{
-        padding:20px 18px;
-        flex-direction:column;
-        gap:10px;
-        align-items:flex-start;
-      }
-      .footer a{ margin-left:0; margin-right:14px; }
+    /* Responsive */
+    @media (max-width: 980px){
+      .feature{ grid-template-columns: 1fr; }
+      .feature-media{ min-height: 220px; }
+      .arrow{ margin-left: 0; }
+      main{ background-attachment: scroll; } /* fixed backgrounds can be janky on mobile */
+    }
+
+    @media (max-width: 780px){
+      .navbar{ padding:12px 16px; }
+      .nav-links{ gap:6px; }
+      .nav-links a{ padding:8px 9px; }
+      .brand{ display:none; } /* keep logo, hide wordmark on small screens */
+      .hero-text{ text-align:left; }
+      .hero-inner{ justify-content:flex-start; align-items:flex-end; }
+      .hero-cta{ justify-content:flex-start; }
+      .hero-text p{ margin-left:0; }
     }
   </style>
 </head>
 
 <body>
-
   <!-- NAV -->
-  <nav class="navbar">
+  <nav class="navbar" aria-label="Primary">
     <div class="nav-left">
-      <!-- HOME ALWAYS GOES TO ROOT -->
-      <a href="/">
+      <a href="/" aria-label="Astral Forge home">
         <img src="/assets/nav/Astral-Forge-nav.png" alt="Astral Forge">
         <span class="brand">Astral Forge</span>
       </a>
@@ -226,108 +427,98 @@
       <a href="https://codex.astralforge.studio" target="_blank" rel="noopener">Codex</a>
       <a href="https://shop.astralforge.studio" target="_blank" rel="noopener">Shop</a>
       <a href="/about/">About</a>
-      <a href="/membership/">Join</a>
+      <a class="cta" href="/membership/">Join</a>
     </div>
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
+  <header class="hero">
     <img class="hero-image" src="/assets/hero/Astral-Forge-hero.png" alt="Astral Forge Hero">
     <div class="hero-overlay"></div>
 
-    <div class="hero-text">
-      <h1>Crafted Worlds</h1>
-      <h2>Epic Journeys</h2>
-      <p>
-        Professional tabletop campaigns, immersive storytelling,
-        and worlds forged beyond imagination.
-      </p>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1>Crafted Worlds</h1>
+        <h2>Epic Journeys</h2>
+        <p>
+          Professional tabletop campaigns, immersive storytelling,
+          and worlds forged beyond imagination.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn primary" href="https://play.astralforge.studio" target="_blank" rel="noopener">Enter the Table →</a>
+          <a class="btn" href="https://codex.astralforge.studio" target="_blank" rel="noopener">Explore the Codex →</a>
+        </div>
+      </div>
     </div>
-  </section>
+  </header>
 
   <!-- CONTENT -->
   <main>
-
-<section class="section">
-  <h2>Featured Campaign</h2>
-
-  <div class="featured-grid">
-    <!-- Main featured campaign -->
-    <article class="campaign-card">
-      <div class="campaign-media">
-        <img src="/assets/campaigns/Black-Star-Gambit.png" alt="Black Star Gambit campaign art">
-      </div>
-
-      <div class="campaign-body">
-        <div class="campaign-kicker">D&D 5e • Level 3–15</div>
-        <h3 class="campaign-title">Black Star Gambit</h3>
-
-        <p class="campaign-sub">
-          A sealed message finds you in your dreams. You are hired to steal a chained goddess
-          imprisoned within a shattered god-mind before fate resets itself.
+    <!-- FEATURED -->
+    <section class="section" aria-labelledby="featured-campaign">
+      <div class="container">
+        <h2 id="featured-campaign">Featured Campaign</h2>
+        <p class="subhead">
+          A flagship story currently welcoming new players.
         </p>
 
-        <div class="badge-row">
-          <span class="badge">Corruption</span>
-          <span class="badge">Cosmic Paranoia</span>
-          <span class="badge">Fate vs Free Will</span>
-          <span class="badge">Hubris</span>
-        </div>
+        <!-- Single clickable Featured Campaign -->
+        <a class="feature-link" href="https://play.astralforge.studio/campaigns/black-star-gambit" target="_blank" rel="noopener">
+          <div class="feature">
+            <div class="feature-media">
+              <img src="/assets/campaigns/Black-Star-Gambit.png" alt="Black Star Gambit campaign art">
+            </div>
 
-        <div class="campaign-meta">
-          <div class="meta-item"><b>Schedule:</b> Thursdays • 7 CT • Weekly</div>
-          <div class="meta-item"><b>Seats:</b> 5 open (of 5)</div>
-          <div class="meta-item"><b>Price:</b> $25 / Session</div>
-          <div class="meta-item"><b>Bonus:</b> Custom 3D printed mini</div>
-        </div>
+            <div class="feature-body">
+              <div class="kicker">D&D 5e • Level 3–15</div>
+              <h3 class="title">Black Star Gambit</h3>
 
-        <div class="cta-row">
-          <a class="btn primary" href="https://play.astralforge.studio/campaigns/black-star-gambit" target="_blank" rel="noopener">
-            View Campaign →
-          </a>
-          <a class="btn" href="https://play.astralforge.studio" target="_blank" rel="noopener">
-            Browse All Campaigns →
-          </a>
-        </div>
+              <p class="hook">
+                A sealed message finds you in your dreams. You are hired to steal a chained goddess
+                imprisoned within a shattered god-mind before fate resets itself.
+              </p>
+
+              <div class="meta" aria-label="Campaign details">
+                <span class="pill">Thursdays • 7 CT • Weekly</span>
+                <span class="pill">Seats: 5 open</span>
+                <span class="pill">$25 / Session</span>
+                <span class="arrow">View campaign →</span>
+              </div>
+            </div>
+          </div>
+        </a>
       </div>
-    </article>
-
-    <!-- Side card (optional) -->
-    <aside class="side-card">
-      <h3>What to Expect</h3>
-      <p>
-        Dark high fantasy with cosmic ambition, fractured timelines, and temptation.
-        Story-driven play with consequences, spotlight moments, and a strong Session 0 safety baseline.
-      </p>
-      <p>
-        Before Session 0, each player gets a private 1:1 backstory session tying their character into the central conflict.
-      </p>
-      <a class="btn" href="https://play.astralforge.studio" target="_blank" rel="noopener">Enter the Table →</a>
-    </aside>
-  </div>
-</section>
-
-    <section class="section">
-      <h2>Playable Campaigns</h2>
-      <div class="placeholder">Sessions Opening Soon</div>
     </section>
 
-    <section class="section">
-      <h2>Player Reviews</h2>
-      <div class="placeholder">Reviews Coming Soon</div>
+    <!-- PLAYABLE CAMPAIGNS -->
+    <section class="section" aria-labelledby="playable-campaigns">
+      <div class="container">
+        <h2 id="playable-campaigns">Playable Campaigns</h2>
+        <div class="placeholder">Sessions Opening Soon</div>
+      </div>
     </section>
 
+    <!-- REVIEWS -->
+    <section class="section" aria-labelledby="player-reviews">
+      <div class="container">
+        <h2 id="player-reviews">Player Reviews</h2>
+        <div class="placeholder">Reviews Coming Soon</div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
     <footer class="footer">
-      <div>© 2026 Astral Forge</div>
-      <div>
-        <a href="/contact/">Contact</a>
-        <a href="/legal/privacy/">Privacy</a>
-        <a href="/legal/terms/">Terms</a>
-        <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q" target="_blank" rel="noopener">Root</a>
+      <div class="footer-inner">
+        <div>© 2026 Astral Forge</div>
+        <div>
+          <a href="/contact/">Contact</a>
+          <a href="/legal/privacy/">Privacy</a>
+          <a href="/legal/terms/">Terms</a>
+          <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q" target="_blank" rel="noopener">Root</a>
+        </div>
       </div>
     </footer>
-
   </main>
-
 </body>
 </html>
