@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Notifications • Astral Forge</title>
+  <title>Membership • Astral Forge</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +24,9 @@
       --gold:#b99054;
       --gold2:#7e5a2f;
     }
+
     *{ box-sizing:border-box; }
+
     body{
       margin:0;
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -43,6 +45,7 @@
       border-bottom: 1px solid var(--border);
       box-shadow: 0 6px 30px rgba(0,0,0,.45);
     }
+
     .nav-inner{
       width:100%;
       padding: 14px 56px;
@@ -51,6 +54,7 @@
       justify-content:space-between;
       gap: 18px;
     }
+
     .brand{
       display:flex;
       align-items:center;
@@ -59,7 +63,13 @@
       color: var(--text);
       white-space:nowrap;
     }
-    .brand img{ height:38px; width:auto; display:block; }
+
+    .brand img{
+      height:38px;
+      width:auto;
+      display:block;
+    }
+
     .brand-text{
       font-family:"Cinzel", serif;
       font-weight:700;
@@ -67,6 +77,7 @@
       font-size:14px;
       text-transform:uppercase;
     }
+
     .nav-links{
       display:flex;
       align-items:center;
@@ -75,6 +86,7 @@
       flex-wrap:wrap;
       justify-content:flex-end;
     }
+
     .nav-links a{
       text-decoration:none;
       color: rgba(255,255,255,.82);
@@ -84,20 +96,24 @@
       transition:.2s;
       white-space:nowrap;
     }
+
     .nav-links a:hover{
       color: rgba(255,255,255,.96);
       background: rgba(255,255,255,.06);
     }
+
     .nav-links a[aria-current="page"]{
       color: rgba(255,255,255,.95);
       background: rgba(255,255,255,.08);
     }
+
     .nav-links a.join{
       border: 1px solid rgba(185,144,84,.55);
       background: linear-gradient(135deg, rgba(185,144,84,.18), rgba(0,0,0,.12));
       color: rgba(255,255,255,.95);
       box-shadow: 0 10px 30px rgba(185,144,84,.12);
     }
+
     .nav-links a.join:hover{
       border-color: rgba(185,144,84,.85);
       transform: translateY(-1px);
@@ -112,6 +128,7 @@
         radial-gradient(900px 520px at 85% 0%, rgba(255,255,255,.05), transparent 60%),
         var(--bg);
     }
+
     .stage{
       max-width: 1200px;
       margin: 0 auto;
@@ -128,6 +145,7 @@
       background: url("/assets/backgrounds/parchment.png") center / cover no-repeat;
       background-color: #c9b48f;
     }
+
     .parchment::before{
       content:"";
       position:absolute;
@@ -138,11 +156,13 @@
         linear-gradient(rgba(0,0,0,.10), rgba(0,0,0,.18));
       pointer-events:none;
     }
+
     .inner{
       position:relative;
       padding: 44px clamp(18px, 3.2vw, 56px) 52px;
       color: rgba(20,16,12,.94);
     }
+
     .kicker{
       letter-spacing:.24em;
       text-transform: uppercase;
@@ -151,6 +171,7 @@
       color: rgba(40,28,18,.72);
       margin-bottom: 10px;
     }
+
     h1{
       margin:0 0 10px;
       font-family: Georgia, serif;
@@ -158,6 +179,7 @@
       letter-spacing:.02em;
       color: rgba(18,12,8,.95);
     }
+
     .sub{
       margin:0 0 24px;
       font-size: 17px;
@@ -179,12 +201,14 @@
       border-top: 1px solid rgba(40,28,18,.22);
       margin-top: 18px;
     }
+
     .section h2{
       margin: 0 0 10px;
       font-family: Georgia, serif;
       font-size: 24px;
       color: rgba(18,12,8,.95);
     }
+
     .section p{
       margin: 0 0 14px;
       font-size: 16px;
@@ -200,6 +224,7 @@
       padding: 16px;
       box-shadow: 0 12px 34px rgba(0,0,0,.10);
     }
+
     label{
       display:block;
       font-weight: 700;
@@ -208,12 +233,14 @@
       color: rgba(18,12,8,.92);
       margin: 10px 0 6px;
     }
+
     .hint{
       font-size: 12px;
       color: rgba(28,20,14,.78);
       line-height: 1.6;
       margin-top: 6px;
     }
+
     input, select{
       width:100%;
       padding: 11px 12px;
@@ -223,10 +250,20 @@
       color: rgba(18,12,8,.95);
       outline:none;
     }
-    input::placeholder{ color: rgba(18,12,8,.55); }
+
+    input::placeholder{
+      color: rgba(18,12,8,.55);
+    }
+
     input:focus, select:focus{
       border-color: rgba(185,144,84,.75);
       box-shadow: 0 0 0 4px rgba(185,144,84,.14);
+    }
+
+    .field-grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
     }
 
     .toggles{
@@ -234,6 +271,7 @@
       gap: 10px;
       margin-top: 10px;
     }
+
     .toggle{
       display:flex;
       gap:10px;
@@ -243,15 +281,19 @@
       border: 1px solid rgba(40,28,18,.16);
       background: rgba(255,255,255,.14);
     }
+
     .toggle input{
       width:auto;
       margin-top: 2px;
       accent-color: var(--gold2);
+      flex: 0 0 auto;
     }
+
     .toggle strong{
       display:block;
       color: rgba(18,12,8,.95);
     }
+
     .toggle span{
       display:block;
       font-size: 13px;
@@ -269,6 +311,7 @@
       padding-top: 14px;
       border-top: 1px solid rgba(40,28,18,.18);
     }
+
     .btn{
       appearance:none;
       border: 1px solid rgba(40,28,18,.20);
@@ -286,7 +329,12 @@
       cursor:pointer;
       box-shadow: 0 10px 26px rgba(0,0,0,.10);
     }
-    .btn:hover{ transform: translateY(-1px); opacity:.98; }
+
+    .btn:hover{
+      transform: translateY(-1px);
+      opacity:.98;
+    }
+
     .btn.primary{
       border-color: rgba(185,144,84,.55);
       background: linear-gradient(135deg, rgba(185,144,84,.30), rgba(255,255,255,.10));
@@ -298,7 +346,10 @@
       line-height: 1.7;
       margin-top: 12px;
     }
-    .fineprint a{ color: rgba(28,20,14,.92); }
+
+    .fineprint a{
+      color: rgba(28,20,14,.92);
+    }
 
     /* SIDEBAR */
     .panel{
@@ -309,24 +360,30 @@
       box-shadow: 0 10px 30px rgba(0,0,0,.10);
       backdrop-filter: blur(2px);
     }
+
     .panel h3{
       margin: 0 0 10px;
       font-family: Georgia, serif;
       font-size: 18px;
       color: rgba(18,12,8,.95);
     }
+
     .panel p{
       margin: 0 0 12px;
       color: rgba(28,20,14,.90);
       line-height: 1.75;
     }
+
     .panel ul{
       margin: 0;
       padding-left: 18px;
       color: rgba(28,20,14,.88);
       line-height: 1.7;
     }
-    .panel li{ margin: 8px 0; }
+
+    .panel li{
+      margin: 8px 0;
+    }
 
     details{
       border: 1px solid rgba(40,28,18,.16);
@@ -335,13 +392,18 @@
       padding: 12px 14px;
       margin: 10px 0;
     }
+
     summary{
       cursor:pointer;
       font-weight: 800;
       color: rgba(18,12,8,.95);
       list-style:none;
     }
-    summary::-webkit-details-marker{ display:none; }
+
+    summary::-webkit-details-marker{
+      display:none;
+    }
+
     details p{
       margin: 10px 0 0;
       color: rgba(28,20,14,.90);
@@ -353,6 +415,7 @@
       background: rgba(0,0,0,.70);
       border-top: 1px solid var(--border);
     }
+
     .footer-inner{
       max-width: 1200px;
       margin: 0 auto;
@@ -364,21 +427,35 @@
       color: rgba(255,255,255,.72);
       font-size: 14px;
     }
+
     .footer-links{
       display:flex;
       gap: 18px;
       flex-wrap:wrap;
       justify-content:flex-end;
     }
+
     .footer-links a{
       color: rgba(255,255,255,.78);
       text-decoration:none;
     }
-    .footer-links a:hover{ color: rgba(255,255,255,.95); }
+
+    .footer-links a:hover{
+      color: rgba(255,255,255,.95);
+    }
 
     @media (max-width: 980px){
-      .nav-inner{ padding: 14px 18px; }
-      .grid{ grid-template-columns: 1fr; }
+      .nav-inner{
+        padding: 14px 18px;
+      }
+
+      .grid{
+        grid-template-columns: 1fr;
+      }
+
+      .field-grid{
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -407,22 +484,98 @@
       <div class="parchment">
         <div class="inner">
 
-          <div class="kicker">Free Email Notifications</div>
-          <h1>Stay in the Loop</h1>
+          <div class="kicker">Free Membership</div>
+          <h1>Join the Forge</h1>
           <p class="sub">
-            This is a free “membership” for players and friends of the Forge: opt into <strong>email notifications</strong> when
-            a <strong>new campaign launches</strong>, a <strong>new store item drops</strong>, or the <strong>Codex gets a new article</strong>.
-            You can update preferences or opt out at any time.
+            Create your free Astral Forge membership to stay connected to <strong>new campaigns</strong>,
+            <strong>shop drops</strong>, and <strong>new Codex articles</strong>. Add your contact information,
+            choose how you want to be notified, and update your preferences any time.
           </p>
 
           <div class="grid">
             <!-- LEFT: Form -->
             <div>
-              <form method="post" action="/api/notify/subscribe" id="notifyForm" novalidate>
-                <div>
-                  <label for="email">Email</label>
-                  <input id="email" name="email" type="email" placeholder="you@domain.com" autocomplete="email" required />
-                  <div class="hint">Used for announcements + preference management link.</div>
+              <form method="post" action="/api/membership/signup" id="membershipForm" novalidate>
+                <div class="field-grid">
+                  <div>
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" placeholder="Your full name" autocomplete="name" required />
+                  </div>
+
+                  <div>
+                    <label for="handle">Handle</label>
+                    <input id="handle" name="handle" type="text" placeholder="@yourhandle or player name" autocomplete="nickname" required />
+                    <div class="hint">Your username, player handle, or preferred public name.</div>
+                  </div>
+                </div>
+
+                <div class="field-grid">
+                  <div>
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" placeholder="you@domain.com" autocomplete="email" required />
+                  </div>
+
+                  <div>
+                    <label for="phone">Phone</label>
+                    <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" autocomplete="tel" />
+                    <div class="hint">Used for notifications only if you choose phone alerts.</div>
+                  </div>
+                </div>
+
+                <div class="section">
+                  <h2>Address <span style="font-size:14px; font-weight:400;">(Optional)</span></h2>
+
+                  <label for="address1">Street Address</label>
+                  <input id="address1" name="address1" type="text" placeholder="123 Main St" autocomplete="address-line1" />
+
+                  <label for="address2">Apartment, Suite, etc.</label>
+                  <input id="address2" name="address2" type="text" placeholder="Apt 4B" autocomplete="address-line2" />
+
+                  <div class="field-grid">
+                    <div>
+                      <label for="city">City</label>
+                      <input id="city" name="city" type="text" placeholder="City" autocomplete="address-level2" />
+                    </div>
+
+                    <div>
+                      <label for="state">State / Province</label>
+                      <input id="state" name="state" type="text" placeholder="State / Province" autocomplete="address-level1" />
+                    </div>
+                  </div>
+
+                  <div class="field-grid">
+                    <div>
+                      <label for="postal">ZIP / Postal Code</label>
+                      <input id="postal" name="postal" type="text" placeholder="ZIP / Postal Code" autocomplete="postal-code" />
+                    </div>
+
+                    <div>
+                      <label for="country">Country</label>
+                      <input id="country" name="country" type="text" placeholder="Country" autocomplete="country-name" />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="section">
+                  <h2>Choice of Notifications</h2>
+
+                  <div class="toggles" aria-label="Notification methods">
+                    <label class="toggle">
+                      <input type="checkbox" name="notify_methods[]" value="email" checked />
+                      <div>
+                        <strong>Email Notifications</strong>
+                        <span>Receive updates by email.</span>
+                      </div>
+                    </label>
+
+                    <label class="toggle">
+                      <input type="checkbox" name="notify_methods[]" value="sms" />
+                      <div>
+                        <strong>Phone Notifications</strong>
+                        <span>Receive text alerts for membership updates and announcements.</span>
+                      </div>
+                    </label>
+                  </div>
                 </div>
 
                 <div class="section">
@@ -464,20 +617,20 @@
                     <option value="daily_digest">Daily digest</option>
                     <option value="weekly_digest">Weekly digest</option>
                   </select>
-                  <div class="hint">Digest options are great if you only want summaries.</div>
+                  <div class="hint">Digest options are great if you want a summary instead of every individual alert.</div>
 
                   <div class="fineprint" style="margin-top:12px;">
-                    By subscribing, you agree to our <a href="/legal/terms/">Terms</a> and <a href="/legal/privacy/">Privacy Policy</a>.
-                    We only use your email for the alerts you opt into.
+                    By joining, you agree to our <a href="/legal/terms/">Terms</a> and <a href="/legal/privacy/">Privacy Policy</a>.
+                    Your membership information is saved on our website servers and used only for account management and the notifications you choose.
                   </div>
 
                   <div class="actions">
-                    <button class="btn primary" type="submit">Enable Email Notifications →</button>
+                    <button class="btn primary" type="submit">Create Membership →</button>
                     <a class="btn" href="#manage">Manage / Opt out</a>
                   </div>
 
                   <div class="hint" style="margin-top:10px;">
-                    After you submit, we may send a confirmation email.
+                    After you submit, we may send a confirmation email or a phone verification message depending on your notification choices.
                   </div>
                 </div>
               </form>
@@ -485,20 +638,20 @@
               <div class="section" id="manage">
                 <h2>Manage Preferences / Opt Out</h2>
                 <p>
-                  Use your preference link from any email to update topics or unsubscribe completely.
+                  Use your membership or preference link from any message to update your contact details, change alert topics, or unsubscribe completely.
                 </p>
 
                 <details>
                   <summary>I didn’t get a preferences link — what now?</summary>
                   <p>
-                    Reach out via <a href="/contact/">/contact/</a> and we’ll help you update or remove your subscription.
+                    Reach out via <a href="/contact/">/contact/</a> and we’ll help you update or remove your membership details.
                   </p>
                 </details>
 
                 <details>
                   <summary>What does “opt out” do?</summary>
                   <p>
-                    Opting out stops all alerts. You can re-subscribe later any time from this page.
+                    Opting out stops all alerts. Your account can be reactivated later by returning to this page and signing up again.
                   </p>
                 </details>
               </div>
@@ -509,12 +662,13 @@
               <div class="panel">
                 <h3>What This Is</h3>
                 <p>
-                  A free email notification list for active players and Forge friends — no paywall, no clutter.
+                  A free Astral Forge membership for players and Forge friends. Save your info, choose your notifications,
+                  and stay connected to campaigns, shop updates, and Codex releases.
                 </p>
                 <ul>
-                  <li>Campaign launches & openings</li>
-                  <li>New store items</li>
-                  <li>New Codex articles</li>
+                  <li>Name and handle on file</li>
+                  <li>Email and optional phone notifications</li>
+                  <li>Optional address saved to your membership</li>
                 </ul>
               </div>
 
@@ -523,11 +677,12 @@
               <div class="panel">
                 <h3>Privacy First</h3>
                 <p>
-                  We only send what you opt into. You can change your mind anytime.
+                  We only send what you opt into. You can change your preferences or leave at any time.
                 </p>
                 <ul>
-                  <li>Unsubscribe link in every message</li>
-                  <li>No selling your info</li>
+                  <li>Notification controls stay in your hands</li>
+                  <li>No selling your information</li>
+                  <li>Saved securely on website servers</li>
                 </ul>
               </div>
 
@@ -566,28 +721,61 @@
   </main>
 
   <script>
-    // Light client-side guardrails (optional).
-    // Server MUST enforce rules too.
     (function () {
-      const form = document.getElementById('notifyForm');
+      const form = document.getElementById('membershipForm');
       if (!form) return;
 
       form.addEventListener('submit', function (e) {
+        const name = form.querySelector('#name');
+        const handle = form.querySelector('#handle');
         const email = form.querySelector('#email');
+        const phone = form.querySelector('#phone');
 
-        // Require at least one topic
+        const methods = Array.from(form.querySelectorAll('input[name="notify_methods[]"]'))
+          .filter(input => input.checked)
+          .map(input => input.value);
+
         const topics = Array.from(form.querySelectorAll('input[name="topics[]"]'))
-          .filter(t => t.checked).map(t => t.value);
-        if (topics.length === 0) {
+          .filter(input => input.checked)
+          .map(input => input.value);
+
+        if (!name.value.trim()) {
           e.preventDefault();
-          alert('Please select at least one alert type (Campaigns, Shop, or Codex).');
+          alert('Please enter your name.');
+          name.focus();
           return;
         }
 
-        // Basic email required
+        if (!handle.value.trim()) {
+          e.preventDefault();
+          alert('Please enter your handle.');
+          handle.focus();
+          return;
+        }
+
         if (!email.value.trim()) {
           e.preventDefault();
           alert('Please enter your email address.');
+          email.focus();
+          return;
+        }
+
+        if (methods.length === 0) {
+          e.preventDefault();
+          alert('Please select at least one notification method.');
+          return;
+        }
+
+        if (methods.includes('sms') && !phone.value.trim()) {
+          e.preventDefault();
+          alert('Please enter your phone number to receive phone notifications.');
+          phone.focus();
+          return;
+        }
+
+        if (topics.length === 0) {
+          e.preventDefault();
+          alert('Please select at least one alert topic.');
           return;
         }
       });
