@@ -1,1 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astral Forge Admin Settings</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Cinzel:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0d;
+      --panel:rgba(0,0,0,.35);
+      --panel2:rgba(0,0,0,.22);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.68);
+      --border:rgba(255,255,255,.12);
+      --gold:#b99054;
+      --good:#2ecc71;
+      --bad:#ff6b6b;
+    }
+
+    *{ box-sizing:border-box; }
+
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% 5%, rgba(185,144,84,.12), transparent 55%),
+        radial-gradient(900px 600px at 80% 10%, rgba(255,255,255,.06), transparent 60%),
+        var(--bg);
+      color:var(--text);
+    }
+
+    code{
+      font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+      font-size:.95em;
+      color:rgba(255,255,255,.9);
+    }
+
+    nav{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      backdrop-filter:blur(12px);
+      -webkit-backdrop-filter:blur(12px);
+      background:rgba(0,0,0,.55);
+      border-bottom:1px solid var(--border);
+      box-shadow:0 10px 40px rgba(0,0,0,.40);
+    }
+
+    .nav-inner{
+      padding:14px 18px;
+      max-width:1240px;
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color:var(--text);
+    }
+
+    .brand-text{
+      font-family:"Cinzel", serif;
+      font-weight:700;
+      letter-spacing:.16em;
+      font-size:13px;
+      text-transform:uppercase;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .btn{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.16);
+      background:rgba(0,0,0,.20);
+      color:rgba(255,255,255,.92);
+      padding:10px 12px;
+      border-radius:12px;
+      font-size:13px;
+      cursor:pointer;
+      transition:.18s;
+      text-decoration:none;
+      user-select:none;
+    }
+
+    .btn:hover{
+      background:rgba(255,255,255,.06);
+    }
+
+    .btn.gold{
+      border-color:rgba(185,144,84,.55);
+      background:linear-gradient(135deg, rgba(185,144,84,.20), rgba(0,0,0,.10));
+    }
+
+    .btn.gold:hover{
+      border-color:rgba(185,144,84,.88);
+      transform:translateY(-1px);
+    }
+
+    .pill{
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(0,0,0,.18);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12px;
+      color:rgba(255,255,255,.80);
+    }
+
+    .pill.ok{
+      border-color:rgba(46,204,113,.55);
+      color:rgba(46,204,113,.92);
+    }
+
+    .pill.bad{
+      border-color:rgba(255,107,107,.55);
+      color:rgba(255,107,107,.92);
+    }
+
+    .pill.gold{
+      border-color:rgba(185,144,84,.55);
+      color:rgba(185,144,84,.92);
+    }
+
+    .wrap{
+      max-width:1240px;
+      margin:0 auto;
+      padding:26px 18px 50px;
+      display:grid;
+      gap:18px;
+    }
+
+    .hero{
+      border:1px solid var(--border);
+      border-radius:18px;
+      overflow:hidden;
+      background:linear-gradient(135deg, rgba(185,144,84,.18), rgba(0,0,0,.40));
+      box-shadow:0 18px 60px rgba(0,0,0,.35);
+      position:relative;
+    }
+
+    .hero::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(600px 300px at 20% 30%, rgba(255,255,255,.10), transparent 60%),
+        radial-gradient(500px 400px at 80% 20%, rgba(185,144,84,.16), transparent 65%);
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      position:relative;
+      padding:22px;
+      display:grid;
+      grid-template-columns:1.1fr .9fr;
+      gap:16px;
+      align-items:center;
+    }
+
+    .hero h1{
+      margin:0 0 8px;
+      font-family:Georgia, serif;
+      font-size:26px;
+      letter-spacing:.01em;
+    }
+
+    .hero p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.7;
+      font-size:14px;
+      max-width:70ch;
+    }
+
+    .hero-actions{
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(12, 1fr);
+      gap:14px;
+    }
+
+    .card{
+      grid-column:span 6;
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:16px;
+      box-shadow:0 12px 42px rgba(0,0,0,.30);
+      overflow:hidden;
+      transition:.18s;
+    }
+
+    .card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(185,144,84,.35);
+    }
+
+    .card.full{
+      grid-column:span 12;
+    }
+
+    .card.small{
+      grid-column:span 4;
+    }
+
+    .card .top{
+      padding:14px 14px 10px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-start;
+      gap:10px;
+    }
+
+    .card .title{
+      font-weight:600;
+      letter-spacing:.10em;
+      text-transform:uppercase;
+      font-size:12px;
+      color:rgba(255,255,255,.80);
+    }
+
+    .card .desc{
+      padding:12px 14px 14px;
+      color:rgba(255,255,255,.72);
+      font-size:13px;
+      line-height:1.65;
+    }
+
+    .card .actions{
+      padding:0 14px 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .settings-grid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:12px;
+      padding:14px;
+    }
+
+    .field{
+      display:grid;
+      gap:8px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    label{
+      display:block;
+      font-size:12px;
+      color:rgba(255,255,255,.70);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="url"],
+    select,
+    textarea{
+      width:100%;
+      background:rgba(0,0,0,.22);
+      color:var(--text);
+      border:1px solid rgba(255,255,255,.14);
+      border-radius:12px;
+      padding:10px 12px;
+      outline:none;
+      font-size:14px;
+      font-family:inherit;
+    }
+
+    textarea{
+      min-height:120px;
+      resize:vertical;
+    }
+
+    .hint{
+      color:rgba(255,255,255,.56);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    .switch-list{
+      padding:14px;
+      display:grid;
+      gap:12px;
+    }
+
+    .switch-item{
+      display:flex;
+      justify-content:space-between;
+      gap:14px;
+      align-items:flex-start;
+      padding:12px;
+      border:1px solid rgba(255,255,255,.08);
+      border-radius:14px;
+      background:rgba(255,255,255,.02);
+    }
+
+    .switch-copy strong{
+      display:block;
+      font-size:14px;
+      margin-bottom:4px;
+      color:rgba(255,255,255,.92);
+    }
+
+    .switch-copy span{
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .switch{
+      position:relative;
+      width:54px;
+      height:32px;
+      flex:0 0 auto;
+    }
+
+    .switch input{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      cursor:pointer;
+    }
+
+    .slider{
+      position:absolute;
+      inset:0;
+      border-radius:999px;
+      background:#3a3a42;
+      border:1px solid rgba(255,255,255,.12);
+      transition:.18s;
+    }
+
+    .slider::before{
+      content:"";
+      position:absolute;
+      width:24px;
+      height:24px;
+      left:3px;
+      top:3px;
+      border-radius:50%;
+      background:white;
+      transition:.18s;
+    }
+
+    .switch input:checked + .slider{
+      background:rgba(46,204,113,.45);
+      border-color:rgba(46,204,113,.65);
+    }
+
+    .switch input:checked + .slider::before{
+      transform:translateX(22px);
+    }
+
+    .stats{
+      padding:14px;
+      display:grid;
+      gap:12px;
+    }
+
+    .stat{
+      padding:14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.03);
+      border:1px solid rgba(255,255,255,.08);
+    }
+
+    .stat .label{
+      color:rgba(255,255,255,.62);
+      font-size:12px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      margin-bottom:6px;
+    }
+
+    .stat .value{
+      color:rgba(255,255,255,.94);
+      font-size:20px;
+      font-weight:600;
+    }
+
+    .pill-row{
+      padding:0 14px 14px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .footer-bar{
+      padding:0 14px 14px;
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+
+    .footer-note{
+      color:rgba(255,255,255,.56);
+      font-size:12px;
+      line-height:1.55;
+    }
+
+    dialog{
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(0,0,0,.82);
+      color:var(--text);
+      border-radius:16px;
+      padding:0;
+      width:min(560px, 92vw);
+      box-shadow:0 20px 90px rgba(0,0,0,.55);
+    }
+
+    dialog::backdrop{
+      background:rgba(0,0,0,.55);
+    }
+
+    .dlg{
+      padding:16px;
+    }
+
+    .dlg h2{
+      margin:0 0 10px;
+      font-family:Georgia, serif;
+      font-size:18px;
+    }
+
+    .dlg p{
+      margin:0 0 12px;
+      color:var(--muted);
+      line-height:1.6;
+      font-size:13px;
+    }
+
+    .dlg-actions{
+      display:flex;
+      justify-content:flex-end;
+      gap:10px;
+      flex-wrap:wrap;
+      padding:0 16px 16px;
+    }
+
+    @media (max-width: 980px){
+      .card,
+      .card.small,
+      .card.full{
+        grid-column:span 12;
+      }
+    }
+
+    @media (max-width: 860px){
+      .hero-inner{ grid-template-columns:1fr; }
+      .hero-actions{ justify-content:flex-start; }
+      .settings-grid{ grid-template-columns:1fr; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="/admin/">
+        <span class="brand-text">Astral Forge • Admin Settings</span>
+      </a>
+
+      <div class="row">
+        <span class="pill" id="pillAuth">Auth: unset</span>
+        <span class="pill gold" id="pillApi">API: workers.dev</span>
+        <button class="btn" id="btnSetApi" type="button">API Base</button>
+        <button class="btn" id="btnSetToken" type="button">Set Token</button>
+        <a class="btn" href="/admin/">Switchboard</a>
+        <a class="btn" href="/admin/builder/">Campaign Builder</a>
+        <a class="btn" href="/admin/codex/">Codex Admin</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <h1>Settings</h1>
+          <p>
+            Configure platform identity, security defaults, notification behavior, publishing integrations,
+            and operational controls for Astral Forge. This page mirrors the overall switchboard style while
+            giving you a dedicated home for environment-level settings.
+          </p>
+        </div>
+
+        <div class="hero-actions">
+          <a class="btn gold" href="#general">General</a>
+          <a class="btn gold" href="#security">Security</a>
+          <a class="btn" href="#notifications">Notifications</a>
+          <a class="btn" href="#advanced">Advanced</a>
+          <button class="btn" id="btnExport" type="button">Export Config</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <article class="card" id="general">
+        <div class="top">
+          <div>
+            <div class="title">General</div>
+          </div>
+          <span class="pill ok">Configured</span>
+        </div>
+        <div class="desc">
+          Set the core identity and default behavior for the admin environment, including app name,
+          support address, locale, and content defaults across <code>play</code>, <code>codex</code>, and <code>shop</code>.
+        </div>
+        <div class="settings-grid">
+          <div class="field">
+            <label for="siteName">Site Name</label>
+            <input id="siteName" type="text" value="Astral Forge" />
+            <div class="hint">Displayed in titles, headers, and system-generated messages.</div>
+          </div>
+          <div class="field">
+            <label for="supportEmail">Support Email</label>
+            <input id="supportEmail" type="email" value="scribe@astralforge.studio" />
+            <div class="hint">Primary contact used for admin-facing and customer-facing notices.</div>
+          </div>
+          <div class="field">
+            <label for="timezone">Time Zone</label>
+            <select id="timezone">
+              <option selected>America/Chicago</option>
+              <option>America/New_York</option>
+              <option>America/Los_Angeles</option>
+              <option>UTC</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="defaultLocale">Default Locale</label>
+            <select id="defaultLocale">
+              <option selected>English (US)</option>
+              <option>English (UK)</option>
+              <option>Spanish</option>
+            </select>
+          </div>
+          <div class="field full">
+            <label for="orgDescription">Studio Description</label>
+            <textarea id="orgDescription">Astral Forge is the publishing and operations hub for immersive campaigns, codex content, digital offerings, and live storytelling experiences.</textarea>
+            <div class="hint">Internal summary used across admin surfaces and future automation tooling.</div>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn gold" type="button">Save General</button>
+          <button class="btn" type="button">Reset</button>
+        </div>
+      </article>
+
+      <article class="card" id="security">
+        <div class="top">
+          <div>
+            <div class="title">Security</div>
+          </div>
+          <span class="pill ok">Protected</span>
+        </div>
+        <div class="desc">
+          Protect access to the admin environment with session controls, token restrictions,
+          and account hardening policies for high-trust publishing and commerce actions.
+        </div>
+        <div class="switch-list">
+          <div class="switch-item">
+            <div class="switch-copy">
+              <strong>Require two-factor authentication</strong>
+              <span>Force all admin users to enroll in an additional verification factor before access is granted.</span>
+            </div>
+            <label class="switch" aria-label="Require two-factor authentication">
+              <input type="checkbox" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="switch-item">
+            <div class="switch-copy">
+              <strong>Expire idle sessions automatically</strong>
+              <span>End inactive sessions to reduce exposure on unattended devices and shared workstations.</span>
+            </div>
+            <label class="switch" aria-label="Expire idle sessions automatically">
+              <input type="checkbox" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="switch-item">
+            <div class="switch-copy">
+              <strong>Restrict admin access by IP</strong>
+              <span>Limit sign-ins to approved office, home studio, or VPN address ranges.</span>
+            </div>
+            <label class="switch" aria-label="Restrict admin access by IP">
+              <input type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="settings-grid">
+          <div class="field">
+            <label for="sessionTimeout">Session Timeout</label>
+            <select id="sessionTimeout">
+              <option>15 minutes</option>
+              <option selected>30 minutes</option>
+              <option>1 hour</option>
+              <option>4 hours</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="rotation">Token Rotation Policy</label>
+            <select id="rotation">
+              <option>Disabled</option>
+              <option>30 days</option>
+              <option selected>90 days</option>
+              <option>180 days</option>
+            </select>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn gold" type="button">Save Security</button>
+        </div>
+      </article>
+
+      <article class="card" id="notifications">
+        <div class="top">
+          <div>
+            <div class="title">Notifications</div>
+          </div>
+          <span class="pill ok">Active</span>
+        </div>
+        <div class="desc">
+          Control what operational events produce alerts, summaries, and review reminders for publishing,
+          commerce, infrastructure, and community management workflows.
+        </div>
+        <div class="switch-list">
+          <div class="switch-item">
+            <div class="switch-copy">
+              <strong>Critical incident alerts</strong>
+              <span>Send immediate notifications for broken deploys, failing API endpoints, and publishing errors.</span>
+            </div>
+            <label class="switch" aria-label="Critical incident alerts">
+              <input type="checkbox" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="switch-item">
+            <div class="switch-copy">
+              <strong>Weekly operations digest</strong>
+              <span>Summarize campaign updates, product changes, codex edits, and email activity.</span>
+            </div>
+            <label class="switch" aria-label="Weekly operations digest">
+              <input type="checkbox" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="switch-item">
+            <div class="switch-copy">
+              <strong>Review and approval reminders</strong>
+              <span>Prompt admins when lore, products, or announcements are waiting for approval.</span>
+            </div>
+            <label class="switch" aria-label="Review and approval reminders">
+              <input type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+        <div class="actions">
+          <button class="btn gold" type="button">Save Notifications</button>
+        </div>
+      </article>
+
+      <article class="card" id="integrations">
+        <div class="top">
+          <div>
+            <div class="title">Integrations</div>
+          </div>
+          <span class="pill gold">Connected</span>
+        </div>
+        <div class="desc">
+          Manage service connections used across the Astral Forge platform, including Worker APIs,
+          storefront services, mail tooling, and future payment providers.
+        </div>
+        <div class="stats">
+          <div class="stat">
+            <div class="label">Primary API Base</div>
+            <div class="value" id="apiBaseDisplay">workers.dev</div>
+          </div>
+          <div class="stat">
+            <div class="label">Environment</div>
+            <div class="value">Production</div>
+          </div>
+          <div class="stat">
+            <div class="label">Connected Services</div>
+            <div class="value">Play • Codex • Shop</div>
+          </div>
+        </div>
+        <div class="pill-row">
+          <span class="pill gold">Worker API</span>
+          <span class="pill">Cloudflare</span>
+          <span class="pill">Email Hub</span>
+          <span class="pill">Stripe Soon</span>
+        </div>
+        <div class="actions">
+          <button class="btn" id="btnOpenApiFromCard" type="button">Update API Base</button>
+        </div>
+      </article>
+
+      <article class="card small">
+        <div class="top">
+          <div class="title">Environment</div>
+          <span class="pill ok">Live</span>
+        </div>
+        <div class="desc">
+          The current admin environment is pointed at production services and ready for publishing.
+        </div>
+        <div class="actions">
+          <a class="btn" href="https://play.astralforge.studio/" target="_blank" rel="noopener">Play</a>
+          <a class="btn" href="https://codex.astralforge.studio/" target="_blank" rel="noopener">Codex</a>
+        </div>
+      </article>
+
+      <article class="card small">
+        <div class="top">
+          <div class="title">Audit</div>
+          <span class="pill">Internal</span>
+        </div>
+        <div class="desc">
+          View configuration history, setting changes, and future compliance notes for operational review.
+        </div>
+        <div class="actions">
+          <button class="btn" type="button">View Log</button>
+        </div>
+      </article>
+
+      <article class="card small" id="advanced">
+        <div class="top">
+          <div class="title">Advanced</div>
+          <span class="pill bad">Sensitive</span>
+        </div>
+        <div class="desc">
+          Configure retention windows, maintenance schedules, and optional IP allowlists for restricted admin access.
+        </div>
+        <div class="actions">
+          <a class="btn" href="#advancedPanel">Open Panel</a>
+        </div>
+      </article>
+
+      <article class="card full" id="advancedPanel">
+        <div class="top">
+          <div>
+            <div class="title">Advanced Configuration</div>
+          </div>
+          <span class="pill gold">Ops</span>
+        </div>
+        <div class="desc">
+          Set long-tail operational defaults for logs, backups, maintenance windows, and access ranges.
+        </div>
+        <div class="settings-grid">
+          <div class="field">
+            <label for="retention">Log Retention</label>
+            <select id="retention">
+              <option>30 days</option>
+              <option>90 days</option>
+              <option selected>180 days</option>
+              <option>365 days</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="maintenanceWindow">Maintenance Window</label>
+            <input id="maintenanceWindow" type="text" value="Sundays, 01:00–03:00 CT" />
+          </div>
+          <div class="field full">
+            <label for="ipRanges">Allowed Admin IP Ranges</label>
+            <textarea id="ipRanges">192.168.10.0/24
+10.0.0.0/16
+203.0.113.14/32</textarea>
+            <div class="hint">Enter one CIDR block per line. Leave empty to allow access from any location.</div>
+          </div>
+        </div>
+        <div class="footer-bar">
+          <div class="footer-note">Last saved by Scribe on March 6, 2026 at 9:42 AM CT.</div>
+          <div class="row">
+            <button class="btn" type="button">Discard</button>
+            <button class="btn gold" type="button">Save All Settings</button>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <dialog id="dlgToken">
+    <div class="dlg">
+      <h2>Admin Token</h2>
+      <p>Stored only in this browser via <code>localStorage</code>. Don’t share it.</p>
+      <label for="tokenInput">ADMIN_TOKEN</label>
+      <input id="tokenInput" type="text" placeholder="paste token here" />
+    </div>
+    <div class="dlg-actions">
+      <button class="btn" id="btnTokenClear" type="button">Clear</button>
+      <button class="btn gold" id="btnTokenSave" type="button">Save</button>
+      <button class="btn" id="btnTokenClose" type="button">Close</button>
+    </div>
+  </dialog>
+
+  <dialog id="dlgApi">
+    <div class="dlg">
+      <h2>API Base</h2>
+      <p>This is where the admin tools will call your Worker API.</p>
+      <label for="apiInput">API Base URL</label>
+      <input id="apiInput" type="url" placeholder="https://astralforge-api.example.workers.dev" />
+    </div>
+    <div class="dlg-actions">
+      <button class="btn gold" id="btnApiSave" type="button">Save</button>
+      <button class="btn" id="btnApiClose" type="button">Close</button>
+    </div>
+  </dialog>
+
+  <script>
+    const API_BASE_DEFAULT = "https://astralforge-api.scalescribe-mythicrealms.workers.dev";
+    const KEY_ADMIN_TOKEN = "af_admin_token";
+    const KEY_API_BASE = "af_api_base";
+
+    const el = (id) => document.getElementById(id);
+
+    function sanitizeBaseUrl(value) {
+      return String(value || "").trim().replace(/\/+$/, "");
+    }
+
+    function getApiBase() {
+      return sanitizeBaseUrl(localStorage.getItem(KEY_API_BASE) || API_BASE_DEFAULT);
+    }
+
+    function setApiBase(value) {
+      localStorage.setItem(KEY_API_BASE, sanitizeBaseUrl(value));
+      syncPills();
+    }
+
+    function getToken() {
+      return localStorage.getItem(KEY_ADMIN_TOKEN) || "";
+    }
+
+    function setToken(value) {
+      localStorage.setItem(KEY_ADMIN_TOKEN, value);
+      syncPills();
+    }
+
+    function clearToken() {
+      localStorage.removeItem(KEY_ADMIN_TOKEN);
+      syncPills();
+    }
+
+    function syncPills() {
+      const token = getToken();
+      const pillAuth = el("pillAuth");
+      const pillApi = el("pillApi");
+      const base = getApiBase();
+      const apiBaseDisplay = el("apiBaseDisplay");
+
+      pillAuth.textContent = token ? "Auth: set" : "Auth: unset";
+      pillAuth.className = "pill " + (token ? "ok" : "bad");
+
+      if (base.includes("api.astralforge.studio")) {
+        pillApi.textContent = "API: api.astralforge.studio";
+        apiBaseDisplay.textContent = "api.astralforge.studio";
+      } else if (base.includes("workers.dev")) {
+        pillApi.textContent = "API: workers.dev";
+        apiBaseDisplay.textContent = "workers.dev";
+      } else {
+        pillApi.textContent = "API: custom";
+        apiBaseDisplay.textContent = base;
+      }
+    }
+
+    const dlgToken = el("dlgToken");
+    const dlgApi = el("dlgApi");
+
+    el("btnSetToken").addEventListener("click", () => {
+      el("tokenInput").value = getToken();
+      dlgToken.showModal();
+    });
+
+    el("btnTokenSave").addEventListener("click", () => {
+      const value = el("tokenInput").value.trim();
+      if (!value) {
+        clearToken();
+        dlgToken.close();
+        return;
+      }
+      setToken(value);
+      dlgToken.close();
+    });
+
+    el("btnTokenClear").addEventListener("click", () => {
+      clearToken();
+      el("tokenInput").value = "";
+    });
+
+    el("btnTokenClose").addEventListener("click", () => {
+      dlgToken.close();
+    });
+
+    el("btnSetApi").addEventListener("click", () => {
+      el("apiInput").value = getApiBase();
+      dlgApi.showModal();
+    });
+
+    el("btnOpenApiFromCard").addEventListener("click", () => {
+      el("apiInput").value = getApiBase();
+      dlgApi.showModal();
+    });
+
+    el("btnApiSave").addEventListener("click", () => {
+      const value = sanitizeBaseUrl(el("apiInput").value);
+      if (!value) {
+        alert("API Base cannot be empty.");
+        return;
+      }
+      setApiBase(value);
+      dlgApi.close();
+    });
+
+    el("btnApiClose").addEventListener("click", () => {
+      dlgApi.close();
+    });
+
+    el("btnExport").addEventListener("click", () => {
+      const payload = {
+        siteName: el("siteName").value,
+        supportEmail: el("supportEmail").value,
+        timezone: el("timezone").value,
+        defaultLocale: el("defaultLocale").value,
+        apiBase: getApiBase()
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "astral-forge-settings.json";
+      a.click();
+      URL.revokeObjectURL(url);
+    });
+
+    syncPills();
+  </script>
+</body>
+</html>
 
