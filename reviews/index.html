@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reviews | Astral Forge</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --bg:#0b0b0b;
+      --panel: rgba(0,0,0,.35);
+      --panel-2: rgba(0,0,0,.22);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --border: rgba(255,255,255,.12);
+      --border-2: rgba(255,255,255,.18);
+      --ring: rgba(255,255,255,.28);
+      --shadow: 0 18px 60px rgba(0,0,0,.45);
+      --radius: 16px;
+      --radius-sm: 12px;
+      --max: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{
+      margin:0;
+      padding:0;
+      background:var(--bg);
+      color:var(--text);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    }
+
+    a{ color:inherit; }
+    img{ max-width:100%; height:auto; }
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); border:0;
+    }
+
+    .navbar{
+      position:fixed;
+      top:0; left:0; right:0;
+      z-index:1000;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:12px 28px;
+      background:rgba(0,0,0,.72);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid var(--border);
+    }
+
+    .nav-left a{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+    }
+
+    .nav-left img{
+      height:38px;
+      width:auto;
+      display:block;
+    }
+
+    .brand{
+      font-family:'Cinzel', serif;
+      font-weight:600;
+      letter-spacing:.8px;
+      font-size:18px;
+      white-space:nowrap;
+    }
+
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      white-space:nowrap;
+    }
+
+    .nav-links a{
+      color:rgba(255,255,255,.84);
+      text-decoration:none;
+      font-size:14px;
+      padding:8px 10px;
+      border-radius:999px;
+      transition: .15s ease;
+    }
+
+    .nav-links a:hover{
+      background:rgba(255,255,255,.07);
+      color:#fff;
+    }
+
+    .nav-links a.cta{
+      border:1px solid var(--border-2);
+      background:rgba(255,255,255,.06);
+      padding:8px 12px;
+    }
+
+    .hero{
+      position:relative;
+      margin-top:64px;
+      width:100%;
+      overflow:hidden;
+      background:#000;
+    }
+
+    .hero-image{
+      width:100%;
+      height: min(620px, calc(84vh - 64px));
+      object-fit:cover;
+      display:block;
+      filter:saturate(1.02) contrast(1.03);
+    }
+
+    .hero-overlay{
+      position:absolute;
+      inset:0;
+      background:
+        radial-gradient(ellipse at 70% 70%, rgba(0,0,0,.12), rgba(0,0,0,.66)),
+        linear-gradient(to bottom, rgba(0,0,0,.25), rgba(0,0,0,.55));
+      pointer-events:none;
+    }
+
+    .hero-inner{
+      position:absolute;
+      inset:0;
+      display:flex;
+      align-items:flex-end;
+      justify-content:flex-end;
+      padding: clamp(18px, 3.5vw, 52px);
+    }
+
+    .hero-text{
+      text-align:right;
+      max-width: min(640px, 92%);
+      text-shadow: 0 8px 28px rgba(0,0,0,.75);
+    }
+
+    .hero-text h1{
+      margin:0;
+      font-family: Georgia, serif;
+      font-size: clamp(34px, 4.4vw, 58px);
+      letter-spacing:.4px;
+      line-height:1.05;
+    }
+
+    .hero-text h2{
+      margin:10px 0 0;
+      font-family: Georgia, serif;
+      font-size: clamp(18px, 2.2vw, 30px);
+      font-weight:600;
+      opacity:.95;
+    }
+
+    .hero-text p{
+      margin:12px 0 0;
+      font-size:14px;
+      line-height:1.6;
+      color:rgba(255,255,255,.80);
+      max-width: 56ch;
+      margin-left:auto;
+    }
+
+    .hero-cta{
+      margin-top:14px;
+      display:flex;
+      gap:10px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border-2);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      text-decoration:none;
+      font-size:13.5px;
+      transition:.15s ease;
+      cursor:pointer;
+    }
+    .btn:hover{ background:rgba(255,255,255,.11); }
+    .btn.primary{
+      background:rgba(255,255,255,.14);
+      border-color:rgba(255,255,255,.28);
+    }
+    .btn:focus,
+    input:focus,
+    textarea:focus,
+    select:focus{
+      outline:none;
+      box-shadow: 0 0 0 3px var(--ring);
+    }
+
+    main{
+      background: url("/assets/backgrounds/Astral-Forge.png") center / cover no-repeat fixed;
+    }
+
+    .section{
+      position:relative;
+      padding: clamp(46px, 6vw, 90px) 20px;
+    }
+
+    .section::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(rgba(0,0,0,.70), rgba(0,0,0,.84));
+      pointer-events:none;
+    }
+
+    .container{
+      position:relative;
+      z-index:1;
+      max-width: var(--max);
+      margin:0 auto;
+    }
+
+    .section h2{
+      margin:0 0 18px;
+      font-family:'Cinzel', serif;
+      font-weight:600;
+      letter-spacing:.6px;
+      font-size: 18px;
+      color:rgba(255,255,255,.92);
+    }
+
+    .subhead{
+      margin:0 0 18px;
+      color: rgba(255,255,255,.68);
+      font-size: 13.5px;
+      line-height:1.6;
+      max-width: 72ch;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr .92fr;
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel-card{
+      border:1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      overflow:hidden;
+    }
+
+    .panel-body{
+      padding:18px;
+    }
+
+    .stack{
+      display:grid;
+      gap:14px;
+    }
+
+    .form-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    label{
+      font-size:13px;
+      color:rgba(255,255,255,.88);
+    }
+
+    input,textarea,select{
+      width:100%;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-radius:12px;
+      padding:12px 13px;
+      font:inherit;
+    }
+
+    textarea{
+      resize:vertical;
+      min-height:160px;
+    }
+
+    .helper{
+      font-size:12.5px;
+      color:rgba(255,255,255,.62);
+      line-height:1.55;
+    }
+
+    .checkbox{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      color:rgba(255,255,255,.78);
+      font-size:13px;
+      line-height:1.55;
+    }
+
+    .checkbox input{
+      width:auto;
+      margin-top:2px;
+    }
+
+    .empty-state{
+      border:1px dashed rgba(255,255,255,.16);
+      background:var(--panel-2);
+      padding:22px 18px;
+      border-radius: var(--radius-sm);
+      color: rgba(255,255,255,.68);
+    }
+
+    .empty-state strong{
+      display:block;
+      margin-bottom:8px;
+      color:rgba(255,255,255,.88);
+      font-family:'Cinzel', serif;
+      font-weight:600;
+      letter-spacing:.4px;
+      font-size:14px;
+    }
+
+    .review-guidelines{
+      display:grid;
+      gap:10px;
+      margin-top:14px;
+    }
+
+    .review-guidelines .pill{
+      width:fit-content;
+    }
+
+    .pill{
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:12.5px;
+      color:rgba(255,255,255,.76);
+    }
+
+    .footer{
+      position:relative;
+      z-index:1;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      padding:22px 20px;
+      background:rgba(0,0,0,.86);
+      border-top:1px solid var(--border);
+    }
+
+    .footer-inner{
+      max-width: var(--max);
+      margin: 0 auto;
+      width:100%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:14px;
+      flex-wrap:wrap;
+    }
+
+    .footer a{
+      color:rgba(255,255,255,.78);
+      text-decoration:none;
+      margin-left:16px;
+      font-size: 13px;
+    }
+    .footer a:hover{ color:#fff; }
+
+    @media (max-width: 980px){
+      .grid,
+      .form-grid{ grid-template-columns:1fr; }
+      main{ background-attachment: scroll; }
+    }
+
+    @media (max-width: 780px){
+      .navbar{ padding:12px 16px; }
+      .nav-links{ gap:6px; }
+      .nav-links a{ padding:8px 9px; }
+      .brand{ display:none; }
+      .hero-text{ text-align:left; }
+      .hero-inner{ justify-content:flex-start; align-items:flex-end; }
+      .hero-cta{ justify-content:flex-start; }
+      .hero-text p{ margin-left:0; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar" aria-label="Primary">
+    <div class="nav-left">
+      <a href="/" aria-label="Astral Forge home">
+        <img src="/assets/nav/Astral-Forge-nav.png" alt="Astral Forge">
+        <span class="brand">Astral Forge</span>
+      </a>
+    </div>
+
+    <div class="nav-links">
+      <a href="https://play.astralforge.studio" target="_blank" rel="noopener">Play</a>
+      <a href="https://codex.astralforge.studio" target="_blank" rel="noopener">Codex</a>
+      <a href="https://shop.astralforge.studio" target="_blank" rel="noopener">Shop</a>
+      <a href="/about/">About</a>
+      <a href="/reviews/" aria-current="page">Reviews</a>
+      <a class="cta" href="/membership/">Join</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <img class="hero-image" src="/assets/hero/Review-heor.png" alt="Adventurers watching the sunrise over a fantasy world">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-inner">
+      <div class="hero-text">
+        <h1>Player Reviews</h1>
+        <h2>Earned at the Table</h2>
+        <p>
+          A dedicated place for real player feedback. This page is structured to collect verified testimonials
+          without inventing praise before it exists.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn primary" href="#leave-review">Leave a Review →</a>
+          <a class="btn" href="https://play.astralforge.studio" target="_blank" rel="noopener">Enter the Table →</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" aria-labelledby="reviews-overview">
+      <div class="container">
+        <h2 id="reviews-overview">Reviews</h2>
+        <p class="subhead">
+          Keep this page honest: show real testimonials when they are submitted, and until then use clear placeholders,
+          review guidelines, and a submission form that asks for permission before publishing anything publicly.
+        </p>
+
+        <div class="grid">
+          <article class="panel-card">
+            <div class="panel-body">
+              <h2 id="leave-review">Leave a Review</h2>
+              <p class="subhead">
+                Invite players to share what they experienced, what stood out, and whether they want their feedback displayed on the site.
+              </p>
+
+              <form action="#" method="post">
+                <div class="form-grid">
+                  <div class="field">
+                    <label for="name">Name or player alias</label>
+                    <input id="name" name="name" type="text" placeholder="Your name" required>
+                  </div>
+
+                  <div class="field">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" placeholder="you@example.com">
+                  </div>
+
+                  <div class="field">
+                    <label for="rating">Rating</label>
+                    <select id="rating" name="rating" required>
+                      <option value="">Select a rating</option>
+                      <option value="5">5 / 5</option>
+                      <option value="4">4 / 5</option>
+                      <option value="3">3 / 5</option>
+                      <option value="2">2 / 5</option>
+                      <option value="1">1 / 5</option>
+                    </select>
+                  </div>
+
+                  <div class="field">
+                    <label for="game">Campaign or session</label>
+                    <input id="game" name="game" type="text" placeholder="Black Star Gambit, private one-shot, etc.">
+                  </div>
+
+                  <div class="field full">
+                    <label for="review">Review</label>
+                    <textarea id="review" name="review" placeholder="What was memorable? What should future players know?" required></textarea>
+                    <div class="helper">Ask for specific details. Specific feedback produces stronger and more believable testimonials.</div>
+                  </div>
+
+                  <div class="field full">
+                    <label class="checkbox" for="permission">
+                      <input id="permission" name="permission" type="checkbox">
+                      <span>I give Astral Forge permission to publish this review publicly on the website.</span>
+                    </label>
+                  </div>
+
+                  <div class="field full">
+                    <button class="btn primary" type="submit">Submit Review</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </article>
+
+          <aside class="panel-card">
+            <div class="panel-body stack">
+              <div>
+                <h2>Published Testimonials</h2>
+                <p class="subhead">
+                  This section intentionally avoids fabricated reviews. Replace the placeholder below only with testimonials you have actually received and have permission to display.
+                </p>
+              </div>
+
+              <div class="empty-state" aria-live="polite">
+                <strong>No published reviews yet</strong>
+                Real reviews will appear here once players submit them and approve public display.
+              </div>
+
+              <div class="review-guidelines">
+                <span class="pill">Homepage: feature 2–3 real quotes</span>
+                <span class="pill">Play page: place reviews near booking CTA</span>
+                <span class="pill">This page: full archive of approved testimonials</span>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="review-policy">
+      <div class="container">
+        <h2 id="review-policy">Review Publishing Notes</h2>
+        <div class="empty-state">
+          <strong>Recommended policy</strong>
+          Only publish testimonials that can be traced to a real player, a real table, or a real submitted form response. If you later connect this form to a CMS, database, or email workflow, keep the moderation step so every published review remains verified.
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>© 2026 Astral Forge</div>
+        <div>
+          <a href="/contact/">Contact</a>
+          <a href="/legal/privacy/">Privacy</a>
+          <a href="/legal/terms/">Terms</a>
+          <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q" target="_blank" rel="noopener">Root</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+</body>
+</html>
