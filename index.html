@@ -314,6 +314,21 @@ flex-direction:column;
 gap:8px;
 }
 
+.placeholder-card{
+border:1px solid var(--border);
+background:var(--panel-2);
+border-radius:var(--radius);
+padding:22px;
+box-shadow:var(--shadow);
+}
+
+.placeholder-card p{
+margin:0;
+font-size:13.5px;
+line-height:1.7;
+color:rgba(255,255,255,.72);
+}
+
 .reviews-grid{
 display:grid;
 grid-template-columns:1fr 1fr;
@@ -371,11 +386,9 @@ color:rgba(255,255,255,.78);
 }
 
 @media(max-width:980px){
-
 .feature{grid-template-columns:1fr}
 .reviews-grid{grid-template-columns:1fr}
 .campaign-grid{grid-template-columns:1fr}
-
 }
 
 </style>
@@ -435,33 +448,9 @@ and worlds forged beyond imagination.
 <h2>Featured Campaign</h2>
 <p class="subhead">A flagship story currently welcoming new players.</p>
 
-<a class="feature-link" href="https://play.astralforge.studio/campaigns/black-star-gambit">
-
-<div class="feature">
-
-<div class="feature-media">
-<img src="/assets/campaigns/Black-Star-Gambit.png" alt="Black Star Gambit campaign art">
+<div class="placeholder-card">
+  <p>Featured campaign coming soon.</p>
 </div>
-
-<div class="feature-body">
-
-<div class="kicker">D&D 5e • Level 3–15</div>
-
-<h3 class="title">Black Star Gambit</h3>
-
-<p class="hook">
-A sealed message finds you in your dreams. You are hired to steal a chained goddess imprisoned within a shattered god-mind before fate resets itself.
-</p>
-
-<div class="meta">
-<span class="pill">Thursdays • 7 CT</span>
-<span class="pill">$25 / Session</span>
-<span class="arrow">View Campaign →</span>
-</div>
-
-</div>
-</div>
-</a>
 
 </div>
 </section>
@@ -472,33 +461,11 @@ A sealed message finds you in your dreams. You are hired to steal a chained godd
 <h2>Playable Campaigns</h2>
 
 <div class="campaign-grid">
-
-<a class="campaign-square" href="https://play.astralforge.studio/campaigns/black-star-gambit">
-
-<div class="campaign-image">
-<img src="/assets/campaigns/Black-Star-Gambit.png" alt="Black Star Gambit campaign">
+  <div class="placeholder-card">
+    <p>Playable campaigns will appear here as they are published.</p>
+  </div>
 </div>
 
-<div class="campaign-content">
-
-<div class="kicker">D&D 5e • Level 3–15</div>
-
-<h3 class="title">Black Star Gambit</h3>
-
-<p class="hook">
-A sealed message finds you in your dreams. You are hired to steal a chained goddess imprisoned within a shattered god-mind before fate resets itself.
-</p>
-
-<div class="meta">
-<span class="pill">Thursdays • 7 CT</span>
-<span class="pill">$25 / Session</span>
-</div>
-
-</div>
-
-</a>
-
-</div>
 </div>
 </section>
 
