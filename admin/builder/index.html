@@ -130,6 +130,17 @@
     transform: translateY(-1px);
   }
 
+  .btn.danger{
+    border-color: rgba(255,107,107,.45);
+    background: linear-gradient(135deg, rgba(255,107,107,.14), rgba(0,0,0,.12));
+    color: rgba(255,255,255,.95);
+  }
+
+  .btn.danger:hover{
+    border-color: rgba(255,107,107,.75);
+    background: linear-gradient(135deg, rgba(255,107,107,.20), rgba(0,0,0,.14));
+  }
+
   .wrap{
     padding-top: 86px;
     max-width: 1460px;
@@ -518,7 +529,9 @@
       <span class="pill" id="pillAuth">Auth: unset</span>
       <span class="pill gold" id="pillDraft">Draft: local</span>
       <button class="btn" id="btnSaveLocal">Save Local</button>
+      <button class="btn danger" id="btnDeleteLocal">Delete Local</button>
       <button class="btn" id="btnSaveServer">Save Draft (Server)</button>
+      <button class="btn danger" id="btnDeleteServer">Delete Server</button>
       <button class="btn gold" id="btnPublish">Publish</button>
       <button class="btn" id="btnExport">Export JSON</button>
     </div>
@@ -858,7 +871,9 @@
       <div class="muted" id="saveStatus">Blank builder ready.</div>
       <div class="row">
         <button class="btn" id="btnClear">Clear</button>
+        <button class="btn danger" id="btnDeleteLocal2">Delete Local</button>
         <button class="btn" id="btnSaveServer2">Save Draft (Server)</button>
+        <button class="btn danger" id="btnDeleteServer2">Delete Server</button>
         <button class="btn gold" id="btnPublish2">Publish</button>
       </div>
     </div>
@@ -972,7 +987,13 @@
   }
 
   function escapeHtml(s){
-    return (s ?? "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+    return (s ?? "").replace(/[&<>"']/g, m => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#039;'
+    }[m]));
   }
 
   function downloadJson(filename, obj){
@@ -1103,14 +1124,6 @@
     };
   }
 
-  function saveLocal(){
-    const data = collect();
-    localStorage.setItem(STORE_KEY, JSON.stringify(data));
-    el("saveStatus").textContent = "Saved locally • " + new Date().toLocaleString();
-    setDraftPill("Draft: local", "gold");
-    updateDots();
-  }
-
   function getServerRef(){
     const raw = localStorage.getItem(SERVER_KEY);
     if(!raw) return null;
@@ -1123,6 +1136,33 @@
 
   function clearServerRef(){
     localStorage.removeItem(SERVER_KEY);
+  }
+
+  function resetBuilderState(){
+    themes = [];
+    equipment = [];
+    platforms = [];
+    contentWarnings = [];
+    customSafetyTools = [];
+
+    document.querySelectorAll(".sTool").forEach(cb => cb.checked = false);
+    Object.values(inputs).forEach(i => i.value = "");
+
+    inputs.type.value = "campaign";
+    inputs.language.value = "en";
+    inputs.homepageVisibility.value = "normal";
+
+    renderChips();
+    updatePreview();
+    updateDots();
+  }
+
+  function saveLocal(){
+    const data = collect();
+    localStorage.setItem(STORE_KEY, JSON.stringify(data));
+    el("saveStatus").textContent = "Saved locally • " + new Date().toLocaleString();
+    setDraftPill("Draft: local", "gold");
+    updateDots();
   }
 
   async function saveDraftToServer(){
@@ -1201,6 +1241,47 @@
       el("saveStatus").textContent = "Publish failed.";
       alert("Publish failed: " + err.message);
       throw err;
+    }
+  }
+
+  function deleteLocalDraft(){
+    if(!confirm("Delete the local draft from this browser?")) return;
+
+    localStorage.removeItem(STORE_KEY);
+    resetBuilderState();
+
+    el("saveStatus").textContent = "Local draft deleted.";
+    setDraftPill("Draft: local deleted", "bad");
+  }
+
+  async function deleteServerDraft(){
+    const ref = getServerRef();
+
+    if(!ref || !ref.id){
+      alert("No linked server campaign found.");
+      return;
+    }
+
+    if(!confirm("Delete this campaign from the server? This cannot be undone.")) return;
+
+    setDraftPill("Deleting…", "gold");
+    el("saveStatus").textContent = "Deleting server campaign…";
+
+    try{
+      await api("/api/v1/admin/campaigns/" + encodeURIComponent(ref.id), {
+        method: "DELETE"
+      });
+
+      clearServerRef();
+      localStorage.removeItem(STORE_KEY);
+      resetBuilderState();
+
+      el("saveStatus").textContent = "Server campaign deleted.";
+      setDraftPill("Server deleted", "bad");
+    }catch(err){
+      setDraftPill("Delete failed", "bad");
+      el("saveStatus").textContent = "Server delete failed.";
+      alert("Server delete failed: " + err.message);
     }
   }
 
@@ -1369,8 +1450,15 @@
   }));
 
   el("btnSaveLocal").addEventListener("click", saveLocal);
+  el("btnDeleteLocal").addEventListener("click", deleteLocalDraft);
+  el("btnDeleteLocal2").addEventListener("click", deleteLocalDraft);
+
   el("btnSaveServer").addEventListener("click", () => saveDraftToServer());
   el("btnSaveServer2").addEventListener("click", () => saveDraftToServer());
+
+  el("btnDeleteServer").addEventListener("click", deleteServerDraft);
+  el("btnDeleteServer2").addEventListener("click", deleteServerDraft);
+
   el("btnPublish").addEventListener("click", () => publishToServer());
   el("btnPublish2").addEventListener("click", () => publishToServer());
 
@@ -1381,29 +1469,9 @@
   });
 
   el("btnClear").addEventListener("click", () => {
-    if(!confirm("Clear all fields?")) return;
-
-    localStorage.removeItem(STORE_KEY);
-    clearServerRef();
-
-    themes = [];
-    equipment = [];
-    platforms = [];
-    contentWarnings = [];
-    customSafetyTools = [];
-
-    document.querySelectorAll(".sTool").forEach(cb => cb.checked = false);
-    Object.values(inputs).forEach(i => i.value = "");
-
-    inputs.type.value = "campaign";
-    inputs.language.value = "en";
-    inputs.homepageVisibility.value = "normal";
-
-    renderChips();
-    updatePreview();
-    updateDots();
-    el("saveStatus").textContent = "Cleared.";
-    setDraftPill("Draft: local", "gold");
+    if(!confirm("Clear all fields on screen? This will not delete local or server data until you save or delete.")) return;
+    resetBuilderState();
+    el("saveStatus").textContent = "Form cleared (not deleted).";
   });
 
   el("btnCopySlug").addEventListener("click", async () => {
