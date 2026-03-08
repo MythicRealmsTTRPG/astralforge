@@ -24,6 +24,7 @@
   }
 
   *{ box-sizing:border-box; }
+
   body{
     margin:0;
     font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
@@ -31,9 +32,11 @@
     color:var(--text);
   }
 
-  /* NAV */
   nav{
-    position:fixed; top:0; left:0; right:0;
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
     z-index:1000;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -41,6 +44,7 @@
     border-bottom: 1px solid var(--border);
     box-shadow: 0 6px 30px rgba(0,0,0,.45);
   }
+
   .nav-inner{
     padding:14px 56px;
     display:flex;
@@ -48,10 +52,16 @@
     justify-content:space-between;
     gap:18px;
   }
+
   .brand{
-    display:flex; align-items:center; gap:12px;
-    text-decoration:none; color:var(--text); white-space:nowrap;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color:var(--text);
+    white-space:nowrap;
   }
+
   .brand-text{
     font-family:"Cinzel", serif;
     font-weight:700;
@@ -59,7 +69,14 @@
     font-size:13px;
     text-transform:uppercase;
   }
-  .nav-actions{ display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; align-items:center; }
+
+  .nav-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:flex-end;
+    align-items:center;
+  }
 
   .pill{
     border: 1px solid rgba(255,255,255,.14);
@@ -69,9 +86,21 @@
     font-size: 12px;
     color: rgba(255,255,255,.80);
   }
-  .pill.ok{ border-color: rgba(46,204,113,.55); color: rgba(46,204,113,.92); }
-  .pill.bad{ border-color: rgba(255,107,107,.55); color: rgba(255,107,107,.92); }
-  .pill.gold{ border-color: rgba(185,144,84,.55); color: rgba(185,144,84,.92); }
+
+  .pill.ok{
+    border-color: rgba(46,204,113,.55);
+    color: rgba(46,204,113,.92);
+  }
+
+  .pill.bad{
+    border-color: rgba(255,107,107,.55);
+    color: rgba(255,107,107,.92);
+  }
+
+  .pill.gold{
+    border-color: rgba(185,144,84,.55);
+    color: rgba(185,144,84,.92);
+  }
 
   .btn{
     appearance:none;
@@ -86,17 +115,24 @@
     text-decoration:none;
     text-align:center;
   }
-  .btn:hover{ background: rgba(255,255,255,.06); }
+
+  .btn:hover{
+    background: rgba(255,255,255,.06);
+  }
+
   .btn.gold{
     border-color: rgba(185,144,84,.55);
     background: linear-gradient(135deg, rgba(185,144,84,.18), rgba(0,0,0,.12));
   }
-  .btn.gold:hover{ border-color: rgba(185,144,84,.85); transform: translateY(-1px); }
 
-  /* LAYOUT */
+  .btn.gold:hover{
+    border-color: rgba(185,144,84,.85);
+    transform: translateY(-1px);
+  }
+
   .wrap{
     padding-top: 86px;
-    max-width: 1400px;
+    max-width: 1460px;
     margin: 0 auto;
     padding-left: 20px;
     padding-right: 20px;
@@ -107,7 +143,6 @@
     align-items:start;
   }
 
-  /* SIDEBAR */
   .sidebar{
     position:sticky;
     top: 96px;
@@ -117,10 +152,12 @@
     box-shadow: 0 18px 48px rgba(0,0,0,.35);
     overflow:hidden;
   }
+
   .side-head{
     padding:14px 14px 12px;
     border-bottom: 1px solid rgba(255,255,255,.10);
   }
+
   .side-head .title{
     font-weight:600;
     letter-spacing:.08em;
@@ -128,7 +165,11 @@
     font-size:12px;
     color: rgba(255,255,255,.72);
   }
-  .steps{ display:grid; }
+
+  .steps{
+    display:grid;
+  }
+
   .step{
     display:flex;
     justify-content:space-between;
@@ -138,23 +179,36 @@
     cursor:pointer;
     transition:.15s;
   }
-  .step:hover{ background: rgba(255,255,255,.05); }
-  .step.active{ background: rgba(255,255,255,.07); }
-  .step .name{ font-size:14px; color: rgba(255,255,255,.88); }
+
+  .step:hover{
+    background: rgba(255,255,255,.05);
+  }
+
+  .step.active{
+    background: rgba(255,255,255,.07);
+  }
+
+  .step .name{
+    font-size:14px;
+    color: rgba(255,255,255,.88);
+  }
+
   .dot{
-    width:18px; height:18px;
+    width:18px;
+    height:18px;
     border-radius:999px;
     border:1px solid rgba(255,255,255,.24);
-    display:grid; place-items:center;
+    display:grid;
+    place-items:center;
     font-size:12px;
     color: rgba(255,255,255,.70);
   }
+
   .dot.ok{
     border-color: rgba(46,204,113,.55);
     color: rgba(46,204,113,.95);
   }
 
-  /* MAIN FORM */
   .main{
     background: var(--panel);
     border: 1px solid var(--border);
@@ -162,6 +216,7 @@
     box-shadow: 0 18px 48px rgba(0,0,0,.35);
     overflow:hidden;
   }
+
   .main-head{
     padding:16px 18px;
     border-bottom: 1px solid rgba(255,255,255,.10);
@@ -170,6 +225,7 @@
     align-items:center;
     gap:12px;
   }
+
   .main-head h1{
     margin:0;
     font-size:16px;
@@ -178,14 +234,24 @@
     color: rgba(255,255,255,.75);
     font-weight:600;
   }
-  .main-body{ padding: 18px; }
+
+  .main-body{
+    padding: 18px;
+  }
 
   .section{
     display:none;
     animation: fade .12s ease;
   }
-  .section.active{ display:block; }
-  @keyframes fade{ from{opacity:.4; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+  .section.active{
+    display:block;
+  }
+
+  @keyframes fade{
+    from{ opacity:.4; transform:translateY(4px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
 
   .block{
     background: var(--panel2);
@@ -194,12 +260,14 @@
     padding: 16px;
     margin-bottom: 14px;
   }
+
   .block h2{
     margin:0 0 8px;
     font-family: Georgia, serif;
     font-size: 20px;
     letter-spacing:.01em;
   }
+
   .help{
     margin:0 0 12px;
     color: var(--muted);
@@ -216,7 +284,11 @@
     margin: 12px 0 8px;
   }
 
-  input[type="text"], input[type="number"], input[type="url"], textarea, select{
+  input[type="text"],
+  input[type="number"],
+  input[type="url"],
+  textarea,
+  select{
     width:100%;
     background: rgba(0,0,0,.22);
     color: var(--text);
@@ -226,10 +298,22 @@
     outline:none;
     font-size: 14px;
   }
-  textarea{ min-height: 120px; resize: vertical; }
-  input::placeholder, textarea::placeholder{ color: rgba(255,255,255,.45); }
 
-  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  textarea{
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  input::placeholder,
+  textarea::placeholder{
+    color: rgba(255,255,255,.45);
+  }
+
+  .grid2{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+  }
 
   .row{
     display:flex;
@@ -237,6 +321,7 @@
     gap:10px;
     flex-wrap:wrap;
   }
+
   .chip{
     border: 1px solid rgba(255,255,255,.14);
     background: rgba(0,0,0,.18);
@@ -248,9 +333,15 @@
     align-items:center;
     gap:8px;
   }
+
   .chip button{
-    border:none; background:transparent; color: rgba(255,255,255,.72);
-    cursor:pointer; font-size: 14px; padding:0; line-height:1;
+    border:none;
+    background:transparent;
+    color: rgba(255,255,255,.72);
+    cursor:pointer;
+    font-size: 14px;
+    padding:0;
+    line-height:1;
   }
 
   .warn{
@@ -272,9 +363,12 @@
     border-top: 1px solid rgba(255,255,255,.10);
     background: rgba(0,0,0,.18);
   }
-  .footerbar .muted{ color: rgba(255,255,255,.62); font-size: 12px; }
 
-  /* PREVIEW */
+  .footerbar .muted{
+    color: rgba(255,255,255,.62);
+    font-size: 12px;
+  }
+
   .preview{
     position:sticky;
     top: 96px;
@@ -284,6 +378,7 @@
     box-shadow: 0 18px 48px rgba(0,0,0,.35);
     overflow:hidden;
   }
+
   .preview-head{
     padding: 16px 18px;
     border-bottom: 1px solid rgba(255,255,255,.10);
@@ -291,6 +386,7 @@
     justify-content:space-between;
     align-items:center;
   }
+
   .preview-head .t{
     font-weight:600;
     letter-spacing:.10em;
@@ -298,13 +394,18 @@
     font-size:12px;
     color: rgba(255,255,255,.70);
   }
-  .preview-body{ padding: 16px; }
+
+  .preview-body{
+    padding: 16px;
+  }
+
   .card{
     border: 1px solid rgba(255,255,255,.12);
     background: rgba(0,0,0,.22);
     border-radius: 16px;
     overflow:hidden;
   }
+
   .thumb{
     height: 140px;
     background: radial-gradient(circle at 25% 20%, rgba(255,255,255,.08), rgba(0,0,0,.65));
@@ -312,35 +413,46 @@
     background-size: cover;
     background-position: center;
   }
-  .card-body{ padding: 14px; }
+
+  .card-body{
+    padding: 14px;
+  }
+
   .meta{
-    display:flex; flex-wrap:wrap; gap:8px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
     color: rgba(255,255,255,.70);
     font-size: 12px;
     letter-spacing:.10em;
     text-transform:uppercase;
   }
+
   .pill2{
     border: 1px solid rgba(255,255,255,.14);
     background: rgba(0,0,0,.18);
     padding: 6px 8px;
     border-radius: 999px;
   }
+
   .pill2.gold{
     border-color: rgba(185,144,84,.55);
     background: linear-gradient(135deg, rgba(185,144,84,.16), rgba(0,0,0,.14));
   }
+
   .card-body h3{
     margin: 10px 0 6px;
     font-family: Georgia, serif;
     font-size: 18px;
   }
+
   .card-body p{
     margin:0;
     color: rgba(255,255,255,.76);
     line-height:1.6;
     font-size: 13px;
   }
+
   .kv{
     margin-top: 12px;
     display:grid;
@@ -348,16 +460,48 @@
     color: rgba(255,255,255,.72);
     font-size: 13px;
   }
-  .kv div{ display:flex; justify-content:space-between; gap:10px; }
-  .kv strong{ color: rgba(255,255,255,.92); font-weight:600; }
+
+  .kv div{
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+  }
+
+  .kv strong{
+    color: rgba(255,255,255,.92);
+    font-weight:600;
+  }
+
+  .safety-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px 18px;
+    align-items:start;
+    margin-top: 6px;
+  }
+
+  .safety-grid label{
+    margin:0;
+    font-size:13px;
+    letter-spacing:0;
+    text-transform:none;
+    color:rgba(255,255,255,.82);
+  }
+
+  .safety-grid input[type="checkbox"]{
+    margin-right:8px;
+  }
 
   @media (max-width: 1180px){
     .wrap{ grid-template-columns: 280px 1fr; }
     .preview{ display:none; }
   }
+
   @media (max-width: 860px){
     .wrap{ grid-template-columns: 1fr; }
     .sidebar{ position:relative; top:auto; }
+    .grid2,
+    .safety-grid{ grid-template-columns:1fr; }
   }
 </style>
 </head>
@@ -372,7 +516,7 @@
 
     <div class="nav-actions">
       <span class="pill" id="pillAuth">Auth: unset</span>
-      <span class="pill" id="pillDraft">Draft: local</span>
+      <span class="pill gold" id="pillDraft">Draft: local</span>
       <button class="btn" id="btnSaveLocal">Save Local</button>
       <button class="btn" id="btnSaveServer">Save Draft (Server)</button>
       <button class="btn gold" id="btnPublish">Publish</button>
@@ -383,7 +527,6 @@
 
 <div class="wrap">
 
-  <!-- SIDEBAR -->
   <aside class="sidebar" aria-label="Builder steps">
     <div class="side-head">
       <div class="title">Sections</div>
@@ -393,6 +536,7 @@
       <div class="step active" data-step="basic"><div class="name">Basic information</div><div class="dot" id="dot-basic">•</div></div>
       <div class="step" data-step="image"><div class="name">Image</div><div class="dot" id="dot-image">•</div></div>
       <div class="step" data-step="seo"><div class="name">Search &amp; social</div><div class="dot" id="dot-seo">•</div></div>
+      <div class="step" data-step="visibility"><div class="name">Visibility</div><div class="dot" id="dot-visibility">•</div></div>
       <div class="step" data-step="booking"><div class="name">Booking</div><div class="dot" id="dot-booking">•</div></div>
       <div class="step" data-step="pricing"><div class="name">Pricing</div><div class="dot" id="dot-pricing">•</div></div>
       <div class="step" data-step="chars"><div class="name">Character creation</div><div class="dot" id="dot-chars">•</div></div>
@@ -401,7 +545,6 @@
     </div>
   </aside>
 
-  <!-- MAIN -->
   <section class="main">
     <div class="main-head">
       <h1 id="sectionTitle">Basic information</h1>
@@ -413,14 +556,13 @@
 
     <div class="main-body">
 
-      <!-- BASIC -->
       <div class="section active" id="sec-basic">
         <div class="block">
           <h2>Basic information</h2>
           <p class="help">Core identity. Title + hook + description are what players feel first.</p>
 
           <label for="title">Title</label>
-          <input id="title" type="text" maxlength="64" placeholder="Mythic Realms: The Shattered Oath" />
+          <input id="title" type="text" maxlength="64" placeholder="Campaign title" />
 
           <div class="grid2">
             <div>
@@ -435,9 +577,16 @@
               <label for="system">Game system</label>
               <select id="system">
                 <option value="">Select system</option>
+                <option>D&amp;D 3</option>
+                <option>D&amp;D 3.5</option>
                 <option>D&amp;D 5e</option>
+                <option>OSR</option>
                 <option>Pathfinder 2e</option>
                 <option>Call of Cthulhu</option>
+                <option>Fallout</option>
+                <option>Cyberpunk RED</option>
+                <option>Vampire the Masquerade</option>
+                <option>The Walking Dead</option>
                 <option>Other</option>
               </select>
             </div>
@@ -450,15 +599,15 @@
             </div>
             <div>
               <label for="levelEnd">Game level (end)</label>
-              <input id="levelEnd" type="number" min="1" max="20" placeholder="10" />
+              <input id="levelEnd" type="number" min="1" max="20" placeholder="15" />
             </div>
           </div>
 
           <label for="hook">Game hook (1–2 sentences)</label>
-          <textarea id="hook" maxlength="150" placeholder="A one- or two-sentence teaser."></textarea>
+          <textarea id="hook" maxlength="220" placeholder="Short hook"></textarea>
 
           <label for="description">Game description</label>
-          <textarea id="description" maxlength="3000" placeholder="Back-cover copy. Setting, theme, what makes it special."></textarea>
+          <textarea id="description" maxlength="6000" placeholder="Full campaign description"></textarea>
 
           <div class="grid2">
             <div>
@@ -472,55 +621,77 @@
             <div>
               <label>Themes (1–8)</label>
               <div class="row">
-                <input id="themeInput" type="text" placeholder="Type a theme (e.g. Horror)" />
+                <input id="themeInput" type="text" placeholder="Type a theme" />
                 <button class="btn" type="button" id="btnAddTheme">Add</button>
               </div>
               <div class="row" id="themes"></div>
-              <p class="help" style="margin-top:10px;">Examples: Epic, Political Intrigue, Dark Fantasy, Mystery.</p>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- IMAGE -->
       <div class="section" id="sec-image">
         <div class="block">
           <h2>Image</h2>
-          <p class="help">Since it’s admin-only: copy the file into <code>play.astralforge.studio/assets/campaigns/</code> and paste the URL path here.</p>
+          <p class="help">Paste the campaign image path used by the play site.</p>
 
           <div class="warn">
             Recommended: <code>/assets/campaigns/your-campaign.jpg</code> (16:9 banner)
           </div>
 
           <label for="imagePath">Campaign image path</label>
-          <input id="imagePath" type="text" placeholder="/assets/campaigns/mythic-realms.jpg" />
+          <input id="imagePath" type="text" placeholder="/assets/campaigns/your-campaign.jpg" />
 
           <label for="artistName">Created by (optional)</label>
-          <input id="artistName" type="text" placeholder="Artist name" />
+          <input id="artistName" type="text" placeholder="Artist / creator name" />
 
           <label for="artistUrl">Artist URL (optional)</label>
           <input id="artistUrl" type="url" placeholder="https://artist-portfolio.example" />
         </div>
       </div>
 
-      <!-- SEARCH & SOCIAL -->
       <div class="section" id="sec-seo">
         <div class="block">
           <h2>Search &amp; social</h2>
           <p class="help">Preview text when shared. Keep it punchy.</p>
 
           <label for="seoTitle">Title (external)</label>
-          <input id="seoTitle" type="text" maxlength="64" placeholder="Mythic Realms — A Living Campaign of Consequences" />
+          <input id="seoTitle" type="text" maxlength="64" placeholder="External title" />
 
           <label for="seoDesc">Game description (external)</label>
-          <textarea id="seoDesc" maxlength="320" placeholder="Short preview description for search results and shares."></textarea>
+          <textarea id="seoDesc" maxlength="320" placeholder="Short preview description"></textarea>
 
           <label for="seoImage">Image (external)</label>
-          <input id="seoImage" type="text" placeholder="/assets/campaigns/mythic-realms.jpg" />
+          <input id="seoImage" type="text" placeholder="/assets/campaigns/your-campaign.jpg" />
         </div>
       </div>
 
-      <!-- BOOKING -->
+      <div class="section" id="sec-visibility">
+        <div class="block">
+          <h2>Visibility</h2>
+          <p class="help">Control how this adventure appears across the site.</p>
+
+          <div class="grid2">
+            <div>
+              <label for="homepageVisibility">Homepage visibility</label>
+              <select id="homepageVisibility">
+                <option value="normal">Normal</option>
+                <option value="featured">Featured</option>
+                <option value="hidden">Hidden</option>
+              </select>
+            </div>
+            <div>
+              <label for="displayOrder">Display order</label>
+              <input id="displayOrder" type="number" min="0" placeholder="0" />
+            </div>
+          </div>
+
+          <div class="warn">
+            Featured = intended for the homepage spotlight. Hidden = published, but excluded from homepage lists.
+          </div>
+        </div>
+      </div>
+
       <div class="section" id="sec-booking">
         <div class="block">
           <h2>Booking</h2>
@@ -540,11 +711,11 @@
           <div class="grid2">
             <div>
               <label for="minHours">Session duration (min hours)</label>
-              <input id="minHours" type="number" min="1" placeholder="3" />
+              <input id="minHours" type="number" min="1" placeholder="2" />
             </div>
             <div>
               <label for="maxHours">Session duration (max hours)</label>
-              <input id="maxHours" type="number" min="1" placeholder="3" />
+              <input id="maxHours" type="number" min="1" placeholder="4" />
             </div>
           </div>
 
@@ -572,7 +743,7 @@
           </div>
 
           <label for="schedule">Schedule (display text)</label>
-          <input id="schedule" type="text" placeholder="Tuesdays • 7:00pm CT • Weekly" />
+          <input id="schedule" type="text" placeholder="Thursdays • 7 CT • Weekly" />
 
           <div class="grid2">
             <div>
@@ -581,27 +752,25 @@
             </div>
             <div>
               <label for="seatsOpen">Seats (open)</label>
-              <input id="seatsOpen" type="number" min="0" placeholder="2" />
+              <input id="seatsOpen" type="number" min="0" placeholder="5" />
             </div>
           </div>
         </div>
       </div>
 
-      <!-- PRICING -->
       <div class="section" id="sec-pricing">
         <div class="block">
           <h2>Pricing</h2>
           <p class="help">Display-only for now.</p>
 
           <label for="price">Session cost (per player)</label>
-          <input id="price" type="text" placeholder="$20 / session" />
+          <input id="price" type="text" placeholder="$25 / Session" />
 
           <label for="pricingNotes">Pricing notes (optional)</label>
-          <textarea id="pricingNotes" maxlength="1200" placeholder="Billing cadence, missed sessions, etc."></textarea>
+          <textarea id="pricingNotes" maxlength="1200" placeholder="Optional pricing notes"></textarea>
         </div>
       </div>
 
-      <!-- CHARACTER CREATION -->
       <div class="section" id="sec-chars">
         <div class="block">
           <h2>Character creation</h2>
@@ -612,38 +781,36 @@
         </div>
       </div>
 
-      <!-- PREPARATION -->
       <div class="section" id="sec-prep">
         <div class="block">
           <h2>Preparation</h2>
           <p class="help">What players should do before Session 1, what you provide, any table rules.</p>
 
           <label for="prepSteps">How should players prepare?</label>
-          <textarea id="prepSteps" maxlength="3000" placeholder="Discord, VTT, what to read, etc."></textarea>
+          <textarea id="prepSteps" maxlength="3000" placeholder="Preparation steps"></textarea>
 
           <label for="gmProvides">What will you provide?</label>
-          <textarea id="gmProvides" maxlength="3000" placeholder="Recaps, maps, ambiance, tools, etc."></textarea>
+          <textarea id="gmProvides" maxlength="3000" placeholder="What the GM provides"></textarea>
 
           <label for="homebrew">Homebrew rules (optional)</label>
-          <textarea id="homebrew" maxlength="3000" placeholder="Potion rules, crit rules, death saves, downtime, etc."></textarea>
+          <textarea id="homebrew" maxlength="3000" placeholder="Optional rules"></textarea>
 
           <label>Equipment needed</label>
           <div class="row">
-            <input id="equipInput" type="text" placeholder="Type an item and press Add (e.g. Microphone)" />
+            <input id="equipInput" type="text" placeholder="Type an item and press Add" />
             <button class="btn" type="button" id="btnAddEquip">Add</button>
           </div>
           <div class="row" id="equipment"></div>
 
           <label>Platforms</label>
           <div class="row">
-            <input id="platInput" type="text" placeholder="Type a platform and press Add (e.g. Discord)" />
+            <input id="platInput" type="text" placeholder="Type a platform and press Add" />
             <button class="btn" type="button" id="btnAddPlat">Add</button>
           </div>
           <div class="row" id="platforms"></div>
         </div>
       </div>
 
-      <!-- SAFETY -->
       <div class="section" id="sec-safety">
         <div class="block">
           <h2>Safety</h2>
@@ -654,36 +821,41 @@
 
           <label>Content warnings</label>
           <div class="row">
-            <input id="cwInput" type="text" placeholder="Type a warning and press Add (e.g. body horror)" />
+            <input id="cwInput" type="text" placeholder="Type a warning and press Add" />
             <button class="btn" type="button" id="btnAddCW">Add</button>
           </div>
           <div class="row" id="contentWarnings"></div>
 
           <label>Safety tools</label>
-          <div class="row">
-            <label style="margin:0; font-size:13px; letter-spacing:0; text-transform:none; color:rgba(255,255,255,.82);">
-              <input type="checkbox" class="sTool" value="Session 0"> Session 0
-            </label>
-            <label style="margin:0; font-size:13px; letter-spacing:0; text-transform:none; color:rgba(255,255,255,.82);">
-              <input type="checkbox" class="sTool" value="Lines & Veils"> Lines & Veils
-            </label>
-            <label style="margin:0; font-size:13px; letter-spacing:0; text-transform:none; color:rgba(255,255,255,.82);">
-              <input type="checkbox" class="sTool" value="X, N, and O Cards"> X, N, and O Cards
-            </label>
-            <label style="margin:0; font-size:13px; letter-spacing:0; text-transform:none; color:rgba(255,255,255,.82);">
-              <input type="checkbox" class="sTool" value="Open Door"> Open Door
-            </label>
-            <label style="margin:0; font-size:13px; letter-spacing:0; text-transform:none; color:rgba(255,255,255,.82);">
-              <input type="checkbox" class="sTool" value="Breaks"> Breaks
-            </label>
+          <div class="safety-grid">
+            <label><input type="checkbox" class="sTool" value="Aftercare"> Aftercare</label>
+            <label><input type="checkbox" class="sTool" value="Bleed"> Bleed</label>
+            <label><input type="checkbox" class="sTool" value="Breaks"> Breaks</label>
+            <label><input type="checkbox" class="sTool" value="Debriefing"> Debriefing</label>
+            <label><input type="checkbox" class="sTool" value="Deck of Player Safety"> Deck of Player Safety</label>
+            <label><input type="checkbox" class="sTool" value="Lines & Veils"> Lines & Veils</label>
+            <label><input type="checkbox" class="sTool" value="Luxton Technique"> Luxton Technique</label>
+            <label><input type="checkbox" class="sTool" value="Luxton Technique Discussion"> Luxton Technique Discussion</label>
+            <label><input type="checkbox" class="sTool" value="Monte Cook RPG Consent Checklist"> Monte Cook RPG Consent Checklist</label>
+            <label><input type="checkbox" class="sTool" value="Open Door"> Open Door</label>
+            <label><input type="checkbox" class="sTool" value="Session 0"> Session 0</label>
+            <label><input type="checkbox" class="sTool" value="Stars and Wishes"> Stars and Wishes</label>
+            <label><input type="checkbox" class="sTool" value="X, N, and O Cards"> X, N, and O Cards</label>
           </div>
+
+          <label>Custom safety tools</label>
+          <div class="row">
+            <input id="customSafetyInput" type="text" placeholder="Type a custom safety tool and press Add" />
+            <button class="btn" type="button" id="btnAddCustomSafety">Add</button>
+          </div>
+          <div class="row" id="customSafetyTools"></div>
         </div>
       </div>
 
     </div>
 
     <div class="footerbar">
-      <div class="muted" id="saveStatus">Draft not saved yet.</div>
+      <div class="muted" id="saveStatus">Blank builder ready.</div>
       <div class="row">
         <button class="btn" id="btnClear">Clear</button>
         <button class="btn" id="btnSaveServer2">Save Draft (Server)</button>
@@ -692,11 +864,10 @@
     </div>
   </section>
 
-  <!-- PREVIEW -->
   <aside class="preview">
     <div class="preview-head">
       <div class="t">Preview</div>
-      <button class="btn" id="btnCopySlug" title="Copy suggested slug">Copy slug</button>
+      <button class="btn" id="btnCopySlug">Copy slug</button>
     </div>
     <div class="preview-body">
       <div class="card">
@@ -714,6 +885,7 @@
             <div><span>Seats</span><strong id="pvSeats">—</strong></div>
             <div><span>Price</span><strong id="pvPrice">—</strong></div>
             <div><span>Level</span><strong id="pvLevel">—</strong></div>
+            <div><span>Visibility</span><strong id="pvVisibility">Normal</strong></div>
           </div>
         </div>
       </div>
@@ -722,7 +894,6 @@
 
       <div class="warn">
         Publish flow writes your full builder JSON into D1 via the Worker API.
-        Next we’ll build the Play pages to render it.
       </div>
     </div>
   </aside>
@@ -730,25 +901,22 @@
 </div>
 
 <script>
-  // ===== Shared keys used by the Switchboard =====
   const KEY_ADMIN_TOKEN = "af_admin_token";
-  const KEY_API_BASE    = "af_api_base";
-
-  // ===== Builder storage keys =====
-  const STORE_KEY  = "astralforge_campaign_builder_v2";
-  const SERVER_KEY = "astralforge_campaign_server_ref_v1"; // {id}
-
+  const KEY_API_BASE = "af_api_base";
+  const STORE_KEY = "astralforge_campaign_builder_blank_v1";
+  const SERVER_KEY = "astralforge_campaign_server_ref_v1";
   const API_BASE_DEFAULT = "https://astralforge-api.scalescribe-mythicrealms.workers.dev";
 
   const steps = [
     {key:"basic", title:"Basic information"},
     {key:"image", title:"Image"},
     {key:"seo", title:"Search & social"},
+    {key:"visibility", title:"Visibility"},
     {key:"booking", title:"Booking"},
     {key:"pricing", title:"Pricing"},
     {key:"chars", title:"Character creation"},
     {key:"prep", title:"Preparation"},
-    {key:"safety", title:"Safety"},
+    {key:"safety", title:"Safety"}
   ];
 
   const el = (id) => document.getElementById(id);
@@ -756,9 +924,11 @@
   function getApiBase(){
     return (localStorage.getItem(KEY_API_BASE) || API_BASE_DEFAULT).replace(/\/+$/, "");
   }
+
   function getToken(){
     return (localStorage.getItem(KEY_ADMIN_TOKEN) || "").trim();
   }
+
   function syncAuthPill(){
     const t = getToken();
     el("pillAuth").textContent = t ? "Auth: set" : "Auth: unset";
@@ -772,7 +942,7 @@
 
   async function api(path, opts={}){
     const token = getToken();
-    if(!token) throw new Error("Admin token not set. Go to /admin and click Set Token.");
+    if(!token) throw new Error("Admin token not set.");
 
     const res = await fetch(getApiBase() + path, {
       ...opts,
@@ -816,7 +986,6 @@
     URL.revokeObjectURL(a.href);
   }
 
-  // Inputs
   const inputs = {
     title: el("title"),
     type: el("type"),
@@ -834,6 +1003,9 @@
     seoTitle: el("seoTitle"),
     seoDesc: el("seoDesc"),
     seoImage: el("seoImage"),
+
+    homepageVisibility: el("homepageVisibility"),
+    displayOrder: el("displayOrder"),
 
     minSessions: el("minSessions"),
     maxSessions: el("maxSessions"),
@@ -854,26 +1026,23 @@
     gmProvides: el("gmProvides"),
     homebrew: el("homebrew"),
 
-    safetyPlan: el("safetyPlan"),
+    safetyPlan: el("safetyPlan")
   };
 
-  // Chip lists
   let themes = [];
   let equipment = [];
   let platforms = [];
   let contentWarnings = [];
+  let customSafetyTools = [];
 
   function getSafetyTools(){
-    return Array.from(document.querySelectorAll(".sTool:checked")).map(x => x.value);
-  }
-  function setSafetyTools(values){
-    const set = new Set(values || []);
-    document.querySelectorAll(".sTool").forEach(cb => cb.checked = set.has(cb.value));
+    const standard = Array.from(document.querySelectorAll(".sTool:checked")).map(x => x.value);
+    return [...standard, ...customSafetyTools];
   }
 
   function collect(){
-    const data = {
-      version: 2,
+    return {
+      version: 1,
       updatedAt: new Date().toISOString(),
       slug: slugify(inputs.title.value),
       basic: {
@@ -885,17 +1054,21 @@
         hook: inputs.hook.value.trim(),
         description: inputs.description.value.trim(),
         language: inputs.language.value,
-        themes: themes.slice(0, 8),
+        themes: themes.slice(0, 8)
       },
       image: {
         path: inputs.imagePath.value.trim(),
         artistName: inputs.artistName.value.trim(),
-        artistUrl: inputs.artistUrl.value.trim(),
+        artistUrl: inputs.artistUrl.value.trim()
       },
       seo: {
         title: inputs.seoTitle.value.trim(),
         description: inputs.seoDesc.value.trim(),
-        image: inputs.seoImage.value.trim(),
+        image: inputs.seoImage.value.trim()
+      },
+      visibility: {
+        homepageVisibility: inputs.homepageVisibility.value,
+        displayOrder: inputs.displayOrder.value ? Number(inputs.displayOrder.value) : null
       },
       booking: {
         minSessions: inputs.minSessions.value ? Number(inputs.minSessions.value) : null,
@@ -906,85 +1079,28 @@
         experienceLevel: inputs.xpLevel.value,
         schedule: inputs.schedule.value.trim(),
         seatsTotal: inputs.seatsTotal.value ? Number(inputs.seatsTotal.value) : null,
-        seatsOpen: inputs.seatsOpen.value ? Number(inputs.seatsOpen.value) : null,
+        seatsOpen: inputs.seatsOpen.value ? Number(inputs.seatsOpen.value) : null
       },
       pricing: {
         price: inputs.price.value.trim(),
-        notes: inputs.pricingNotes.value.trim(),
+        notes: inputs.pricingNotes.value.trim()
       },
-      characterCreation: { details: inputs.charCreation.value.trim() },
+      characterCreation: {
+        details: inputs.charCreation.value.trim()
+      },
       preparation: {
         steps: inputs.prepSteps.value.trim(),
         gmProvides: inputs.gmProvides.value.trim(),
         homebrew: inputs.homebrew.value.trim(),
         equipment: equipment.slice(),
-        platforms: platforms.slice(),
+        platforms: platforms.slice()
       },
       safety: {
         plan: inputs.safetyPlan.value.trim(),
         contentWarnings: contentWarnings.slice(),
-        tools: getSafetyTools(),
+        tools: getSafetyTools()
       }
     };
-    return data;
-  }
-
-  function apply(data){
-    const d = data || {};
-    const b = d.basic || {};
-    inputs.title.value = b.title || "";
-    inputs.type.value = b.type || "campaign";
-    inputs.system.value = b.system || "";
-    inputs.levelStart.value = (b.levelStart ?? "") === null ? "" : (b.levelStart ?? "");
-    inputs.levelEnd.value = (b.levelEnd ?? "") === null ? "" : (b.levelEnd ?? "");
-    inputs.hook.value = b.hook || "";
-    inputs.description.value = b.description || "";
-    inputs.language.value = b.language || "en";
-    themes = Array.isArray(b.themes) ? b.themes.slice(0,8) : [];
-
-    const img = d.image || {};
-    inputs.imagePath.value = img.path || "";
-    inputs.artistName.value = img.artistName || "";
-    inputs.artistUrl.value = img.artistUrl || "";
-
-    const seo = d.seo || {};
-    inputs.seoTitle.value = seo.title || "";
-    inputs.seoDesc.value = seo.description || "";
-    inputs.seoImage.value = seo.image || "";
-
-    const bk = d.booking || {};
-    inputs.minSessions.value = bk.minSessions ?? "";
-    inputs.maxSessions.value = bk.maxSessions ?? "";
-    inputs.minHours.value = bk.minHours ?? "";
-    inputs.maxHours.value = bk.maxHours ?? "";
-    inputs.ageRange.value = bk.ageRange || "";
-    inputs.xpLevel.value = bk.experienceLevel || "";
-    inputs.schedule.value = bk.schedule || "";
-    inputs.seatsTotal.value = bk.seatsTotal ?? "";
-    inputs.seatsOpen.value = bk.seatsOpen ?? "";
-
-    const pr = d.pricing || {};
-    inputs.price.value = pr.price || "";
-    inputs.pricingNotes.value = pr.notes || "";
-
-    const cc = d.characterCreation || {};
-    inputs.charCreation.value = cc.details || "";
-
-    const p = d.preparation || {};
-    inputs.prepSteps.value = p.steps || "";
-    inputs.gmProvides.value = p.gmProvides || "";
-    inputs.homebrew.value = p.homebrew || "";
-    equipment = Array.isArray(p.equipment) ? p.equipment.slice() : [];
-    platforms = Array.isArray(p.platforms) ? p.platforms.slice() : [];
-
-    const s = d.safety || {};
-    inputs.safetyPlan.value = s.plan || "";
-    contentWarnings = Array.isArray(s.contentWarnings) ? s.contentWarnings.slice() : [];
-    setSafetyTools(s.tools || []);
-
-    renderChips();
-    updatePreview();
-    updateDots();
   }
 
   function saveLocal(){
@@ -995,42 +1111,20 @@
     updateDots();
   }
 
-  function loadLocal(){
-    const raw = localStorage.getItem(STORE_KEY);
-    if(!raw) return null;
-    try{ return JSON.parse(raw); }catch{ return null; }
-  }
-
   function getServerRef(){
     const raw = localStorage.getItem(SERVER_KEY);
     if(!raw) return null;
     try { return JSON.parse(raw); } catch { return null; }
   }
+
   function setServerRef(ref){
     localStorage.setItem(SERVER_KEY, JSON.stringify(ref));
   }
+
   function clearServerRef(){
     localStorage.removeItem(SERVER_KEY);
   }
 
-  // Auto-migrate old localStorage ref formats (ones that stored slug)
-  function sanitizeServerRef(){
-    const ref = getServerRef();
-    if(!ref) return;
-
-    // Old versions stored {id, slug}. If slug is generic/stale, wipe it.
-    if(ref.slug && ref.slug === "campaign"){
-      clearServerRef();
-      return;
-    }
-
-    // If ref has slug but not harmful, strip it anyway to prevent future staleness.
-    if(ref.slug && ref.id){
-      setServerRef({ id: ref.id });
-    }
-  }
-
-  // ===== Server save / publish =====
   async function saveDraftToServer(){
     const data = collect();
     if(!data.basic.title || data.basic.title.trim().length < 3){
@@ -1038,7 +1132,6 @@
       return;
     }
 
-    // Keep DB fields in sync with the main story fields
     const payload = {
       title: data.basic.title,
       description: data.basic.hook || data.basic.description || "",
@@ -1058,8 +1151,6 @@
           method: "POST",
           body: JSON.stringify(payload)
         });
-
-        // IMPORTANT: only store id. Slug becomes stale and causes /campaigns/campaign/
         setServerRef({ id: out.id });
       }else{
         await api("/api/v1/admin/campaigns/" + encodeURIComponent(ref.id), {
@@ -1071,7 +1162,6 @@
       const newRef = getServerRef();
       el("saveStatus").textContent = "Server draft saved • " + new Date().toLocaleString() + (newRef?.id ? (" • id: " + newRef.id) : "");
       setDraftPill("Draft: server", "ok");
-
       return newRef;
     }catch(err){
       setDraftPill("Draft: error", "bad");
@@ -1082,13 +1172,11 @@
   }
 
   async function publishToServer(){
-    // Ensure there's a server record
     const ref = await saveDraftToServer();
     if(!ref || !ref.id) return;
 
     const data = collect();
 
-    // Publish = status published + persist final JSON
     setDraftPill("Publishing…", "gold");
     el("saveStatus").textContent = "Publishing…";
 
@@ -1104,11 +1192,10 @@
       });
 
       setDraftPill("Published", "ok");
-      el("saveStatus").textContent = "Published • " + new Date().toLocaleString() + " • opening Play…";
+      el("saveStatus").textContent = "Published • " + new Date().toLocaleString();
 
-      // IMPORTANT: NEVER trust a stored/stale slug. Always compute from title.
       const slug = slugify(data.basic.title);
-      window.open("https://play.astralforge.studio/campaigns/" + encodeURIComponent(slug) + "/", "_blank", "noopener");
+      window.open("https://play.astralforge.studio/adventures/" + encodeURIComponent(slug), "_blank", "noopener");
     }catch(err){
       setDraftPill("Publish: error", "bad");
       el("saveStatus").textContent = "Publish failed.";
@@ -1117,7 +1204,6 @@
     }
   }
 
-  // ===== Chips + preview =====
   function renderChipList(containerId, items, onRemove){
     const wrap = el(containerId);
     wrap.innerHTML = "";
@@ -1139,6 +1225,11 @@
     renderChipList("equipment", equipment, (i)=>{ equipment.splice(i,1); renderChips(); updatePreview(); updateDots(); });
     renderChipList("platforms", platforms, (i)=>{ platforms.splice(i,1); renderChips(); updatePreview(); updateDots(); });
     renderChipList("contentWarnings", contentWarnings, (i)=>{ contentWarnings.splice(i,1); renderChips(); updatePreview(); updateDots(); });
+    renderChipList("customSafetyTools", customSafetyTools, (i)=>{ customSafetyTools.splice(i,1); renderChips(); updatePreview(); updateDots(); });
+  }
+
+  function isFilled(v){
+    return !!(v && String(v).trim().length);
   }
 
   function updatePreview(){
@@ -1147,6 +1238,7 @@
     el("pvHook").textContent = data.basic.hook || "Your hook will appear here.";
     el("pvSystem").textContent = data.basic.system || "System";
     el("pvSchedule").textContent = data.booking.schedule || "Schedule";
+    el("pvVisibility").textContent = data.visibility.homepageVisibility.charAt(0).toUpperCase() + data.visibility.homepageVisibility.slice(1);
 
     const open = data.booking.seatsOpen;
     const total = data.booking.seatsTotal;
@@ -1156,7 +1248,10 @@
     const seats = (typeof open === "number" && typeof total === "number") ? `${open}/${total}` : "—";
     el("pvSeats").textContent = seats;
     el("pvPrice").textContent = data.pricing.price || "—";
-    const lvl = (data.basic.levelStart || data.basic.levelEnd) ? `${data.basic.levelStart ?? "?"}–${data.basic.levelEnd ?? "?"}` : "—";
+
+    const lvl = (data.basic.levelStart || data.basic.levelEnd)
+      ? `${data.basic.levelStart ?? "?"}–${data.basic.levelEnd ?? "?"}`
+      : "—";
     el("pvLevel").textContent = lvl;
 
     const img = data.image.path || data.seo.image || "";
@@ -1166,20 +1261,31 @@
       : `radial-gradient(circle at 25% 20%, rgba(255,255,255,.08), rgba(0,0,0,.65))`;
   }
 
-  function isFilled(v){ return !!(v && String(v).trim().length); }
-
   function updateDots(){
     const data = collect();
+
     const basicOk = isFilled(data.basic.title) && isFilled(data.basic.system) && isFilled(data.basic.hook) && isFilled(data.basic.description);
     const imgOk = isFilled(data.image.path);
     const seoOk = isFilled(data.seo.title) && isFilled(data.seo.description);
+    const visibilityOk = isFilled(data.visibility.homepageVisibility);
     const bookingOk = isFilled(data.booking.schedule) && (typeof data.booking.seatsTotal === "number") && (typeof data.booking.seatsOpen === "number");
     const pricingOk = isFilled(data.pricing.price);
     const charsOk = isFilled(data.characterCreation.details);
     const prepOk = isFilled(data.preparation.steps) && isFilled(data.preparation.gmProvides);
     const safetyOk = isFilled(data.safety.plan) && (data.safety.tools || []).length > 0;
 
-    const map = { basic: basicOk, image: imgOk, seo: seoOk, booking: bookingOk, pricing: pricingOk, chars: charsOk, prep: prepOk, safety: safetyOk };
+    const map = {
+      basic: basicOk,
+      image: imgOk,
+      seo: seoOk,
+      visibility: visibilityOk,
+      booking: bookingOk,
+      pricing: pricingOk,
+      chars: charsOk,
+      prep: prepOk,
+      safety: safetyOk
+    };
+
     Object.entries(map).forEach(([k, ok]) => {
       const dot = el("dot-" + k);
       dot.classList.toggle("ok", !!ok);
@@ -1187,8 +1293,8 @@
     });
   }
 
-  // ===== Step navigation =====
   let idx = 0;
+
   function setStep(nextIdx){
     idx = Math.max(0, Math.min(steps.length - 1, nextIdx));
     const key = steps[idx].key;
@@ -1197,7 +1303,7 @@
     document.querySelectorAll(".step").forEach(s => s.classList.toggle("active", s.dataset.step === key));
     document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
     el("sec-" + key).classList.add("active");
-    window.scrollTo({top: 0, behavior:"smooth"});
+    window.scrollTo({top:0, behavior:"smooth"});
   }
 
   el("steps").addEventListener("click", (e) => {
@@ -1211,7 +1317,6 @@
   el("btnPrev").addEventListener("click", () => setStep(idx - 1));
   el("btnNext").addEventListener("click", () => setStep(idx + 1));
 
-  // Chip add buttons
   el("btnAddTheme").addEventListener("click", () => {
     const v = el("themeInput").value.trim();
     if(!v) return;
@@ -1245,17 +1350,27 @@
     renderChips(); updatePreview(); updateDots();
   });
 
-  document.querySelectorAll(".sTool").forEach(cb => cb.addEventListener("change", () => { updatePreview(); updateDots(); }));
+  el("btnAddCustomSafety").addEventListener("click", () => {
+    const v = el("customSafetyInput").value.trim();
+    if(!v) return;
+    customSafetyTools.push(v);
+    el("customSafetyInput").value = "";
+    renderChips(); updatePreview(); updateDots();
+  });
 
-  // Live preview updates
-  Object.values(inputs).forEach(inp => inp.addEventListener("input", () => { updatePreview(); updateDots(); }));
+  document.querySelectorAll(".sTool").forEach(cb => cb.addEventListener("change", () => {
+    updatePreview();
+    updateDots();
+  }));
 
-  // Buttons
+  Object.values(inputs).forEach(inp => inp.addEventListener("input", () => {
+    updatePreview();
+    updateDots();
+  }));
+
   el("btnSaveLocal").addEventListener("click", saveLocal);
-
   el("btnSaveServer").addEventListener("click", () => saveDraftToServer());
   el("btnSaveServer2").addEventListener("click", () => saveDraftToServer());
-
   el("btnPublish").addEventListener("click", () => publishToServer());
   el("btnPublish2").addEventListener("click", () => publishToServer());
 
@@ -1266,15 +1381,27 @@
   });
 
   el("btnClear").addEventListener("click", () => {
-    if(!confirm("Clear all fields? This also forgets the linked server record.")) return;
+    if(!confirm("Clear all fields?")) return;
+
     localStorage.removeItem(STORE_KEY);
     clearServerRef();
-    themes = []; equipment = []; platforms = []; contentWarnings = [];
-    setSafetyTools([]);
+
+    themes = [];
+    equipment = [];
+    platforms = [];
+    contentWarnings = [];
+    customSafetyTools = [];
+
+    document.querySelectorAll(".sTool").forEach(cb => cb.checked = false);
     Object.values(inputs).forEach(i => i.value = "");
+
     inputs.type.value = "campaign";
     inputs.language.value = "en";
-    renderChips(); updatePreview(); updateDots();
+    inputs.homepageVisibility.value = "normal";
+
+    renderChips();
+    updatePreview();
+    updateDots();
     el("saveStatus").textContent = "Cleared.";
     setDraftPill("Draft: local", "gold");
   });
@@ -1284,26 +1411,16 @@
     try{
       await navigator.clipboard.writeText(slug);
       el("btnCopySlug").textContent = "Copied!";
-      setTimeout(()=> el("btnCopySlug").textContent = "Copy slug", 900);
+      setTimeout(() => el("btnCopySlug").textContent = "Copy slug", 900);
     }catch{
       alert("Slug: " + slug);
     }
   });
 
-  // Init
   syncAuthPill();
-  sanitizeServerRef();
-
-  const existing = loadLocal();
-  if(existing) {
-    apply(existing);
-    el("saveStatus").textContent = "Draft loaded from this browser.";
-  } else {
-    renderChips(); updatePreview(); updateDots();
-  }
-
-  const ref = getServerRef();
-  if(ref && ref.id) setDraftPill("Draft: server-linked", "ok");
+  renderChips();
+  updatePreview();
+  updateDots();
 </script>
 
 </body>
