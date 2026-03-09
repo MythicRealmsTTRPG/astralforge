@@ -3,75 +3,272 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Create Account • Astral Forge</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
 :root{
---bg:#0b0b0d;
---text:rgba(255,255,255,.92);
---muted:rgba(255,255,255,.65);
---border:rgba(255,255,255,.10);
---gold:#b99054;
+--bg:#0b0b0b;
 --panel:rgba(0,0,0,.45);
+--panel-2:rgba(255,255,255,.04);
+--text:rgba(255,255,255,.92);
+--muted:rgba(255,255,255,.70);
+--border:rgba(255,255,255,.12);
+--border-2:rgba(255,255,255,.18);
+--gold:#b99054;
+--gold-2:#7e5a2f;
+--shadow:0 18px 60px rgba(0,0,0,.45);
 --radius:16px;
+--max:1120px;
 }
 
 *{box-sizing:border-box}
 
-body{
+html,body{
 margin:0;
 background:var(--bg);
-font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
 color:var(--text);
+font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+}
+
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+.navbar{
+position:fixed;
+top:0;
+left:0;
+right:0;
+z-index:1000;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:12px 28px;
+background:rgba(0,0,0,.72);
+backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);
+gap:12px;
+}
+
+.nav-left a{
 display:flex;
 align-items:center;
+gap:12px;
+}
+
+.nav-left img{height:38px}
+
+.brand{
+font-family:'Cinzel',serif;
+font-weight:600;
+letter-spacing:.8px;
+font-size:18px;
+}
+
+.nav-links{
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+justify-content:flex-end;
+}
+
+.nav-links a{
+color:rgba(255,255,255,.84);
+padding:8px 10px;
+border-radius:999px;
+font-size:14px;
+transition:.15s ease;
+}
+
+.nav-links a:hover{
+background:rgba(255,255,255,.07);
+color:#fff;
+}
+
+.nav-links a.cta{
+border:1px solid var(--border-2);
+background:rgba(255,255,255,.06);
+}
+
+.hero{
+position:relative;
+margin-top:64px;
+overflow:hidden;
+border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.hero-image{
+width:100%;
+height:min(520px,calc(100vh - 64px));
+min-height:420px;
+object-fit:cover;
+}
+
+.hero-overlay{
+position:absolute;
+inset:0;
+background:
+radial-gradient(ellipse at 70% 70%,rgba(0,0,0,.12),rgba(0,0,0,.70)),
+linear-gradient(to bottom,rgba(0,0,0,.30),rgba(0,0,0,.62));
+}
+
+.hero-inner{
+position:absolute;
+inset:0;
+display:flex;
+align-items:flex-end;
+justify-content:flex-end;
+padding:clamp(18px,3.5vw,52px);
+}
+
+.hero-text{
+text-align:right;
+max-width:680px;
+text-shadow:0 8px 28px rgba(0,0,0,.75);
+}
+
+.hero-text h1{
+margin:0;
+font-family:Georgia,serif;
+font-size:clamp(38px,4.8vw,64px);
+line-height:1.05;
+}
+
+.hero-text h2{
+margin:10px 0 0;
+font-family:Georgia,serif;
+font-size:clamp(22px,2.4vw,34px);
+line-height:1.15;
+}
+
+.hero-text p{
+margin:14px 0 0 auto;
+font-size:15px;
+color:rgba(255,255,255,.84);
+max-width:56ch;
+line-height:1.7;
+}
+
+.hero-cta{
+margin-top:16px;
+display:flex;
+gap:10px;
+justify-content:flex-end;
+flex-wrap:wrap;
+}
+
+.btn{
+display:inline-flex;
+align-items:center;
 justify-content:center;
-min-height:100vh;
-padding:24px;
+padding:10px 16px;
+border-radius:999px;
+border:1px solid var(--border-2);
+background:rgba(255,255,255,.06);
+font-size:13.5px;
+transition:.15s ease;
+}
+
+.btn:hover{
+transform:translateY(-1px);
+background:rgba(255,255,255,.09);
+}
+
+.btn.primary{
+background:rgba(255,255,255,.14);
+border-color:rgba(255,255,255,.28);
+}
+
+main{
+background:url("/assets/backgrounds/Astral-Forge.png") center / cover no-repeat fixed;
+}
+
+.section{
+position:relative;
+padding:clamp(46px,6vw,90px)20px;
+}
+
+.section::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(rgba(0,0,0,.70),rgba(0,0,0,.84));
 }
 
 .container{
-width:100%;
-max-width:520px;
-background:var(--panel);
+position:relative;
+z-index:1;
+max-width:var(--max);
+margin:0 auto;
+}
+
+.signup-grid{
+display:grid;
+grid-template-columns:1.05fr .95fr;
+gap:22px;
+align-items:start;
+}
+
+.signup-card{
 border:1px solid var(--border);
+background:var(--panel);
 border-radius:var(--radius);
-padding:32px;
-box-shadow:0 30px 80px rgba(0,0,0,.65);
+padding:28px;
+box-shadow:var(--shadow);
+backdrop-filter:blur(4px);
 }
 
-.brand{
-display:flex;
-align-items:center;
-gap:10px;
-margin-bottom:20px;
+.paper-card{
+border:1px solid rgba(40,28,18,.18);
+background:#cdb894;
+color:rgba(20,16,12,.94);
+border-radius:var(--radius);
+padding:26px;
+box-shadow:var(--shadow);
 }
 
-.brand img{
-height:34px;
-}
-
-.brand span{
+.kicker{
 font-family:'Cinzel',serif;
-letter-spacing:.12em;
-font-size:14px;
+font-size:12px;
+letter-spacing:.8px;
 text-transform:uppercase;
+color:rgba(255,255,255,.70);
+margin-bottom:10px;
 }
 
-h1{
+.paper-kicker{
+font-family:'Cinzel',serif;
+font-size:12px;
+letter-spacing:.8px;
+text-transform:uppercase;
+color:rgba(40,28,18,.72);
+margin-bottom:10px;
+}
+
+h3{
 margin:0 0 10px;
 font-family:Georgia,serif;
-font-size:34px;
+font-size:clamp(26px,2.2vw,36px);
+line-height:1.15;
 }
 
-.sub{
-color:var(--muted);
+.paper-card h3{
+color:rgba(18,12,8,.95);
+}
+
+.copy{
 font-size:14px;
-margin-bottom:22px;
-line-height:1.6;
+line-height:1.75;
+color:var(--muted);
+margin:0 0 20px;
+}
+
+.paper-copy{
+font-size:15px;
+line-height:1.8;
+color:rgba(36,26,18,.86);
+margin:0 0 20px;
 }
 
 label{
@@ -82,64 +279,187 @@ margin-top:14px;
 margin-bottom:6px;
 }
 
+.paper-card label{
+color:rgba(18,12,8,.92);
+}
+
 input{
 width:100%;
 padding:12px;
-border-radius:10px;
-border:1px solid var(--border);
+border-radius:12px;
+border:1px solid rgba(255,255,255,.14);
 background:rgba(255,255,255,.06);
 color:#fff;
 outline:none;
+font:inherit;
+}
+
+.paper-card input{
+border:1px solid rgba(40,28,18,.20);
+background:rgba(255,255,255,.28);
+color:rgba(18,12,8,.95);
+}
+
+.paper-card input::placeholder{
+color:rgba(18,12,8,.55);
 }
 
 input:focus{
 border-color:var(--gold);
+box-shadow:0 0 0 4px rgba(185,144,84,.14);
+}
+
+.hint{
+font-size:12px;
+line-height:1.6;
+margin-top:6px;
+color:var(--muted);
+}
+
+.paper-card .hint{
+color:rgba(28,20,14,.78);
 }
 
 .actions{
-margin-top:20px;
+margin-top:22px;
 display:flex;
 gap:10px;
 align-items:center;
+flex-wrap:wrap;
 }
 
-button{
-background:linear-gradient(135deg,rgba(185,144,84,.35),rgba(0,0,0,.2));
-border:1px solid rgba(185,144,84,.6);
-color:white;
+.submit-btn{
+appearance:none;
+border:1px solid rgba(185,144,84,.55);
+background:linear-gradient(135deg,rgba(185,144,84,.30),rgba(255,255,255,.10));
+color:rgba(18,12,8,.95);
 padding:12px 16px;
 border-radius:12px;
-font-weight:600;
+font-weight:700;
+font-size:14px;
 cursor:pointer;
 transition:.18s ease;
+box-shadow:0 10px 26px rgba(0,0,0,.10);
 }
 
-button:hover{
+.submit-btn:hover{
 transform:translateY(-1px);
 }
 
-.login{
+.login-copy{
 font-size:13px;
+line-height:1.6;
+color:rgba(28,20,14,.82);
+}
+
+.login-copy a{
+color:rgba(18,12,8,.96);
+font-weight:600;
+}
+
+.info-panel{
+border:1px solid var(--border);
+background:var(--panel);
+border-radius:var(--radius);
+padding:22px;
+box-shadow:var(--shadow);
+}
+
+.info-panel + .info-panel{
+margin-top:18px;
+}
+
+.info-panel h4{
+margin:0 0 10px;
+font-family:'Cinzel',serif;
+font-size:14px;
+letter-spacing:.04em;
+text-transform:uppercase;
+color:#fff;
+}
+
+.info-panel p,
+.info-panel li{
+font-size:14px;
+line-height:1.75;
 color:var(--muted);
 }
 
-.login a{
-color:white;
-text-decoration:none;
+.info-panel ul{
+margin:0;
+padding-left:18px;
 }
 
-.login a:focus,
-.footer a:focus{
-outline:1px solid rgba(185,144,84,.7);
-outline-offset:2px;
-border-radius:4px;
+.legal{
+margin-top:20px;
+font-size:12px;
+line-height:1.7;
+color:rgba(28,20,14,.82);
+}
+
+.legal a{
+color:rgba(18,12,8,.95);
 }
 
 .footer{
-margin-top:24px;
-font-size:12px;
-color:var(--muted);
-line-height:1.6;
+background:rgba(0,0,0,.86);
+border-top:1px solid var(--border);
+padding:22px 20px;
+}
+
+.footer-inner{
+max-width:var(--max);
+margin:auto;
+display:flex;
+justify-content:space-between;
+flex-wrap:wrap;
+gap:12px;
+}
+
+.footer-links{
+display:flex;
+flex-wrap:wrap;
+gap:16px;
+}
+
+.footer a{
+font-size:13px;
+color:rgba(255,255,255,.78);
+}
+
+.footer a:hover{
+color:#fff;
+}
+
+@media(max-width:980px){
+.signup-grid{
+grid-template-columns:1fr;
+}
+}
+
+@media(max-width:700px){
+.navbar{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.nav-links{
+width:100%;
+justify-content:flex-start;
+}
+
+.hero-text{
+text-align:left;
+}
+
+.hero-text p{
+margin-left:0;
+margin-right:0;
+}
+
+.hero-cta{
+justify-content:flex-start;
+}
 }
 
 @media(max-width:560px){
@@ -148,8 +468,9 @@ flex-direction:column;
 align-items:flex-start;
 }
 
-button{
+.submit-btn{
 width:100%;
+justify-content:center;
 }
 }
 </style>
@@ -157,54 +478,148 @@ width:100%;
 
 <body>
 
-<div class="container">
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/">
+      <img src="/assets/nav/Astral-Forge-nav.png" alt="Astral Forge logo">
+      <span class="brand">Astral Forge</span>
+    </a>
+  </div>
 
-<div class="brand">
-<img src="/assets/nav/Astral-Forge-nav.png" alt="Astral Forge logo">
-<span>Astral Forge</span>
-</div>
+  <div class="nav-links">
+    <a href="https://play.astralforge.studio">Play</a>
+    <a href="https://codex.astralforge.studio">Codex</a>
+    <a href="https://shop.astralforge.studio">Shop</a>
+    <a href="/about/">About</a>
+    <a href="/login/">Login</a>
+    <a class="cta" href="/signup/">Join</a>
+  </div>
+</nav>
 
-<h1>Create Account</h1>
+<header class="hero">
+  <img class="hero-image" src="/assets/hero/Astral-Forge-hero.png" alt="Astral Forge hero">
+  <div class="hero-overlay"></div>
 
-<p class="sub">
-Create your Astral Forge account to access campaigns, Codex tools,
-and the Forge ecosystem.
-</p>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Your Place in the Forge</h1>
+      <h2>Create Your Account</h2>
 
-<form method="post" action="/api/auth/signup">
+      <p>
+        Join Astral Forge with a standard account. Create your login now,
+        then complete your profile, preferences, and player details inside
+        your personal account area.
+      </p>
 
-<label for="handle">Handle (optional)</label>
-<input id="handle" name="handle" placeholder="@playername" autocomplete="nickname">
+      <div class="hero-cta">
+        <a class="btn primary" href="#signup-form">Create Account →</a>
+        <a class="btn" href="/login/">Already Have an Account →</a>
+      </div>
+    </div>
+  </div>
+</header>
 
-<label for="email">Email</label>
-<input id="email" type="email" name="email" required placeholder="you@domain.com" autocomplete="email">
+<main>
+  <section class="section">
+    <div class="container">
+      <div class="signup-grid">
 
-<label for="password">Password</label>
-<input id="password" type="password" name="password" required placeholder="Create password" autocomplete="new-password">
+        <div class="paper-card">
+          <div class="paper-kicker">Account Signup</div>
+          <h3>Create Your Astral Forge Account</h3>
+          <p class="paper-copy">
+            Use your email and password to create your account. Once inside,
+            you’ll be able to manage your profile, campaign preferences,
+            notification settings, and future platform tools.
+          </p>
 
-<label for="confirm_password">Confirm Password</label>
-<input id="confirm_password" type="password" name="confirm_password" required placeholder="Confirm password" autocomplete="new-password">
+          <form id="signup-form" method="post" action="/api/auth/signup">
+            <label for="handle">Handle (optional)</label>
+            <input id="handle" name="handle" placeholder="@playername" autocomplete="nickname">
+            <div class="hint">Your public or player-facing name.</div>
 
-<div class="actions">
-<button type="submit">Create Account →</button>
+            <label for="email">Email</label>
+            <input id="email" type="email" name="email" required placeholder="you@domain.com" autocomplete="email">
 
-<div class="login">
-Already have an account? <a href="/login/">Login</a>
-</div>
-</div>
+            <label for="password">Password</label>
+            <input id="password" type="password" name="password" required placeholder="Create password" autocomplete="new-password">
+            <div class="hint">Use at least 8 characters.</div>
 
-</form>
+            <label for="confirm_password">Confirm Password</label>
+            <input id="confirm_password" type="password" name="confirm_password" required placeholder="Confirm password" autocomplete="new-password">
 
-<div class="footer">
-By creating an account you agree to the
-<a href="/legal/terms/">Terms</a> and
-<a href="/legal/privacy/">Privacy Policy</a>.
-</div>
+            <div class="actions">
+              <button class="submit-btn" type="submit">Create Account →</button>
 
-</div>
+              <div class="login-copy">
+                Already have an account? <a href="/login/">Login</a>
+              </div>
+            </div>
+
+            <div class="legal">
+              By creating an account you agree to the
+              <a href="/legal/terms/">Terms</a> and
+              <a href="/legal/privacy/">Privacy Policy</a>.
+            </div>
+          </form>
+        </div>
+
+        <aside>
+          <div class="info-panel">
+            <h4>What you get</h4>
+            <p>
+              Your Astral Forge account is your identity across the platform.
+              It gives you a single place for sign-in, player settings,
+              preferences, and future connected tools.
+            </p>
+            <ul>
+              <li>One login for Astral Forge</li>
+              <li>Profile details managed after signup</li>
+              <li>Built to connect Play, Codex, Shop, and more</li>
+            </ul>
+          </div>
+
+          <div class="info-panel">
+            <h4>Why signup is simple</h4>
+            <p>
+              We keep account creation light so you can get inside quickly.
+              Your contact details, notifications, and other personal settings
+              can be completed later in your account area.
+            </p>
+          </div>
+
+          <div class="info-panel">
+            <h4>Quick Links</h4>
+            <ul>
+              <li><a href="/login/">Login</a></li>
+              <li><a href="https://play.astralforge.studio">Play</a></li>
+              <li><a href="https://codex.astralforge.studio">Codex</a></li>
+              <li><a href="https://shop.astralforge.studio">Shop</a></li>
+              <li><a href="/contact/">Contact</a></li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>© 2026 Astral Forge</div>
+
+      <div class="footer-links">
+        <a href="/contact/">Contact</a>
+        <a href="/legal/privacy/">Privacy</a>
+        <a href="/legal/terms/">Terms</a>
+        <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q">Root</a>
+      </div>
+    </div>
+  </footer>
+</main>
 
 <script>
-const form = document.querySelector('form');
+const form = document.querySelector('#signup-form');
 
 form.addEventListener('submit', function(e){
   const password = form.querySelector('#password');
