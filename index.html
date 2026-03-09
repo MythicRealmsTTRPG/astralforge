@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
 --bg:#0b0b0b;
 --panel:rgba(0,0,0,.35);
@@ -48,6 +47,7 @@ padding:12px 28px;
 background:rgba(0,0,0,.72);
 backdrop-filter:blur(12px);
 border-bottom:1px solid var(--border);
+gap:12px;
 }
 
 .nav-left a{
@@ -68,6 +68,8 @@ font-size:18px;
 .nav-links{
 display:flex;
 gap:10px;
+flex-wrap:wrap;
+justify-content:flex-end;
 }
 
 .nav-links a{
@@ -75,6 +77,7 @@ color:rgba(255,255,255,.84);
 padding:8px 10px;
 border-radius:999px;
 font-size:14px;
+transition:.15s ease;
 }
 
 .nav-links a:hover{
@@ -159,6 +162,12 @@ border-radius:999px;
 border:1px solid var(--border-2);
 background:rgba(255,255,255,.06);
 font-size:13.5px;
+transition:.15s ease;
+}
+
+.btn:hover{
+transform:translateY(-1px);
+background:rgba(255,255,255,.09);
 }
 
 .btn.primary{
@@ -377,12 +386,22 @@ margin:auto;
 display:flex;
 justify-content:space-between;
 flex-wrap:wrap;
+gap:12px;
+}
+
+.footer-links{
+display:flex;
+flex-wrap:wrap;
+gap:16px;
 }
 
 .footer a{
-margin-left:16px;
 font-size:13px;
 color:rgba(255,255,255,.78);
+}
+
+.footer a:hover{
+color:#fff;
 }
 
 @media(max-width:980px){
@@ -391,6 +410,17 @@ color:rgba(255,255,255,.78);
 .campaign-grid{grid-template-columns:1fr}
 }
 
+@media(max-width:700px){
+.navbar{
+flex-direction:column;
+align-items:flex-start;
+}
+
+.nav-links{
+width:100%;
+justify-content:flex-start;
+}
+}
 </style>
 </head>
 
@@ -409,20 +439,17 @@ color:rgba(255,255,255,.78);
 <a href="https://codex.astralforge.studio">Codex</a>
 <a href="https://shop.astralforge.studio">Shop</a>
 <a href="/about/">About</a>
-<a href="/login/">Login</a>
-<a class="cta" href="/membership/">Forge Pass</a>
+<a href="https://accounts.astralforge.studio/login/">Login</a>
+<a class="cta" href="https://accounts.astralforge.studio/signup/">Forge Pass</a>
 </div>
 </nav>
 
 <header class="hero">
-
 <img class="hero-image" src="/assets/hero/Astral-Forge-hero.png" alt="Astral Forge fantasy world landscape">
-
 <div class="hero-overlay"></div>
 
 <div class="hero-inner">
 <div class="hero-text">
-
 <h1>Crafted Worlds</h1>
 <h2>Epic Journeys</h2>
 
@@ -432,51 +459,43 @@ and worlds forged beyond imagination.
 </p>
 
 <div class="hero-cta">
-<a class="btn primary" href="https://play.astralforge.studio">Enter the Table →</a>
-<a class="btn" href="https://codex.astralforge.studio">Explore the Codex →</a>
-</div>
-
+<a class="btn primary" href="https://accounts.astralforge.studio/signup/">Claim Forge Pass →</a>
+<a class="btn" href="https://play.astralforge.studio">Enter the Table →</a>
 </div>
 </div>
-
+</div>
 </header>
 
 <main>
 
 <section class="section">
 <div class="container">
-
 <h2>Featured Campaign</h2>
 <p class="subhead">A flagship story currently welcoming new players.</p>
 
 <div class="placeholder-card">
-  <p>Featured campaign coming soon.</p>
+<p>Featured campaign coming soon.</p>
 </div>
-
 </div>
 </section>
 
 <section class="section">
 <div class="container">
-
 <h2>Playable Campaigns</h2>
 
 <div class="campaign-grid">
-  <div class="placeholder-card">
-    <p>Playable campaigns will appear here as they are published.</p>
-  </div>
+<div class="placeholder-card">
+<p>Playable campaigns will appear here as they are published.</p>
 </div>
-
+</div>
 </div>
 </section>
 
 <section class="section">
 <div class="container">
-
 <h2>Player Reviews</h2>
 
 <div class="reviews-grid">
-
 <article class="review-square">
 <div class="pill">★★★★★</div>
 <p>
@@ -492,32 +511,26 @@ A welcoming and understanding atmosphere for session zero. It was great to ask q
 </p>
 <div class="review-attribution">— Cabilis</div>
 </article>
-
 </div>
 
 <div class="reviews-actions">
 <a class="btn" href="/reviews/">Read All Reviews →</a>
 </div>
-
 </div>
 </section>
 
 <footer class="footer">
-
 <div class="footer-inner">
-
 <div>© 2026 Astral Forge</div>
 
-<div>
+<div class="footer-links">
 <a href="/contact/">Contact</a>
 <a href="/legal/privacy/">Privacy</a>
 <a href="/legal/terms/">Terms</a>
 <a href="/reviews/">Reviews</a>
 <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q">Root</a>
 </div>
-
 </div>
-
 </footer>
 
 </main>
