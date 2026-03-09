@@ -9,7 +9,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <style>
-
 :root{
 --bg:#0b0b0d;
 --text:rgba(255,255,255,.92);
@@ -112,6 +111,7 @@ padding:12px 16px;
 border-radius:12px;
 font-weight:600;
 cursor:pointer;
+transition:.18s ease;
 }
 
 button:hover{
@@ -128,6 +128,13 @@ color:white;
 text-decoration:none;
 }
 
+.login a:focus,
+.footer a:focus{
+outline:1px solid rgba(185,144,84,.7);
+outline-offset:2px;
+border-radius:4px;
+}
+
 .footer{
 margin-top:24px;
 font-size:12px;
@@ -135,6 +142,16 @@ color:var(--muted);
 line-height:1.6;
 }
 
+@media(max-width:560px){
+.actions{
+flex-direction:column;
+align-items:flex-start;
+}
+
+button{
+width:100%;
+}
+}
 </style>
 </head>
 
@@ -143,7 +160,7 @@ line-height:1.6;
 <div class="container">
 
 <div class="brand">
-<img src="/assets/nav/Astral-Forge-nav.png">
+<img src="/assets/nav/Astral-Forge-nav.png" alt="Astral Forge logo">
 <span>Astral Forge</span>
 </div>
 
@@ -156,28 +173,24 @@ and the Forge ecosystem.
 
 <form method="post" action="/api/auth/signup">
 
-<label>Handle (optional)</label>
-<input name="handle" placeholder="@playername">
+<label for="handle">Handle (optional)</label>
+<input id="handle" name="handle" placeholder="@playername" autocomplete="nickname">
 
-<label>Email</label>
-<input type="email" name="email" required placeholder="you@domain.com">
+<label for="email">Email</label>
+<input id="email" type="email" name="email" required placeholder="you@domain.com" autocomplete="email">
 
-<label>Password</label>
-<input type="password" name="password" required placeholder="Create password">
+<label for="password">Password</label>
+<input id="password" type="password" name="password" required placeholder="Create password" autocomplete="new-password">
 
-<label>Confirm Password</label>
-<input type="password" name="confirm_password" required placeholder="Confirm password">
+<label for="confirm_password">Confirm Password</label>
+<input id="confirm_password" type="password" name="confirm_password" required placeholder="Confirm password" autocomplete="new-password">
 
 <div class="actions">
-
-<button type="submit">
-Create Account →
-</button>
+<button type="submit">Create Account →</button>
 
 <div class="login">
 Already have an account? <a href="/login/">Login</a>
 </div>
-
 </div>
 
 </form>
@@ -189,6 +202,28 @@ By creating an account you agree to the
 </div>
 
 </div>
+
+<script>
+const form = document.querySelector('form');
+
+form.addEventListener('submit', function(e){
+  const password = form.querySelector('#password');
+  const confirmPassword = form.querySelector('#confirm_password');
+
+  if (password.value.length < 8) {
+    e.preventDefault();
+    alert('Password must be at least 8 characters long.');
+    password.focus();
+    return;
+  }
+
+  if (password.value !== confirmPassword.value) {
+    e.preventDefault();
+    alert('Passwords do not match.');
+    confirmPassword.focus();
+  }
+});
+</script>
 
 </body>
 </html>
