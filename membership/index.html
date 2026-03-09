@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Membership • Astral Forge</title>
+  <title>Forge Pass • Astral Forge</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,6 @@
       color: var(--text);
     }
 
-    /* NAV */
     nav{
       position:fixed;
       top:0; left:0; right:0;
@@ -119,7 +118,6 @@
       transform: translateY(-1px);
     }
 
-    /* PAGE */
     main{
       min-height:100vh;
       padding-top: 86px;
@@ -135,7 +133,6 @@
       padding: 34px 20px 60px;
     }
 
-    /* PARCHMENT PANEL */
     .parchment{
       position:relative;
       border-radius: 18px;
@@ -216,7 +213,6 @@
       color: rgba(28,20,14,.90);
     }
 
-    /* FORM */
     form{
       background: rgba(255,255,255,.18);
       border: 1px solid rgba(40,28,18,.18);
@@ -351,7 +347,6 @@
       color: rgba(28,20,14,.92);
     }
 
-    /* SIDEBAR */
     .panel{
       border-radius: 14px;
       padding: 18px 18px 16px;
@@ -409,7 +404,19 @@
       color: rgba(28,20,14,.90);
     }
 
-    /* FOOTER */
+    .optional-address{
+      margin-top: 18px;
+    }
+
+    .optional-address[open]{
+      padding-bottom: 14px;
+    }
+
+    .optional-address summary{
+      font-family: Georgia, serif;
+      font-size: 20px;
+    }
+
     footer{
       margin-top: 34px;
       background: rgba(0,0,0,.70);
@@ -473,8 +480,8 @@
         <a href="https://codex.astralforge.studio" target="_blank" rel="noopener noreferrer">Codex</a>
         <a href="https://shop.astralforge.studio" target="_blank" rel="noopener noreferrer">Shop</a>
         <a href="/about/">About</a>
-        <a href="/contact/">Contact</a>
-        <a class="join" href="/membership/" aria-current="page">Join</a>
+        <a href="/login/">Login</a>
+        <a class="join" href="/membership/" aria-current="page">Forge Pass</a>
       </div>
     </div>
   </nav>
@@ -484,22 +491,21 @@
       <div class="parchment">
         <div class="inner">
 
-          <div class="kicker">Free Membership</div>
-          <h1>Join the Forge</h1>
+          <div class="kicker">Forge Pass</div>
+          <h1>Claim Your Free Forge Pass</h1>
           <p class="sub">
-            Create your free Astral Forge membership to stay connected to <strong>new campaigns</strong>,
-            <strong>shop drops</strong>, and <strong>new Codex articles</strong>. Add your contact information,
-            choose how you want to be notified, and update your preferences any time.
+            Claim your free Astral Forge Forge Pass to stay connected to <strong>new campaigns</strong>,
+            <strong>shop drops</strong>, and <strong>fresh Codex releases</strong>. Choose how you want to hear from us,
+            and update your preferences any time.
           </p>
 
           <div class="grid">
-            <!-- LEFT: Form -->
             <div>
-              <form method="post" action="/api/membership/signup" id="membershipForm" novalidate>
+              <form method="post" action="/api/forge-pass/signup" id="membershipForm" novalidate>
                 <div class="field-grid">
                   <div>
-                    <label for="name">Name</label>
-                    <input id="name" name="name" type="text" placeholder="Your full name" autocomplete="name" required />
+                    <label for="name">Name <span style="font-weight:400;">(Optional)</span></label>
+                    <input id="name" name="name" type="text" placeholder="Your full name" autocomplete="name" />
                   </div>
 
                   <div>
@@ -518,12 +524,12 @@
                   <div>
                     <label for="phone">Phone</label>
                     <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" autocomplete="tel" />
-                    <div class="hint">Used for notifications only if you choose phone alerts.</div>
+                    <div class="hint">Used only if you choose phone alerts.</div>
                   </div>
                 </div>
 
-                <div class="section">
-                  <h2>Address <span style="font-size:14px; font-weight:400;">(Optional)</span></h2>
+                <details class="optional-address">
+                  <summary>Address (Optional)</summary>
 
                   <label for="address1">Street Address</label>
                   <input id="address1" name="address1" type="text" placeholder="123 Main St" autocomplete="address-line1" />
@@ -554,10 +560,10 @@
                       <input id="country" name="country" type="text" placeholder="Country" autocomplete="country-name" />
                     </div>
                   </div>
-                </div>
+                </details>
 
                 <div class="section">
-                  <h2>Choice of Notifications</h2>
+                  <h2>How should we reach you?</h2>
 
                   <div class="toggles" aria-label="Notification methods">
                     <label class="toggle">
@@ -572,7 +578,7 @@
                       <input type="checkbox" name="notify_methods[]" value="sms" />
                       <div>
                         <strong>Phone Notifications</strong>
-                        <span>Receive text alerts for membership updates and announcements.</span>
+                        <span>Receive text alerts for Forge Pass updates and announcements.</span>
                       </div>
                     </label>
                   </div>
@@ -594,7 +600,7 @@
                       <input type="checkbox" name="topics[]" value="shop" checked />
                       <div>
                         <strong>Shop Drops</strong>
-                        <span>When a new item hits the Astral Forge store.</span>
+                        <span>When a new item hits the Astral Forge shop.</span>
                       </div>
                     </label>
 
@@ -621,12 +627,12 @@
 
                   <div class="fineprint" style="margin-top:12px;">
                     By joining, you agree to our <a href="/legal/terms/">Terms</a> and <a href="/legal/privacy/">Privacy Policy</a>.
-                    Your membership information is saved on our website servers and used only for account management and the notifications you choose.
+                    Your information is used only to manage your Forge Pass and deliver the updates you choose.
                   </div>
 
                   <div class="actions">
-                    <button class="btn primary" type="submit">Create Membership →</button>
-                    <a class="btn" href="#manage">Manage / Opt out</a>
+                    <button class="btn primary" type="submit">Claim Forge Pass →</button>
+                    <a class="btn" href="#manage">Manage Preferences</a>
                   </div>
 
                   <div class="hint" style="margin-top:10px;">
@@ -636,39 +642,38 @@
               </form>
 
               <div class="section" id="manage">
-                <h2>Manage Preferences / Opt Out</h2>
+                <h2>Manage Forge Pass Preferences</h2>
                 <p>
-                  Use your membership or preference link from any message to update your contact details, change alert topics, or unsubscribe completely.
+                  Use your membership or preferences link from any message to update your contact details, change alert topics, or unsubscribe completely.
                 </p>
 
                 <details>
                   <summary>I didn’t get a preferences link — what now?</summary>
                   <p>
-                    Reach out via <a href="/contact/">/contact/</a> and we’ll help you update or remove your membership details.
+                    Reach out via <a href="/contact/">/contact/</a> and we’ll help you update or remove your Forge Pass details.
                   </p>
                 </details>
 
                 <details>
                   <summary>What does “opt out” do?</summary>
                   <p>
-                    Opting out stops all alerts. Your account can be reactivated later by returning to this page and signing up again.
+                    Opting out stops all alerts. You can reactivate later by returning to this page and signing up again.
                   </p>
                 </details>
               </div>
             </div>
 
-            <!-- RIGHT: Sidebar -->
             <aside>
               <div class="panel">
                 <h3>What This Is</h3>
                 <p>
-                  A free Astral Forge membership for players and Forge friends. Save your info, choose your notifications,
-                  and stay connected to campaigns, shop updates, and Codex releases.
+                  Forge Pass is your free connection to the Astral Forge ecosystem. Stay informed about new campaigns,
+                  Codex updates, and shop releases with the notification settings you choose.
                 </p>
                 <ul>
                   <li>Name and handle on file</li>
                   <li>Email and optional phone notifications</li>
-                  <li>Optional address saved to your membership</li>
+                  <li>Optional address saved to your profile</li>
                 </ul>
               </div>
 
@@ -691,10 +696,10 @@
               <div class="panel">
                 <h3>Quick Links</h3>
                 <ul>
-                  <li><a href="/games/">Games</a></li>
                   <li><a href="https://play.astralforge.studio" target="_blank" rel="noopener noreferrer">Play</a></li>
                   <li><a href="https://shop.astralforge.studio" target="_blank" rel="noopener noreferrer">Shop</a></li>
                   <li><a href="https://codex.astralforge.studio" target="_blank" rel="noopener noreferrer">Codex</a></li>
+                  <li><a href="/login/">Login</a></li>
                   <li><a href="/contact/">Contact</a></li>
                   <li><a href="/legal/privacy/">Privacy</a></li>
                   <li><a href="/legal/terms/">Terms</a></li>
@@ -727,7 +732,6 @@
       if (!form) return;
 
       form.addEventListener('submit', function (e) {
-        const name = form.querySelector('#name');
         const handle = form.querySelector('#handle');
         const email = form.querySelector('#email');
         const phone = form.querySelector('#phone');
@@ -739,13 +743,6 @@
         const topics = Array.from(form.querySelectorAll('input[name="topics[]"]'))
           .filter(input => input.checked)
           .map(input => input.value);
-
-        if (!name.value.trim()) {
-          e.preventDefault();
-          alert('Please enter your name.');
-          name.focus();
-          return;
-        }
 
         if (!handle.value.trim()) {
           e.preventDefault();
