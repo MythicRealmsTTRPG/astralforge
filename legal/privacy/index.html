@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Privacy Policy • Astral Forge</title>
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -20,7 +19,7 @@
   --shadow:rgba(0,0,0,.65);
 }
 
-*{ box-sizing:border-box; }
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -28,8 +27,6 @@ body{
   background:var(--bg);
   color:var(--text);
 }
-
-/* ================= NAV ================= */
 
 nav{
   position:fixed;
@@ -81,7 +78,9 @@ nav{
   justify-content:flex-end;
 }
 
-.nav-links a{
+.nav-links > a,
+.nav-links > button,
+.nav-account-trigger{
   text-decoration:none;
   color:rgba(255,255,255,.8);
   padding:8px 12px;
@@ -89,15 +88,16 @@ nav{
   font-size:14px;
   transition:.2s;
   white-space:nowrap;
+  background:none;
+  border:0;
+  cursor:pointer;
+  font-family:inherit;
 }
 
-.nav-links a:hover{
+.nav-links > a:hover,
+.nav-links > button:hover,
+.nav-account-trigger:hover{
   background:rgba(255,255,255,.06);
-  color:rgba(255,255,255,.95);
-}
-
-.nav-links a[aria-current="page"]{
-  background:rgba(255,255,255,.08);
   color:rgba(255,255,255,.95);
 }
 
@@ -113,7 +113,133 @@ nav{
   transform:translateY(-1px);
 }
 
-/* ================= PAGE ================= */
+.nav-account{
+  position:relative;
+}
+
+.login-popover{
+  position:absolute;
+  top:calc(100% + 12px);
+  right:0;
+  width:min(360px,92vw);
+  z-index:1100;
+}
+
+.login-popover[hidden]{
+  display:none;
+}
+
+.login-popover-inner{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  background:rgba(10,10,10,.97);
+  backdrop-filter:blur(14px);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  padding:18px;
+}
+
+.login-popover-inner h3{
+  margin:0 0 14px;
+  font-family:"Cinzel",serif;
+  font-size:18px;
+  color:rgba(255,255,255,.96);
+}
+
+.login-form{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.login-form label{
+  font-size:12px;
+  color:rgba(255,255,255,.84);
+}
+
+.login-form input{
+  width:100%;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.95);
+  outline:none;
+}
+
+.login-form input::placeholder{
+  color:rgba(255,255,255,.42);
+}
+
+.login-form input:focus{
+  border-color:rgba(255,255,255,.26);
+  box-shadow:0 0 0 3px rgba(255,255,255,.08);
+}
+
+.login-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:6px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.06);
+  font-size:13.5px;
+  color:#fff;
+  transition:.15s ease;
+  cursor:pointer;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+  background:rgba(255,255,255,.09);
+}
+
+.btn.primary{
+  background:rgba(255,255,255,.14);
+  border-color:rgba(255,255,255,.28);
+}
+
+.btn-link{
+  font-size:13px;
+  color:rgba(255,255,255,.78);
+  text-decoration:none;
+}
+
+.btn-link:hover{
+  color:#fff;
+}
+
+.login-links{
+  margin-top:2px;
+}
+
+.login-links a{
+  padding:0;
+  border-radius:0;
+  font-size:12.5px;
+  color:rgba(255,255,255,.70);
+  text-decoration:none;
+}
+
+.login-links a:hover{
+  background:none;
+  color:#fff;
+}
+
+.login-note{
+  margin-top:10px;
+  font-size:11.5px;
+  line-height:1.5;
+  color:rgba(255,255,255,.55);
+}
 
 main{
   padding-top:90px;
@@ -129,8 +255,6 @@ main{
   margin:auto;
   padding:40px 20px 80px;
 }
-
-/* parchment reading panel */
 
 .paper{
   position:relative;
@@ -161,6 +285,15 @@ main{
   z-index:1;
 }
 
+.kicker{
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-size:12px;
+  font-weight:600;
+  color:rgba(40,28,18,.68);
+  margin-bottom:10px;
+}
+
 h1{
   font-family:Georgia,serif;
   font-size:42px;
@@ -168,15 +301,42 @@ h1{
   letter-spacing:.02em;
 }
 
-h2{
-  margin-top:34px;
-  font-family:Georgia,serif;
+.intro{
+  font-size:16px;
+  color:rgba(32,22,13,.84);
+  margin-bottom:10px;
 }
 
-p{ margin:14px 0; }
-ul{ padding-left:20px; }
+.updated{
+  margin-top:0;
+  color:rgba(32,22,13,.74);
+  font-size:14px;
+}
 
-/* ================= FOOTER ================= */
+h2{
+  margin-top:34px;
+  margin-bottom:8px;
+  font-family:Georgia,serif;
+  font-size:26px;
+}
+
+p{margin:14px 0}
+ul{padding-left:20px}
+li{margin:8px 0}
+
+.callout{
+  margin-top:22px;
+  padding:16px 18px;
+  border-radius:14px;
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(32,22,13,.12);
+}
+
+.paper a{
+  color:#24170b;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
 
 footer{
   background:rgba(0,0,0,.70);
@@ -207,22 +367,38 @@ footer{
   text-decoration:none;
 }
 
-.footer-links a:hover{
+.footer-links a:hover,
+.footer-links a[aria-current="page"]{
   color:white;
 }
 
-/* ================= RESPONSIVE ================= */
-
 @media (max-width:980px){
-  .nav-inner{ padding:14px 18px; }
-  .paper{ padding:28px 20px; }
+  .nav-inner{padding:14px 18px;}
+  .paper{padding:28px 20px;}
+}
+
+@media (max-width:700px){
+  .nav-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .nav-links{
+    width:100%;
+    justify-content:flex-start;
+  }
+
+  .login-popover{
+    left:0;
+    right:auto;
+    width:min(100vw - 36px,420px);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a class="brand" href="/">
@@ -235,103 +411,205 @@ footer{
       <a href="https://codex.astralforge.studio" target="_blank" rel="noopener noreferrer">Codex</a>
       <a href="https://shop.astralforge.studio" target="_blank" rel="noopener noreferrer">Shop</a>
       <a href="/about/">About</a>
-      <a href="/contact/">Contact</a>
-      <a class="join" href="/membership/">Join</a>
+
+      <div class="nav-account">
+        <button
+          type="button"
+          class="nav-account-trigger"
+          id="loginTrigger"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="loginPopover"
+        >
+          Login
+        </button>
+
+        <div class="login-popover" id="loginPopover" role="dialog" aria-labelledby="loginTitle" hidden>
+          <div class="login-popover-inner">
+            <h3 id="loginTitle">Sign In</h3>
+
+            <form action="https://astralforge.studio/login/" method="post" class="login-form">
+              <label for="login-email">Username or Email</label>
+              <input
+                id="login-email"
+                name="email"
+                type="email"
+                autocomplete="username"
+                placeholder="you@domain.com"
+                required
+              >
+
+              <label for="login-password">Password</label>
+              <input
+                id="login-password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Your password"
+                required
+              >
+
+              <div class="login-actions">
+                <button type="submit" class="btn primary">Login</button>
+                <a href="https://astralforge.studio/signup/" class="btn-link">Create account</a>
+              </div>
+
+              <div class="login-links">
+                <a href="https://accounts.astralforge.studio/forgot-password/">Forgot password?</a>
+              </div>
+
+              <div class="login-note">
+                By signing in you agree to the <a href="/legal/terms/">Terms</a> and <a href="/legal/privacy/">Privacy Policy</a>.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <a class="join" href="https://astralforge.studio/signup/">Forge Pass</a>
     </div>
   </div>
 </nav>
 
-<!-- PAGE -->
 <main>
   <div class="container">
     <div class="paper">
-
+      <div class="kicker">Legal</div>
       <h1>Privacy Policy</h1>
-      <p><strong>Last Updated:</strong> 2026</p>
-
-      <p>
-        Astral Forge respects your privacy. This policy explains what information is collected,
-        why it is collected, and how it is used when you interact with this website,
-        its services, and hosted tabletop campaigns.
+      <p class="intro">
+        This Privacy Policy explains how Astral Forge collects, uses, and protects information when you visit this website, create an account, join a campaign, purchase services, or otherwise interact with the Astral Forge platform.
       </p>
+      <p class="updated"><strong>Effective Date:</strong> January 1, 2026</p>
 
       <h2>Information We Collect</h2>
+      <p>Depending on how you interact with Astral Forge, we may collect information such as:</p>
       <ul>
-        <li>Email addresses submitted through contact or membership forms</li>
-        <li>Account information required for campaign participation</li>
-        <li>Payment information processed securely by Stripe</li>
-        <li>Basic analytics data such as browser type and visit duration</li>
+        <li>Name and email address submitted through forms, account registration, or direct communication</li>
+        <li>Account information used for campaign participation, memberships, or access to tools and content</li>
+        <li>Payment-related information processed securely through third-party payment providers</li>
+        <li>Basic usage and analytics data, such as browser type, device information, pages visited, and session duration</li>
+        <li>Messages or information you voluntarily provide when contacting Astral Forge for support, collaboration, or campaign inquiries</li>
       </ul>
 
-      <h2>How Your Information Is Used</h2>
+      <h2>How Information Is Used</h2>
+      <p>Astral Forge may use collected information to:</p>
       <ul>
-        <li>To manage campaign bookings and memberships</li>
-        <li>To communicate about sessions, updates, or support</li>
-        <li>To deliver purchased products or software licenses</li>
-        <li>To improve the Astral Forge experience</li>
+        <li>Manage memberships, accounts, campaign bookings, and service access</li>
+        <li>Communicate regarding sessions, purchases, account support, updates, or inquiries</li>
+        <li>Deliver purchased products, software access, digital content, or community-related services</li>
+        <li>Improve website performance, user experience, and platform reliability</li>
+        <li>Protect the integrity and security of Astral Forge services</li>
       </ul>
 
       <h2>Payments</h2>
       <p>
-        All payments are handled by third-party providers such as <strong>Stripe</strong>.
-        Astral Forge does not store credit card numbers or billing credentials.
+        Payment transactions may be processed by third-party payment providers such as <strong>Stripe</strong>. Astral Forge does not store full payment card numbers or billing credentials on its own servers.
       </p>
 
-      <h2>Community Platforms</h2>
+      <h2>Third-Party Services</h2>
       <p>
-        Astral Forge may integrate with external services including Root.
-        These platforms maintain their own privacy policies.
+        Astral Forge may integrate with external tools, platforms, and community services, including Root and other hosted providers. Your use of those services may also be governed by their own privacy policies and terms.
+      </p>
+
+      <h2>Cookies and Analytics</h2>
+      <p>
+        Astral Forge may use standard website technologies such as cookies, analytics tools, or session storage to support site functionality, understand usage patterns, and improve performance. These technologies generally help remember preferences, maintain sessions, and measure engagement.
       </p>
 
       <h2>Email Communication</h2>
       <p>
-        If you contact Astral Forge, your email may be retained solely for
-        communication related to campaigns, support, or collaboration.
-        Your information is never sold or shared for advertising.
+        If you contact Astral Forge, your email and related correspondence may be retained for purposes such as support, campaign communication, collaboration, scheduling, and account-related follow-up. Astral Forge does not sell personal information or share it for third-party advertising.
+      </p>
+
+      <h2>Data Retention</h2>
+      <p>
+        Personal information is retained only for as long as reasonably necessary to provide services, maintain business and legal records, resolve disputes, enforce agreements, and support ongoing community or account administration.
       </p>
 
       <h2>Data Protection</h2>
       <p>
-        Reasonable technical and organizational safeguards are used to protect
-        your information. However, no internet transmission can be guaranteed
-        100% secure.
+        Astral Forge uses reasonable technical and organizational safeguards intended to protect personal information. However, no method of internet transmission or electronic storage can be guaranteed to be completely secure.
       </p>
 
-      <h2>Your Rights</h2>
+      <h2>Children’s Privacy</h2>
       <p>
-        You may request deletion of your personal data at any time by contacting:
+        Astral Forge is not intended for children under the age of 13, and personal information is not knowingly collected from children under 13 without appropriate authorization where required by law.
       </p>
-      <p><strong>scribe@astralforge.studio</strong></p>
+
+      <h2>Your Rights and Requests</h2>
+      <p>
+        You may request access to, correction of, or deletion of your personal information by contacting:
+      </p>
+      <p><a href="mailto:scribe@astralforge.studio"><strong>scribe@astralforge.studio</strong></a></p>
+
+      <div class="callout">
+        Requests will be reviewed and addressed within a reasonable period, subject to legal, operational, or security obligations.
+      </div>
 
       <h2>Policy Updates</h2>
       <p>
-        This policy may evolve as Astral Forge grows. Continued use of the site
-        constitutes acceptance of updates.
+        This Privacy Policy may be updated from time to time to reflect changes to services, site features, legal requirements, or operational practices. Continued use of Astral Forge after updates become effective constitutes acceptance of the revised policy.
       </p>
 
       <h2>Contact</h2>
       <p>
-        Questions regarding privacy may be directed to:<br>
-        <strong>scribe@astralforge.studio</strong>
+        Questions regarding this Privacy Policy may be directed to:<br>
+        <a href="mailto:scribe@astralforge.studio"><strong>scribe@astralforge.studio</strong></a>
       </p>
-
     </div>
   </div>
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div>© 2026 Astral Forge</div>
     <div class="footer-links">
       <a href="/contact/">Contact</a>
+      <a href="/reviews/">Reviews</a>
       <a href="/legal/privacy/" aria-current="page">Privacy</a>
       <a href="/legal/terms/">Terms</a>
-      <a href="/reviews/">Reviews</a>
       <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q" target="_blank" rel="noopener noreferrer">Root</a>
     </div>
   </div>
 </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const trigger = document.getElementById("loginTrigger");
+  const popover = document.getElementById("loginPopover");
+
+  if (!trigger || !popover) return;
+
+  const openPopover = () => {
+    popover.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+  };
+
+  const closePopover = () => {
+    popover.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+  };
+
+  trigger.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (popover.hidden) openPopover();
+    else closePopover();
+  });
+
+  popover.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  document.addEventListener("click", () => {
+    closePopover();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closePopover();
+  });
+});
+</script>
 
 </body>
 </html>
