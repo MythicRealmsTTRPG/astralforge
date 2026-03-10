@@ -10,33 +10,42 @@
   <style>
     :root{
       --bg:#0b0b0b;
-      --panel: rgba(0,0,0,.35);
-      --panel-2: rgba(0,0,0,.22);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.72);
-      --border: rgba(255,255,255,.12);
-      --border-2: rgba(255,255,255,.18);
-      --ring: rgba(255,255,255,.28);
-      --shadow: 0 18px 60px rgba(0,0,0,.45);
-      --radius: 16px;
-      --radius-sm: 12px;
-      --max: 1120px;
+      --panel:rgba(0,0,0,.35);
+      --panel-2:rgba(0,0,0,.22);
+      --text:rgba(255,255,255,.92);
+      --muted:rgba(255,255,255,.72);
+      --border:rgba(255,255,255,.12);
+      --border-2:rgba(255,255,255,.18);
+      --ring:rgba(255,255,255,.28);
+      --shadow:0 18px 60px rgba(0,0,0,.45);
+      --radius:16px;
+      --radius-sm:12px;
+      --max:1120px;
     }
 
-    *{ box-sizing:border-box; }
+    *{box-sizing:border-box}
+
     html,body{
       margin:0;
       padding:0;
       background:var(--bg);
       color:var(--text);
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
     }
 
-    a{ color:inherit; }
-    img{ max-width:100%; height:auto; }
+    a{color:inherit}
+    img{max-width:100%;height:auto}
+    button,input,textarea,select{font:inherit}
+
     .sr-only{
-      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
-      overflow:hidden; clip:rect(0,0,0,0); border:0;
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      border:0;
     }
 
     .navbar{
@@ -48,8 +57,9 @@
       align-items:center;
       padding:12px 28px;
       background:rgba(0,0,0,.72);
-      backdrop-filter: blur(12px);
+      backdrop-filter:blur(12px);
       border-bottom:1px solid var(--border);
+      gap:12px;
     }
 
     .nav-left a{
@@ -66,7 +76,7 @@
     }
 
     .brand{
-      font-family:'Cinzel', serif;
+      font-family:'Cinzel',serif;
       font-weight:600;
       letter-spacing:.8px;
       font-size:18px;
@@ -77,20 +87,34 @@
       display:flex;
       align-items:center;
       gap:10px;
-      white-space:nowrap;
+      flex-wrap:wrap;
+      justify-content:flex-end;
     }
 
-    .nav-links a{
+    .nav-links > a,
+    .nav-links > button,
+    .nav-account-trigger{
       color:rgba(255,255,255,.84);
       text-decoration:none;
       font-size:14px;
       padding:8px 10px;
       border-radius:999px;
-      transition: .15s ease;
+      transition:.15s ease;
+      white-space:nowrap;
+      background:none;
+      border:0;
+      cursor:pointer;
     }
 
-    .nav-links a:hover{
+    .nav-links > a:hover,
+    .nav-links > button:hover,
+    .nav-account-trigger:hover{
       background:rgba(255,255,255,.07);
+      color:#fff;
+    }
+
+    .nav-links a[aria-current="page"]{
+      background:rgba(255,255,255,.08);
       color:#fff;
     }
 
@@ -98,6 +122,143 @@
       border:1px solid var(--border-2);
       background:rgba(255,255,255,.06);
       padding:8px 12px;
+    }
+
+    .nav-account{
+      position:relative;
+    }
+
+    .login-popover{
+      position:absolute;
+      top:calc(100% + 12px);
+      right:0;
+      width:min(360px,92vw);
+      z-index:1100;
+    }
+
+    .login-popover[hidden]{
+      display:none;
+    }
+
+    .login-popover-inner{
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:18px;
+      background:rgba(10,10,10,.97);
+      backdrop-filter:blur(14px);
+      box-shadow:0 20px 60px rgba(0,0,0,.5);
+      padding:18px;
+    }
+
+    .login-popover-inner h3{
+      margin:0 0 14px;
+      font-family:'Cinzel',serif;
+      font-size:18px;
+      color:rgba(255,255,255,.96);
+    }
+
+    .login-form{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .login-form label{
+      font-size:12px;
+      color:rgba(255,255,255,.84);
+    }
+
+    .login-form input{
+      width:100%;
+      padding:12px 14px;
+      border-radius:12px;
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.95);
+      outline:none;
+    }
+
+    .login-form input::placeholder{
+      color:rgba(255,255,255,.42);
+    }
+
+    .login-form input:focus{
+      border-color:rgba(255,255,255,.26);
+      box-shadow:0 0 0 3px rgba(255,255,255,.08);
+    }
+
+    .login-actions{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:6px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:10px 14px;
+      border-radius:999px;
+      border:1px solid var(--border-2);
+      background:rgba(255,255,255,.06);
+      color:#fff;
+      text-decoration:none;
+      font-size:13.5px;
+      transition:.15s ease;
+      cursor:pointer;
+    }
+
+    .btn:hover{
+      background:rgba(255,255,255,.11);
+    }
+
+    .btn.primary{
+      background:rgba(255,255,255,.14);
+      border-color:rgba(255,255,255,.28);
+    }
+
+    .btn-link{
+      font-size:13px;
+      color:rgba(255,255,255,.78);
+      text-decoration:none;
+    }
+
+    .btn-link:hover{
+      color:#fff;
+    }
+
+    .login-links{
+      margin-top:2px;
+    }
+
+    .login-links a{
+      padding:0;
+      border-radius:0;
+      font-size:12.5px;
+      color:rgba(255,255,255,.70);
+      text-decoration:none;
+    }
+
+    .login-links a:hover{
+      background:none;
+      color:#fff;
+    }
+
+    .login-note{
+      margin-top:10px;
+      font-size:11.5px;
+      line-height:1.5;
+      color:rgba(255,255,255,.55);
+    }
+
+    .btn:focus,
+    input:focus,
+    textarea:focus,
+    select:focus{
+      outline:none;
+      box-shadow:0 0 0 3px var(--ring);
     }
 
     .hero{
@@ -110,7 +271,7 @@
 
     .hero-image{
       width:100%;
-      height: min(620px, calc(84vh - 64px));
+      height:min(620px, calc(84vh - 64px));
       object-fit:cover;
       display:block;
       filter:saturate(1.02) contrast(1.03);
@@ -131,27 +292,27 @@
       display:flex;
       align-items:flex-end;
       justify-content:flex-end;
-      padding: clamp(18px, 3.5vw, 52px);
+      padding:clamp(18px, 3.5vw, 52px);
     }
 
     .hero-text{
       text-align:right;
-      max-width: min(640px, 92%);
-      text-shadow: 0 8px 28px rgba(0,0,0,.75);
+      max-width:min(640px, 92%);
+      text-shadow:0 8px 28px rgba(0,0,0,.75);
     }
 
     .hero-text h1{
       margin:0;
-      font-family: Georgia, serif;
-      font-size: clamp(34px, 4.4vw, 58px);
+      font-family:Georgia,serif;
+      font-size:clamp(34px, 4.4vw, 58px);
       letter-spacing:.4px;
       line-height:1.05;
     }
 
     .hero-text h2{
       margin:10px 0 0;
-      font-family: Georgia, serif;
-      font-size: clamp(18px, 2.2vw, 30px);
+      font-family:Georgia,serif;
+      font-size:clamp(18px, 2.2vw, 30px);
       font-weight:600;
       opacity:.95;
     }
@@ -161,7 +322,7 @@
       font-size:14px;
       line-height:1.6;
       color:rgba(255,255,255,.80);
-      max-width: 56ch;
+      max-width:56ch;
       margin-left:auto;
     }
 
@@ -173,87 +334,59 @@
       flex-wrap:wrap;
     }
 
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid var(--border-2);
-      background:rgba(255,255,255,.06);
-      color:#fff;
-      text-decoration:none;
-      font-size:13.5px;
-      transition:.15s ease;
-      cursor:pointer;
-    }
-    .btn:hover{ background:rgba(255,255,255,.11); }
-    .btn.primary{
-      background:rgba(255,255,255,.14);
-      border-color:rgba(255,255,255,.28);
-    }
-    .btn:focus,
-    input:focus,
-    textarea:focus,
-    select:focus{
-      outline:none;
-      box-shadow: 0 0 0 3px var(--ring);
-    }
-
     main{
-      background: url("/assets/backgrounds/Astral-Forge.png") center / cover no-repeat fixed;
+      background:url("/assets/backgrounds/Astral-Forge.png") center / cover no-repeat fixed;
     }
 
     .section{
       position:relative;
-      padding: clamp(46px, 6vw, 90px) 20px;
+      padding:clamp(46px, 6vw, 90px) 20px;
     }
 
     .section::before{
       content:"";
       position:absolute;
       inset:0;
-      background: linear-gradient(rgba(0,0,0,.70), rgba(0,0,0,.84));
+      background:linear-gradient(rgba(0,0,0,.70), rgba(0,0,0,.84));
       pointer-events:none;
     }
 
     .container{
       position:relative;
       z-index:1;
-      max-width: var(--max);
+      max-width:var(--max);
       margin:0 auto;
     }
 
     .section h2{
       margin:0 0 18px;
-      font-family:'Cinzel', serif;
+      font-family:'Cinzel',serif;
       font-weight:600;
       letter-spacing:.6px;
-      font-size: 18px;
+      font-size:18px;
       color:rgba(255,255,255,.92);
     }
 
     .subhead{
       margin:0 0 18px;
-      color: rgba(255,255,255,.68);
-      font-size: 13.5px;
+      color:rgba(255,255,255,.68);
+      font-size:13.5px;
       line-height:1.6;
-      max-width: 72ch;
+      max-width:72ch;
     }
 
     .grid{
       display:grid;
-      grid-template-columns: 1fr .92fr;
+      grid-template-columns:1fr .92fr;
       gap:18px;
       align-items:start;
     }
 
     .panel-card{
       border:1px solid var(--border);
-      background: var(--panel);
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
+      background:var(--panel);
+      box-shadow:var(--shadow);
+      border-radius:var(--radius);
       overflow:hidden;
     }
 
@@ -294,7 +427,6 @@
       color:var(--text);
       border-radius:12px;
       padding:12px 13px;
-      font:inherit;
     }
 
     textarea{
@@ -326,15 +458,15 @@
       border:1px dashed rgba(255,255,255,.16);
       background:var(--panel-2);
       padding:22px 18px;
-      border-radius: var(--radius-sm);
-      color: rgba(255,255,255,.68);
+      border-radius:var(--radius-sm);
+      color:rgba(255,255,255,.68);
     }
 
     .empty-state strong{
       display:block;
       margin-bottom:8px;
       color:rgba(255,255,255,.88);
-      font-family:'Cinzel', serif;
+      font-family:'Cinzel',serif;
       font-weight:600;
       letter-spacing:.4px;
       font-size:14px;
@@ -352,11 +484,41 @@
 
     .pill{
       border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
+      background:rgba(255,255,255,.05);
       padding:6px 10px;
       border-radius:999px;
       font-size:12.5px;
       color:rgba(255,255,255,.76);
+    }
+
+    .review-list{
+      display:grid;
+      gap:14px;
+    }
+
+    .review-card{
+      border:1px solid rgba(255,255,255,.12);
+      background:rgba(255,255,255,.04);
+      border-radius:14px;
+      padding:18px;
+    }
+
+    .review-rating{
+      margin-bottom:10px;
+      font-size:13px;
+      color:rgba(255,255,255,.82);
+    }
+
+    .review-copy{
+      margin:0 0 12px;
+      line-height:1.7;
+      color:rgba(255,255,255,.88);
+      font-size:14px;
+    }
+
+    .review-meta{
+      font-size:12.5px;
+      color:rgba(255,255,255,.62);
     }
 
     .footer{
@@ -372,8 +534,8 @@
     }
 
     .footer-inner{
-      max-width: var(--max);
-      margin: 0 auto;
+      max-width:var(--max);
+      margin:0 auto;
       width:100%;
       display:flex;
       justify-content:space-between;
@@ -382,29 +544,77 @@
       flex-wrap:wrap;
     }
 
+    .footer-links{
+      display:flex;
+      flex-wrap:wrap;
+      gap:16px;
+    }
+
     .footer a{
       color:rgba(255,255,255,.78);
       text-decoration:none;
-      margin-left:16px;
-      font-size: 13px;
+      font-size:13px;
     }
-    .footer a:hover{ color:#fff; }
 
-    @media (max-width: 980px){
+    .footer a:hover,
+    .footer a[aria-current="page"]{
+      color:#fff;
+    }
+
+    @media (max-width:980px){
       .grid,
-      .form-grid{ grid-template-columns:1fr; }
-      main{ background-attachment: scroll; }
+      .form-grid{
+        grid-template-columns:1fr;
+      }
+
+      main{
+        background-attachment:scroll;
+      }
     }
 
-    @media (max-width: 780px){
-      .navbar{ padding:12px 16px; }
-      .nav-links{ gap:6px; }
-      .nav-links a{ padding:8px 9px; }
-      .brand{ display:none; }
-      .hero-text{ text-align:left; }
-      .hero-inner{ justify-content:flex-start; align-items:flex-end; }
-      .hero-cta{ justify-content:flex-start; }
-      .hero-text p{ margin-left:0; }
+    @media (max-width:780px){
+      .navbar{
+        padding:12px 16px;
+      }
+
+      .nav-links{
+        gap:6px;
+      }
+
+      .nav-links > a,
+      .nav-links > button,
+      .nav-account-trigger{
+        padding:8px 9px;
+      }
+
+      .brand{
+        display:none;
+      }
+
+      .hero-text{
+        text-align:left;
+      }
+
+      .hero-inner{
+        justify-content:flex-start;
+        align-items:flex-end;
+      }
+
+      .hero-cta{
+        justify-content:flex-start;
+      }
+
+      .hero-text p{
+        margin-left:0;
+      }
+    }
+
+    @media (max-width:700px){
+      .login-popover{
+        left:0;
+        right:auto;
+        width:min(100vw - 32px,420px);
+      }
     }
   </style>
 </head>
@@ -419,12 +629,66 @@
     </div>
 
     <div class="nav-links">
-      <a href="https://play.astralforge.studio" target="_blank" rel="noopener">Play</a>
-      <a href="https://codex.astralforge.studio" target="_blank" rel="noopener">Codex</a>
-      <a href="https://shop.astralforge.studio" target="_blank" rel="noopener">Shop</a>
+      <a href="https://play.astralforge.studio" target="_blank" rel="noopener noreferrer">Play</a>
+      <a href="https://codex.astralforge.studio" target="_blank" rel="noopener noreferrer">Codex</a>
+      <a href="https://shop.astralforge.studio" target="_blank" rel="noopener noreferrer">Shop</a>
       <a href="/about/">About</a>
-      <a href="/reviews/" aria-current="page">Reviews</a>
-      <a class="cta" href="/membership/">Join</a>
+
+      <div class="nav-account">
+        <button
+          type="button"
+          class="nav-account-trigger"
+          id="loginTrigger"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="loginPopover"
+        >
+          Login
+        </button>
+
+        <div class="login-popover" id="loginPopover" role="dialog" aria-labelledby="loginTitle" hidden>
+          <div class="login-popover-inner">
+            <h3 id="loginTitle">Sign In</h3>
+
+            <form action="https://astralforge.studio/login/" method="post" class="login-form">
+              <label for="login-email">Username or Email</label>
+              <input
+                id="login-email"
+                name="email"
+                type="email"
+                autocomplete="username"
+                placeholder="you@domain.com"
+                required
+              >
+
+              <label for="login-password">Password</label>
+              <input
+                id="login-password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Your password"
+                required
+              >
+
+              <div class="login-actions">
+                <button type="submit" class="btn primary">Login</button>
+                <a href="https://astralforge.studio/signup/" class="btn-link">Create account</a>
+              </div>
+
+              <div class="login-links">
+                <a href="https://accounts.astralforge.studio/forgot-password/">Forgot password?</a>
+              </div>
+
+              <div class="login-note">
+                By signing in you agree to the <a href="/legal/terms/">Terms</a> and <a href="/legal/privacy/">Privacy Policy</a>.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <a class="cta" href="https://.astralforge.studio/signup/">Forge Pass</a>
     </div>
   </nav>
 
@@ -435,15 +699,14 @@
     <div class="hero-inner">
       <div class="hero-text">
         <h1>Player Reviews</h1>
-        <h2>Earned at the Table</h2>
+        <h2>Voices from the Table</h2>
         <p>
-          A dedicated place for real player feedback. This page is structured to collect verified testimonials
-          without inventing praise before it exists.
+          Honest feedback from players who have stepped into the worlds of Astral Forge. Every testimonial published here is shared with permission.
         </p>
 
         <div class="hero-cta">
           <a class="btn primary" href="#leave-review">Leave a Review →</a>
-          <a class="btn" href="https://play.astralforge.studio" target="_blank" rel="noopener">Enter the Table →</a>
+          <a class="btn" href="https://play.astralforge.studio" target="_blank" rel="noopener noreferrer">Enter the Table →</a>
         </div>
       </div>
     </div>
@@ -454,8 +717,7 @@
       <div class="container">
         <h2 id="reviews-overview">Reviews</h2>
         <p class="subhead">
-          Keep this page honest: show real testimonials when they are submitted, and until then use clear placeholders,
-          review guidelines, and a submission form that asks for permission before publishing anything publicly.
+          This page collects player testimonials and feedback for Astral Forge campaigns and sessions. Reviews are published only when permission is given.
         </p>
 
         <div class="grid">
@@ -463,7 +725,7 @@
             <div class="panel-body">
               <h2 id="leave-review">Leave a Review</h2>
               <p class="subhead">
-                Invite players to share what they experienced, what stood out, and whether they want their feedback displayed on the site.
+                Share your experience, what stood out, and what future players should know.
               </p>
 
               <form action="#" method="post">
@@ -492,13 +754,13 @@
 
                   <div class="field">
                     <label for="game">Campaign or session</label>
-                    <input id="game" name="game" type="text" placeholder="Black Star Gambit, private one-shot, etc.">
+                    <input id="game" name="game" type="text" placeholder="Campaign title or one-shot name">
                   </div>
 
                   <div class="field full">
                     <label for="review">Review</label>
-                    <textarea id="review" name="review" placeholder="What was memorable? What should future players know?" required></textarea>
-                    <div class="helper">Ask for specific details. Specific feedback produces stronger and more believable testimonials.</div>
+                    <textarea id="review" name="review" placeholder="Tell us about your experience at the table." required></textarea>
+                    <div class="helper">Specific details make stronger and more useful testimonials.</div>
                   </div>
 
                   <div class="field full">
@@ -521,19 +783,19 @@
               <div>
                 <h2>Published Testimonials</h2>
                 <p class="subhead">
-                  This section intentionally avoids fabricated reviews. Replace the placeholder below only with testimonials you have actually received and have permission to display.
+                  Approved testimonials will appear here once they are submitted and cleared for public display.
                 </p>
               </div>
 
               <div class="empty-state" aria-live="polite">
                 <strong>No published reviews yet</strong>
-                Real reviews will appear here once players submit them and approve public display.
+                Real player feedback will appear here as approved testimonials are added.
               </div>
 
               <div class="review-guidelines">
-                <span class="pill">Homepage: feature 2–3 real quotes</span>
+                <span class="pill">Homepage: feature 2–3 review quotes</span>
                 <span class="pill">Play page: place reviews near booking CTA</span>
-                <span class="pill">This page: full archive of approved testimonials</span>
+                <span class="pill">Reviews page: full approved archive</span>
               </div>
             </div>
           </aside>
@@ -543,26 +805,64 @@
 
     <section class="section" aria-labelledby="review-policy">
       <div class="container">
-        <h2 id="review-policy">Review Publishing Notes</h2>
+        <h2 id="review-policy">Review Standards</h2>
         <div class="empty-state">
-          <strong>Recommended policy</strong>
-          Only publish testimonials that can be traced to a real player, a real table, or a real submitted form response. If you later connect this form to a CMS, database, or email workflow, keep the moderation step so every published review remains verified.
+          <strong>Publishing approach</strong>
+          Only publish testimonials from real players, real tables, or real submitted responses. If this form is later connected to a CMS, database, or email workflow, keep a moderation step so each public review stays verified and permission-based.
         </div>
       </div>
     </section>
-
-    <footer class="footer">
-      <div class="footer-inner">
-        <div>© 2026 Astral Forge</div>
-        <div>
-          <a href="/contact/">Contact</a>
-          <a href="/legal/privacy/">Privacy</a>
-          <a href="/legal/terms/">Terms</a>
-          <a href="/reviews/">Reviews</a>
-          <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q" target="_blank" rel="noopener">Root</a>
-        </div>
-      </div>
-    </footer>
   </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>© 2026 Astral Forge</div>
+      <div class="footer-links">
+        <a href="/contact/">Contact</a>
+        <a href="/reviews/" aria-current="page">Reviews</a>
+        <a href="/legal/privacy/">Privacy</a>
+        <a href="/legal/terms/">Terms</a>
+        <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q" target="_blank" rel="noopener noreferrer">Root</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const trigger = document.getElementById("loginTrigger");
+      const popover = document.getElementById("loginPopover");
+
+      if (!trigger || !popover) return;
+
+      const openPopover = () => {
+        popover.hidden = false;
+        trigger.setAttribute("aria-expanded", "true");
+      };
+
+      const closePopover = () => {
+        popover.hidden = true;
+        trigger.setAttribute("aria-expanded", "false");
+      };
+
+      trigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        if (popover.hidden) openPopover();
+        else closePopover();
+      });
+
+      popover.addEventListener("click", (e) => {
+        e.stopPropagation();
+      });
+
+      document.addEventListener("click", () => {
+        closePopover();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closePopover();
+      });
+    });
+  </script>
 </body>
 </html>
