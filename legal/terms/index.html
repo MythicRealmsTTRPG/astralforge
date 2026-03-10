@@ -6,7 +6,6 @@
 
 <title>Terms of Service • Astral Forge</title>
 
-<!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -21,7 +20,7 @@
   --shadow:rgba(0,0,0,.65);
 }
 
-*{ box-sizing:border-box; }
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -29,8 +28,6 @@ body{
   background:var(--bg);
   color:var(--text);
 }
-
-/* ================= NAV ================= */
 
 nav{
   position:fixed;
@@ -82,23 +79,26 @@ nav{
   justify-content:flex-end;
 }
 
-.nav-links a{
-  color:rgba(255,255,255,.8);
+.nav-links > a,
+.nav-links > button,
+.nav-account-trigger{
   text-decoration:none;
+  color:rgba(255,255,255,.8);
   padding:8px 12px;
   border-radius:10px;
   font-size:14px;
   transition:.2s;
   white-space:nowrap;
+  background:none;
+  border:0;
+  cursor:pointer;
+  font-family:inherit;
 }
 
-.nav-links a:hover{
+.nav-links > a:hover,
+.nav-links > button:hover,
+.nav-account-trigger:hover{
   background:rgba(255,255,255,.06);
-  color:rgba(255,255,255,.95);
-}
-
-.nav-links a[aria-current="page"]{
-  background:rgba(255,255,255,.08);
   color:rgba(255,255,255,.95);
 }
 
@@ -114,7 +114,133 @@ nav{
   transform:translateY(-1px);
 }
 
-/* ================= PAGE ================= */
+.nav-account{
+  position:relative;
+}
+
+.login-popover{
+  position:absolute;
+  top:calc(100% + 12px);
+  right:0;
+  width:min(360px,92vw);
+  z-index:1100;
+}
+
+.login-popover[hidden]{
+  display:none;
+}
+
+.login-popover-inner{
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:18px;
+  background:rgba(10,10,10,.97);
+  backdrop-filter:blur(14px);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+  padding:18px;
+}
+
+.login-popover-inner h3{
+  margin:0 0 14px;
+  font-family:"Cinzel",serif;
+  font-size:18px;
+  color:rgba(255,255,255,.96);
+}
+
+.login-form{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.login-form label{
+  font-size:12px;
+  color:rgba(255,255,255,.84);
+}
+
+.login-form input{
+  width:100%;
+  padding:12px 14px;
+  border-radius:12px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.06);
+  color:rgba(255,255,255,.95);
+  outline:none;
+}
+
+.login-form input::placeholder{
+  color:rgba(255,255,255,.42);
+}
+
+.login-form input:focus{
+  border-color:rgba(255,255,255,.26);
+  box-shadow:0 0 0 3px rgba(255,255,255,.08);
+}
+
+.login-actions{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-top:6px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:10px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background:rgba(255,255,255,.06);
+  font-size:13.5px;
+  color:#fff;
+  transition:.15s ease;
+  cursor:pointer;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+  background:rgba(255,255,255,.09);
+}
+
+.btn.primary{
+  background:rgba(255,255,255,.14);
+  border-color:rgba(255,255,255,.28);
+}
+
+.btn-link{
+  font-size:13px;
+  color:rgba(255,255,255,.78);
+  text-decoration:none;
+}
+
+.btn-link:hover{
+  color:#fff;
+}
+
+.login-links{
+  margin-top:2px;
+}
+
+.login-links a{
+  padding:0;
+  border-radius:0;
+  font-size:12.5px;
+  color:rgba(255,255,255,.70);
+  text-decoration:none;
+}
+
+.login-links a:hover{
+  background:none;
+  color:#fff;
+}
+
+.login-note{
+  margin-top:10px;
+  font-size:11.5px;
+  line-height:1.5;
+  color:rgba(255,255,255,.55);
+}
 
 main{
   padding-top:90px;
@@ -160,6 +286,15 @@ main{
   z-index:1;
 }
 
+.kicker{
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  font-size:12px;
+  font-weight:600;
+  color:rgba(40,28,18,.68);
+  margin-bottom:10px;
+}
+
 h1{
   font-family:Georgia,serif;
   font-size:42px;
@@ -167,15 +302,42 @@ h1{
   letter-spacing:.02em;
 }
 
-h2{
-  margin-top:34px;
-  font-family:Georgia,serif;
+.intro{
+  font-size:16px;
+  color:rgba(32,22,13,.84);
+  margin-bottom:10px;
 }
 
-p{ margin:14px 0; }
-ul{ padding-left:20px; }
+.updated{
+  margin-top:0;
+  color:rgba(32,22,13,.74);
+  font-size:14px;
+}
 
-/* ================= FOOTER ================= */
+h2{
+  margin-top:34px;
+  margin-bottom:8px;
+  font-family:Georgia,serif;
+  font-size:26px;
+}
+
+p{margin:14px 0}
+ul{padding-left:20px}
+li{margin:8px 0}
+
+.callout{
+  margin-top:22px;
+  padding:16px 18px;
+  border-radius:14px;
+  background:rgba(255,255,255,.18);
+  border:1px solid rgba(32,22,13,.12);
+}
+
+.paper a{
+  color:#24170b;
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
 
 footer{
   background:rgba(0,0,0,.70);
@@ -206,20 +368,38 @@ footer{
   text-decoration:none;
 }
 
-.footer-links a:hover{ color:white; }
-
-/* ================= RESPONSIVE ================= */
+.footer-links a:hover,
+.footer-links a[aria-current="page"]{
+  color:white;
+}
 
 @media (max-width:980px){
-  .nav-inner{ padding:14px 18px; }
-  .paper{ padding:28px 20px; }
+  .nav-inner{padding:14px 18px;}
+  .paper{padding:28px 20px;}
+}
+
+@media (max-width:700px){
+  .nav-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+
+  .nav-links{
+    width:100%;
+    justify-content:flex-start;
+  }
+
+  .login-popover{
+    left:0;
+    right:auto;
+    width:min(100vw - 36px,420px);
+  }
 }
 </style>
 </head>
 
 <body>
 
-<!-- NAV -->
 <nav>
   <div class="nav-inner">
     <a class="brand" href="/">
@@ -233,115 +413,216 @@ footer{
       <a href="https://shop.astralforge.studio" target="_blank" rel="noopener noreferrer">Shop</a>
       <a href="/about/">About</a>
       <a href="/contact/">Contact</a>
-      <a class="join" href="/membership/">Join</a>
+
+      <div class="nav-account">
+        <button
+          type="button"
+          class="nav-account-trigger"
+          id="loginTrigger"
+          aria-haspopup="dialog"
+          aria-expanded="false"
+          aria-controls="loginPopover"
+        >
+          Login
+        </button>
+
+        <div class="login-popover" id="loginPopover" role="dialog" aria-labelledby="loginTitle" hidden>
+          <div class="login-popover-inner">
+            <h3 id="loginTitle">Sign In</h3>
+
+            <form action="https://astralforge.studio/login/" method="post" class="login-form">
+              <label for="login-email">Username or Email</label>
+              <input
+                id="login-email"
+                name="email"
+                type="email"
+                autocomplete="username"
+                placeholder="you@domain.com"
+                required
+              >
+
+              <label for="login-password">Password</label>
+              <input
+                id="login-password"
+                name="password"
+                type="password"
+                autocomplete="current-password"
+                placeholder="Your password"
+                required
+              >
+
+              <div class="login-actions">
+                <button type="submit" class="btn primary">Login</button>
+                <a href="https://astralforge.studio/signup/" class="btn-link">Create account</a>
+              </div>
+
+              <div class="login-links">
+                <a href="https://accounts.astralforge.studio/forgot-password/">Forgot password?</a>
+              </div>
+
+              <div class="login-note">
+                By signing in you agree to the <a href="/legal/terms/">Terms</a> and <a href="/legal/privacy/">Privacy Policy</a>.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <a class="join" href="https://astralforge.studio/signup/">Forge Pass</a>
     </div>
   </div>
 </nav>
 
-<!-- CONTENT -->
 <main>
   <div class="container">
     <div class="paper">
-
+      <div class="kicker">Legal</div>
       <h1>Terms of Service</h1>
-      <p><strong>Last Updated:</strong> 2026</p>
+      <p class="intro">
+        These Terms of Service govern access to and use of Astral Forge, including its website, campaigns, memberships, digital products, software tools, and related community spaces.
+      </p>
+      <p class="updated"><strong>Effective Date:</strong> January 1, 2026</p>
 
       <p>
-        By accessing Astral Forge, booking a campaign, purchasing products,
-        or participating in community spaces, you agree to the following terms.
+        By accessing Astral Forge, creating an account, booking a campaign, purchasing products, joining memberships, or participating in community spaces, you agree to be bound by these Terms of Service.
       </p>
 
       <h2>1. Services Provided</h2>
       <p>
-        Astral Forge offers professional tabletop roleplaying campaigns,
-        digital products, software tools, and community experiences.
-        All services are provided by an independent creator operating under
-        the Astral Forge brand.
+        Astral Forge provides professional tabletop roleplaying campaigns, digital products, software tools, membership access, and community experiences. All services are offered under the Astral Forge brand and may evolve over time.
       </p>
 
-      <h2>2. Campaign Participation</h2>
+      <h2>2. Eligibility and Account Responsibility</h2>
+      <p>
+        You are responsible for providing accurate information when creating an account or purchasing services. You are also responsible for maintaining the confidentiality of your login credentials and for activity occurring under your account.
+      </p>
+
+      <h2>3. Campaign Participation</h2>
       <ul>
-        <li>Players agree to respectful and cooperative behavior.</li>
-        <li>Harassment, discrimination, or disruptive conduct may result in removal.</li>
-        <li>The Dungeon Master reserves the right to maintain table safety and atmosphere.</li>
+        <li>Players are expected to behave respectfully and cooperatively.</li>
+        <li>Harassment, discrimination, abusive conduct, or repeated disruption may result in removal from a session, campaign, or community space.</li>
+        <li>Astral Forge reserves the right to maintain table safety, tone, and atmosphere for the benefit of all participants.</li>
       </ul>
 
-      <h2>3. Payments & Subscriptions</h2>
+      <h2>4. Payments and Subscriptions</h2>
       <ul>
-        <li>Campaigns may require weekly recurring payments.</li>
-        <li>Payments are processed securely through Stripe.</li>
-        <li>Failure to maintain payment may result in removal from a campaign.</li>
+        <li>Some campaigns, memberships, software, or services may require one-time or recurring payment.</li>
+        <li>Payments may be processed by third-party providers such as <strong>Stripe</strong>.</li>
+        <li>Failure to maintain payment may result in suspension or removal from the relevant service or campaign.</li>
       </ul>
 
-      <h2>4. Cancellation & Refund Policy</h2>
+      <h2>5. Cancellation and Refund Policy</h2>
       <ul>
-        <li>Missed sessions are generally non-refundable.</li>
-        <li>If Astral Forge cancels a session, credit or rescheduling will be provided.</li>
-        <li>Subscription cancellations prevent future billing but do not retroactively refund past sessions.</li>
+        <li>Missed sessions are generally non-refundable unless otherwise stated.</li>
+        <li>If Astral Forge cancels a scheduled paid session, a credit, reschedule, or comparable remedy may be offered.</li>
+        <li>Canceling a subscription or membership stops future billing when applicable, but does not automatically refund prior charges already incurred.</li>
       </ul>
 
-      <h2>5. Digital Products & Software</h2>
+      <div class="callout">
+        Refund practices may vary depending on the specific service, campaign format, or product type described at the point of purchase.
+      </div>
+
+      <h2>6. Digital Products and Software</h2>
       <ul>
-        <li>Software licenses grant usage rights, not ownership transfer.</li>
-        <li>Digital downloads are non-refundable once delivered.</li>
-        <li>Redistribution or resale without permission is prohibited.</li>
+        <li>Software, tools, and digital products are licensed, not sold, unless explicitly stated otherwise.</li>
+        <li>Digital purchases are generally non-refundable once access or delivery has been provided.</li>
+        <li>You may not redistribute, resell, reproduce, reverse engineer where prohibited, or commercially exploit Astral Forge products without permission.</li>
       </ul>
 
-      <h2>6. Community Conduct</h2>
+      <h2>7. Community Conduct</h2>
       <p>
-        Astral Forge strives to maintain a welcoming and inclusive environment.
-        Users who repeatedly violate community expectations may lose access
-        without refund.
+        Astral Forge aims to maintain a welcoming, immersive, and inclusive environment. Users who violate community expectations or compromise the safety and enjoyment of others may lose access to services or community spaces, with or without prior warning depending on the severity of the conduct.
       </p>
 
-      <h2>7. Intellectual Property</h2>
+      <h2>8. Intellectual Property</h2>
       <p>
-        All original content, campaign material, writing, branding, and software
-        remain the intellectual property of Astral Forge unless otherwise stated.
-        Player characters remain owned by their respective players.
+        Unless otherwise stated, all original writing, campaign content, lore, branding, design elements, software, and site materials are the intellectual property of Astral Forge. Player-created characters remain the property of their respective players, though participation may contribute to a shared world or ongoing campaign canon.
       </p>
 
-      <h2>8. Recording & Streaming</h2>
+      <h2>9. Recording and Streaming</h2>
       <p>
-        Sessions may not be recorded, streamed, or redistributed without explicit permission.
+        Sessions, materials, and community interactions may not be recorded, streamed, republished, or redistributed without explicit prior permission.
       </p>
 
-      <h2>9. Limitation of Liability</h2>
+      <h2>10. Third-Party Platforms</h2>
       <p>
-        Astral Forge provides entertainment services. Participation is voluntary.
-        Astral Forge is not liable for indirect damages arising from use of the site,
-        services, or community platforms.
+        Astral Forge may rely on third-party services and platforms, including payment processors, community tools, and hosted services. Astral Forge is not responsible for outages, policy changes, or conduct occurring solely within third-party platforms.
       </p>
 
-      <h2>10. Changes to Terms</h2>
+      <h2>11. Termination or Suspension</h2>
       <p>
-        These terms may be updated as services evolve. Continued use of Astral Forge
-        constitutes acceptance of revised terms.
+        Astral Forge reserves the right to suspend or terminate access to services, memberships, accounts, or community spaces where necessary to enforce these terms, protect the platform, or maintain community safety.
       </p>
 
-      <h2>11. Contact</h2>
+      <h2>12. Disclaimer and Limitation of Liability</h2>
       <p>
-        Questions regarding these terms may be directed to:<br>
-        <strong>scribe@astralforge.studio</strong>
+        Astral Forge provides creative, entertainment, and community services on an as-available basis. To the fullest extent permitted by law, Astral Forge is not liable for indirect, incidental, consequential, or special damages arising from use of the site, campaigns, services, community platforms, or related materials.
       </p>
 
+      <h2>13. Changes to These Terms</h2>
+      <p>
+        These Terms of Service may be updated from time to time as services evolve. Continued use of Astral Forge after revised terms become effective constitutes acceptance of those updated terms.
+      </p>
+
+      <h2>14. Contact</h2>
+      <p>
+        Questions regarding these Terms of Service may be directed to:<br>
+        <a href="mailto:scribe@astralforge.studio"><strong>scribe@astralforge.studio</strong></a>
+      </p>
     </div>
   </div>
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="footer-inner">
     <div>© 2026 Astral Forge</div>
     <div class="footer-links">
       <a href="/contact/">Contact</a>
+      <a href="/reviews/">Reviews</a>
       <a href="/legal/privacy/">Privacy</a>
       <a href="/legal/terms/" aria-current="page">Terms</a>
-      <a href="/reviews/">Reviews</a>
       <a href="https://rootapp.gg/AC05WwIOhgqvSevEYNE_4Q" target="_blank" rel="noopener noreferrer">Root</a>
     </div>
   </div>
 </footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const trigger = document.getElementById("loginTrigger");
+  const popover = document.getElementById("loginPopover");
+
+  if (!trigger || !popover) return;
+
+  const openPopover = () => {
+    popover.hidden = false;
+    trigger.setAttribute("aria-expanded", "true");
+  };
+
+  const closePopover = () => {
+    popover.hidden = true;
+    trigger.setAttribute("aria-expanded", "false");
+  };
+
+  trigger.addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (popover.hidden) openPopover();
+    else closePopover();
+  });
+
+  popover.addEventListener("click", (e) => {
+    e.stopPropagation();
+  });
+
+  document.addEventListener("click", () => {
+    closePopover();
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") closePopover();
+  });
+});
+</script>
 
 </body>
 </html>
